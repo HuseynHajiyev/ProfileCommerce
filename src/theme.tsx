@@ -11,7 +11,7 @@ const theme = createTheme({
           backgroundColor: '#F6F7F8', // background color
           display: 'block', // display property
           margin: "0, auto", // margin property
-          fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', // font family
+          fontFamily: '"Palanquin Dark" sans-serif', // font family
         },
       },
     },

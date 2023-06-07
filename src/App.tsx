@@ -2,14 +2,14 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // MUI imports
-import { Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container, ThemeProvider} from '@mui/material';
+import {  CssBaseline, Box, ThemeProvider} from '@mui/material';
 
 // Pages
 import Home from './pages/Home/Home.tsx';
 import Store from './pages/Store/Store.tsx';
 import About from './pages/About/About.tsx';
 
-// Components
+// NavbarComponents
 import Navbar from './components/Navbar/Navbar.tsx';
 
 // Theme
@@ -21,9 +21,11 @@ const App = () => {
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <Navbar />  
-        <Container sx={
+        <Box sx={
           {
-            mb: 2,
+            paddingTop: '8%',
+            paddingLeft: '10%',
+            paddingRight: '10%',
           }
         }>
           <Routes>
@@ -31,7 +33,7 @@ const App = () => {
             <Route path="/store" element={ <Store />} />
             <Route path="/about" element={ <About />} />
           </Routes>
-        </Container>
+        </Box>
       </ThemeProvider>
     </>
   )
