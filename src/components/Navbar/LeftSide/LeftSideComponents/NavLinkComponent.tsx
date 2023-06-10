@@ -1,9 +1,7 @@
-// MUI Imports
-import { Typography } from '@mui/material';
-
 // NavbarComponents
-import NavLinkStyled from './StyledComponents/NavLinkStyled';
-import NavItemContainerStyled from './StyledComponents/NavItemContainerStyled';
+import NavLinkStyled from '../StyledComponents/NavLinkStyled';
+import NavItemContainerStyled from '../../NavbarComponents/StyledComponents/NavItemContainerStyled';
+import NavTypographyComponent from '../../NavbarComponents/NavTypographyComponent';
 
 interface LinkComponentProps {
     to: string;
@@ -14,7 +12,7 @@ const LinkComponent = ({ to }: LinkComponentProps): JSX.Element => {
     return (
         <NavItemContainerStyled>
             <NavLinkStyled to={to} aria-label={`Link to ${linkText}`}>
-                <Typography variant='body1' fontFamily='Mulish'>{linkText}</Typography>    
+                <NavTypographyComponent>{linkText}</NavTypographyComponent>    
             </NavLinkStyled>
         </NavItemContainerStyled>
     )

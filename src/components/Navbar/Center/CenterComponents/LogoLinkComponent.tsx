@@ -13,7 +13,7 @@ const LogoLinkComponent = () => {
                     color: 'black', 
                     fontFamily: 'Palanquin Dark', 
                     fontSize: '48px',
-                    letterSpacing: '-0.055em'
+                    letterSpacing: '-0.055em',
                 }
             }>
             Participle+

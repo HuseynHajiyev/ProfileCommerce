@@ -5,11 +5,9 @@ import { NavLink, NavLinkProps } from 'react-router-dom';
 import { styled } from '@mui/system';
 
 const NavLinkStyled = styled(NavLink)<NavLinkProps>`
-    color: #000;
     text-decoration: none;
     transition: color 0.2s;
     display: block;
-    font-size: 15px;
     padding: 0;
     &:hover {
         color: #888;

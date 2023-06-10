@@ -2,11 +2,15 @@
 import { Box } from '@mui/material'
 
 // NavbarComponents
-import LogoLinkComponent from '../NavbarComponents/LogoLinkComponent'
+import LogoLinkComponent from './CenterComponents/LogoLinkComponent'
 
-const Center = () => {
+interface CenterProps {
+  isMobile: boolean,
+}
+
+const Center = ({ isMobile }: CenterProps) => {
   return (
-    <Box sx={{flex:1, display: 'flex', justifyContent: 'center', marginX: '5%'}}>
+    <Box sx={{flex:1, display: 'flex', justifyContent: 'center', marginX: isMobile ? '0' : '10%'}}>
       <LogoLinkComponent />
     </Box>
   )

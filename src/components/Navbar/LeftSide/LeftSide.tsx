@@ -1,33 +1,19 @@
-// React Imports
-import React from 'react';
-import { useState, useEffect } from 'react';
-
-
 // MUI Imports
 import { Stack } from '@mui/system'
-import { useTheme, Theme } from '@mui/material/styles';
 
-// MUI Media Query
-import { useMediaQuery } from '@mui/material'
 
 // Custom Components
-import NavLinkComponent from '../NavbarComponents/NavLinkComponent'
+import NavLinkComponent from './LeftSideComponents/NavLinkComponent'
 
-const LeftSide = () => {
-    const [row, setRow] = useState<"row" | "column">('row');
-    const theme = useTheme<Theme>();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+// Props
+interface LeftSideProps {
+    isMobile: boolean,
+  }
+  
 
-    useEffect(() => {
-        if (isMobile) {
-            setRow('column');
-        } else {
-            setRow('row');  
-        }
-    }, [isMobile])
-
+const LeftSide = ({ isMobile } : LeftSideProps) => {
     return (
-        <Stack direction={row} spacing={ isMobile ? 2 : 10 } sx={{ flex: 1 }}>
+        <Stack direction={isMobile ? 'column' : 'row'} spacing={ isMobile ? 2 : 10 } sx={{ flex: isMobile ? 2 : 1 }}>
             <NavLinkComponent to='/' />
             <NavLinkComponent to='/about' />
             <NavLinkComponent to='/store' />

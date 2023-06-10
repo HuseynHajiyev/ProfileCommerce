@@ -1,25 +1,24 @@
 // MUI components
 import { Stack } from '@mui/material';
-import { useMediaQuery, useTheme, Theme } from '@mui/material';
 
 // NavbarComponents
-import FormControlStyled from '../NavbarComponents/StyledComponents/FormControlStyled';
-import SearchInputComponent from '../NavbarComponents/SearchInputComponent';
-import SignInLinkComponent from '../NavbarComponents/SignInLinkComponent';
-import BadgeComponent from '../NavbarComponents/BadgeComponent';
+import SignInLinkComponent from './RightSideComponents/SignInLinkComponent';
+import BadgeComponent from './RightSideComponents/BadgeComponent';
+import SearchButtonComponent from './RightSideComponents/SearchButtonComponent';
+
+// Props
+interface RightSideProps {
+  isMobile: boolean,
+}
 
 
-const RightSide = () => {
-  const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+const RightSide = ({ isMobile }: RightSideProps) => {
 
   return (
-    <Stack direction='row' spacing={isMobile ? 2 : 10} justifyContent='flex-end' sx={{flex: 1}}>
-        <FormControlStyled variant="standard">
-            <SearchInputComponent />
-        </FormControlStyled>
-      <SignInLinkComponent />
-      <BadgeComponent />
+    <Stack direction='row' justifyContent='space-between' sx={{flex: 1}}>
+      <SearchButtonComponent isMobile={ isMobile }/> 
+      {isMobile ? null : <SignInLinkComponent />}
+      <BadgeComponent isMobile={ isMobile }/>
     </Stack>
   )
 }

@@ -2,26 +2,32 @@
 import { useState } from 'react';
 
 // MUI components
-import { Stack, IconButton, useMediaQuery} from '@mui/material';
+import { Stack } from '@mui/material';
 
-import MenuIcon from '@mui/icons-material/Menu';
-
-
-import { useTheme, Theme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 
 // NavbarComponents
 
 // Macro Components
-import RightSide from './RightSide/RightSide';
-import Center from './Center/Center';
 import LeftSide from './LeftSide/LeftSide';
 import NavbarStyled from './NavbarComponents/StyledComponents/NavbarStyled';
-import ToolbarStyled from './NavbarComponents/StyledComponents/ToolBarStyled';
-import NavItemContainerStyled from './NavbarComponents/StyledComponents/NavItemContainerStyled';
 import DrawerComponent from './NavbarComponents/DrawerComponent';
+import ToolbarComponent from './NavbarComponents/ToolbarComponent';
 
-const Navbar = () => {
+
+// Theme imports
+import theme from '../../themes/theme';
+import AnnouncementBarComponent from './NavbarComponents/AnnouncementBarComponent';
+import SignInLinkComponent from './RightSide/RightSideComponents/SignInLinkComponent';
+
+// Props
+interface NavbarProps {
+    isMobile: boolean,
+  }
+  
+
+const Navbar = ({isMobile}: NavbarProps) => {
 
     // Drawer State
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -31,45 +37,19 @@ const Navbar = () => {
         setDrawerOpen(!drawerOpen);
     };
 
-    const theme: Theme = useTheme();
-
-    const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
-
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <NavbarStyled>
-                <ToolbarStyled>
-                    <Stack direction="row" justifyContent='space-between' sx={{width:'100%',}}>
-                        {
-                            isMobile ? (
-                                <>
-                                    <NavItemContainerStyled sx={{p: 0, flex: 1}}>
-                                        <IconButton
-                                            aria-label="large"
-                                            sx={{ order: -1}}
-                                            onClick={handleDrawerToggle}
-                                        >
-                                            <MenuIcon />
-                                        </IconButton>
-                                    </NavItemContainerStyled>
-                                    <Center />
-                                    <RightSide />
-                                </>
-                            ) : (
-                                <>
-                                    <LeftSide />
-                                    <Center />
-                                    <RightSide />
-                                </>
-                            )
-                        }
-                    </Stack>   
-                </ToolbarStyled>
+                <Stack direction='column'>
+                    <AnnouncementBarComponent />
+                    <ToolbarComponent isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />
+                </Stack>
             </NavbarStyled>
             <DrawerComponent>
-                <LeftSide />
+                <SignInLinkComponent />
+                <LeftSide isMobile={ isMobile }/>
             </DrawerComponent>
-        </>
+        </ThemeProvider>
     )
 };
 
