@@ -2,54 +2,51 @@
 import { useState } from 'react';
 
 // MUI components
-import { Stack } from '@mui/material';
-
-import { ThemeProvider } from '@mui/material/styles';
+import { Stack, useTheme } from '@mui/material';
 
 
-// NavbarComponents
+// Component Imports
+import NavbarStyled from './StyledComponents/NavbarStyled';
+import ToolbarComponent from './ToolBar/ToolbarComponent';
+import AnnouncementBarComponent from './Components/AnnouncementBarComponent';
+import SearchBarDrawer from './Components/Drawers/Components/SearchBarDrawer/SearchBarDrawer';
 
-// Macro Components
-import LeftSide from './LeftSide/LeftSide';
-import NavbarStyled from './NavbarComponents/StyledComponents/NavbarStyled';
-import DrawerComponent from './NavbarComponents/DrawerComponent';
-import ToolbarComponent from './NavbarComponents/ToolbarComponent';
+// Context Imports
+import { SearchDrawerToggleProvider } from '../../context/navbarContext/searchDrawerToggleContext';
 
-
-// Theme imports
-import theme from '../../themes/theme';
-import AnnouncementBarComponent from './NavbarComponents/AnnouncementBarComponent';
-import SignInLinkComponent from './RightSide/RightSideComponents/SignInLinkComponent';
-
-// Props
-interface NavbarProps {
-    isMobile: boolean,
+// Interface
+interface SearchBarDrawerHandles {
+    getFocus: () => void;
+    focusInput: () => void;
   }
-  
 
-const Navbar = ({isMobile}: NavbarProps) => {
+const Navbar = () => {
 
     // Drawer State
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [navigationBarOpen, setNavigationBarOpen] = useState(false);
+    
+    // Focus Search Bar Input
+    const [searchBarInputFocus, setSearchBarInputFocus] = useState(false);
 
-    // Drawer Toggle
-    const handleDrawerToggle = () => {
-        setDrawerOpen(!drawerOpen);
+    
+    // Drawer handlers
+    const toggleNavigationDrawer = () => {
+        setNavigationBarOpen(prevState => !prevState);
     };
 
+    
+    const theme = useTheme();
+
     return (
-        <ThemeProvider theme={theme}>
-            <NavbarStyled>
+        <SearchDrawerToggleProvider>
+            <NavbarStyled sx={{ zIndex: theme.zIndex.drawer + 1 }}>
                 <Stack direction='column'>
                     <AnnouncementBarComponent />
-                    <ToolbarComponent isMobile={isMobile} handleDrawerToggle={handleDrawerToggle} />
+                    <ToolbarComponent />
+                    <SearchBarDrawer  />
                 </Stack>
             </NavbarStyled>
-            <DrawerComponent>
-                <SignInLinkComponent />
-                <LeftSide isMobile={ isMobile }/>
-            </DrawerComponent>
-        </ThemeProvider>
+        </SearchDrawerToggleProvider>
     )
 };
 

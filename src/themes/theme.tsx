@@ -1,14 +1,17 @@
-import { createTheme, responsiveFontSizes  } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 // create a theme instance
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#black',
+      main: '#fff',
     },
     secondary: {
-      main: '#000000',
+      main: '#fff',
     },
+    background: {
+      default: '#fff',
+    }
   },
   components: {
     MuiCssBaseline: {
@@ -25,8 +28,6 @@ let theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#ffffff',
-          color: '#011627',
           fontFamily: '"Palanquin Dark" sans-serif',
         },
       },
@@ -34,8 +35,8 @@ let theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          fontFamily: 'Mulish',
           color: '#011627',
+          fontFamily: 'Mulish',
         },
       },
     },
@@ -63,10 +64,10 @@ let theme = createTheme({
       fontSize: '1rem',
       whiteSpace: 'nowrap',
       '@media (min-width:600px)': {
-        fontSize: '2rem',
+        fontSize: '1.2rem',
       },
       '@media (min-width:960px)': {
-        fontSize: '1.8rem',
+        fontSize: '1.3rem',
       },
       '@media (min-width:1280px)': {
         fontSize: '1rem',

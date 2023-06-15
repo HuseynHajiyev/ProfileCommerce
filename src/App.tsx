@@ -3,29 +3,34 @@
 // React imports
 import { Routes, Route } from 'react-router-dom';
 
-
 // MUI imports
-import {  CssBaseline, Box, ThemeProvider, useMediaQuery} from '@mui/material';
+import {  CssBaseline, Box, ThemeProvider } from '@mui/material';
 
 // Pages
-import Home from './pages/Home/Home.tsx';
-import Store from './pages/Store/Store.tsx';
-import About from './pages/About/About.tsx';
+import Home from './pages/Home/Home';
+import Store from './pages/Store/Store';
+import About from './pages/About/About';
+import NewArrivals from './pages/NewArrivals/NewArrivals';
+import NotFound404 from './pages/NotFound404/NotFound404';
 
-// NavbarComponents
-import Navbar from './components/Navbar/Navbar.tsx';
+// Components
+import Navbar from './components/Navbar/Navbar';
+
+// Context
+import { IsMobileProvider } from './context/IsMobileContext';
 
 // Theme
-import theme from './themes/theme.tsx';
+import theme from './themes/theme';
 
 const App = () => {
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+
 
   return (
     <>
+    <IsMobileProvider>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-          <Navbar isMobile={isMobile}/>  
+          <Navbar />  
           <Box sx={
             {
               paddingLeft: '10%',
@@ -34,11 +39,14 @@ const App = () => {
           }>
             <Routes>
               <Route path="/" element={ <Home />} />
+              <Route path="/new-arrivals" element={ <NewArrivals/>} />
               <Route path="/store" element={ <Store />} />
               <Route path="/about" element={ <About />} />
+              <Route path="/404-not-found" element={ <NotFound404 />} />
             </Routes>
         </Box>
       </ThemeProvider>
+    </IsMobileProvider>
     </>
   )
 }
