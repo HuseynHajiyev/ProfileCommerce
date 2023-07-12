@@ -15,8 +15,7 @@ interface IsMobileProviderProps {
 
 export const IsMobileProvider = ({ children }: IsMobileProviderProps): JSX.Element => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
-
+  const isMobile = useMediaQuery(theme.breakpoints.down('xl'));
   return (
     <IsMobileContext.Provider value={isMobile}>
       {children}
