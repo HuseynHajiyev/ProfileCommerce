@@ -1,52 +1,36 @@
-// React State
-import { useState } from 'react';
-
 // MUI components
 import { Stack, useTheme } from '@mui/material';
 
 
 // Component Imports
-import NavbarStyled from './StyledComponents/NavbarStyled';
-import ToolbarComponent from './ToolBar/ToolbarComponent';
-import AnnouncementBarComponent from './Components/AnnouncementBarComponent';
-import SearchBarDrawer from './Components/Drawers/Components/SearchBarDrawer/SearchBarDrawer';
+import { NavbarStyled } from '../StyledComponents/NavbarStyled/NavbarStyled';
+import ToolbarComponent from './Components/MacroComponents/ToolbarComponent';
+import AnnouncementBarComponent from './Components/MicroComponents/AnnouncementBarComponent';
 
 // Context Imports
-import { SearchDrawerToggleProvider } from '../../context/navbarContext/searchDrawerToggleContext';
+import NavigationDrawer from './Components/MacroComponents/NavigationDrawer';
 
-// Interface
-interface SearchBarDrawerHandles {
-    getFocus: () => void;
-    focusInput: () => void;
-  }
+// Redux Imports
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { loadShoppingBag } from '../../features/shoppingBagReducer/shoppingBagSlice';
+
 
 const Navbar = () => {
-
-    // Drawer State
-    const [navigationBarOpen, setNavigationBarOpen] = useState(false);
-    
-    // Focus Search Bar Input
-    const [searchBarInputFocus, setSearchBarInputFocus] = useState(false);
-
-    
-    // Drawer handlers
-    const toggleNavigationDrawer = () => {
-        setNavigationBarOpen(prevState => !prevState);
-    };
-
-    
     const theme = useTheme();
-
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(loadShoppingBag(1));
+      console.log('Navbar Dispatch was called');
+    }, [dispatch]);
     return (
-        <SearchDrawerToggleProvider>
-            <NavbarStyled sx={{ zIndex: theme.zIndex.drawer + 1 }}>
+        <NavbarStyled sx={{ zIndex: theme.zIndex.drawer + 1 }}>
                 <Stack direction='column'>
                     <AnnouncementBarComponent />
                     <ToolbarComponent />
-                    <SearchBarDrawer  />
+                    <NavigationDrawer />
                 </Stack>
-            </NavbarStyled>
-        </SearchDrawerToggleProvider>
+        </NavbarStyled>
     )
 };
 

@@ -1,4 +1,7 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { responsiveFontSizes } from '@mui/material/styles';
+import { createTheme } from '@mui/material';
+
+
 
 // create a theme instance
 let theme = createTheme({
@@ -64,12 +67,15 @@ let theme = createTheme({
       fontSize: '1rem',
       whiteSpace: 'nowrap',
       '@media (min-width:600px)': {
-        fontSize: '1.2rem',
+        fontSize: '1.5rem',
       },
       '@media (min-width:960px)': {
-        fontSize: '1.3rem',
+        fontSize: '1.8rem',
       },
       '@media (min-width:1280px)': {
+        fontSize: '1rem',
+      },
+      '@media (min-width:1496px)': {
         fontSize: '1rem',
       },
     },
