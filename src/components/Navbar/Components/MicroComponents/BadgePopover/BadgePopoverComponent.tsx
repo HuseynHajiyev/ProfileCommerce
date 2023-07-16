@@ -1,8 +1,9 @@
 // React imports
-import { RefObject } from 'react';
+import { RefObject, useEffect } from 'react';
 
 // Hooks
 import { useDrawerToggle } from "../../../../../hooks/useDrawerToggle";
+import { useIsMobile } from '../../../../../hooks/useIsMobile';
 
 // Component imports
 import { BadgePopoverStyled } from '../../../../StyledComponents/NavbarStyled/BadgePopoverStyled';
@@ -15,6 +16,12 @@ interface PopperProps {
 
 const BadgePopover = ({ buttonRef } : PopperProps) => {
     const { shoppingBagIsOpen, closeShoppingPopper } = useDrawerToggle();
+    const isMobile = useIsMobile();
+    useEffect(() => {
+        if(isMobile) {
+            closeShoppingPopper();
+        }
+    }, [isMobile, closeShoppingPopper])
 
     return (
         <BadgePopoverStyled
@@ -22,6 +29,7 @@ const BadgePopover = ({ buttonRef } : PopperProps) => {
             open={ shoppingBagIsOpen }
             anchorEl={ buttonRef.current }
             onClose={ closeShoppingPopper }
+            disableScrollLock={ true }
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right',

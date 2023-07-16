@@ -11,7 +11,8 @@ import { useDrawerToggle } from '../../../../../hooks/useDrawerToggle';
 
 const SubtotalComponent = () => {
     const subTotal = useSelector((state: RootState) => state.shoppingBag.subTotal);
-    const shipping = Number((subTotal*0.05).toFixed(2))
+    const shipping = 0
+    // Number((subTotal*0.05).toFixed(2))
     const { closeShoppingPopper } = useDrawerToggle();
     return (
         <ShoppingBagSubtotalStyled>
@@ -37,7 +38,7 @@ const SubtotalComponent = () => {
                     </ShippingStyled>
                 </Box>
             </Box>
-            <Box display='flex' justifyContent='center'>
+            <Box display='flex' justifyContent='center' padding={'5%'}>
                 <ViewBagLinkStyled to='/shopping-bag' style={{textDecoration: 'none'}} onClick={()=> closeShoppingPopper()}>
                     <ViewBagStyled>
                         View Bag

@@ -1,3 +1,3 @@
 export const iconSize = (isMobile: boolean) => {
-    return isMobile ? 40 : 25;
+    return isMobile ? 20 : 25;
 }

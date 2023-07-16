@@ -15,7 +15,7 @@ import { removeFromShoppingBag } from '../../../../../features/shoppingBagReduce
 
 // Interface imports
 import { CartItemInterface } from '../../../../../types/CartiItemInterface'
-import { Button, Grid } from '@mui/material'
+import { Button } from '@mui/material'
 import { GridRowStyled, GridItemStyled } from '../../../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled'
 import QuantityComponent from './RowContents/QuantityComponent'
 
@@ -26,26 +26,26 @@ const ShoppingProductRow = ({ cartItem } : { cartItem: CartItemInterface }) => {
   }
   return (
       <GridRowStyled item xs={12} container direction='row' minWidth='100%' spacing={0}>
-        <GridItemStyled item xs={2} sx={{position: 'relative'}}>
+        <GridItemStyled item sx={{position: 'relative'}}>
           <CardMediaComponent product={cartItem.product}  />
         </GridItemStyled>
-        <GridItemStyled item container xs={3} direction='column' padding={0} spacing={1}>
+        <GridItemStyled item container justifyContent={'flex-start'} padding={0}>
           <ProductDetail product={cartItem.product} />
         </GridItemStyled>
-        <GridItemStyled container item xs={1}>
+        <GridItemStyled item container>
           <UnitPrice product={cartItem.product} />
         </GridItemStyled>
-        <GridItemStyled container item xs={2}>
+        <GridItemStyled item container>
           <QuantityComponent cartItem={cartItem} />
         </GridItemStyled>
-        <GridItemStyled container item xs={1}>
+        <GridItemStyled item container>
           <SubTotalPrice cartItem={ cartItem } />
         </GridItemStyled>
-        <Grid item xs={2} sx={{alignItems: 'center', display: 'flex', justifyContent: 'center', width: '100%'}}>
+        <GridItemStyled item container>
           <Button sx={{p: 0, minWidth:'0'}} aria-label='remove-product-from-shopping-bag'>
             <VscTrash size={25} color='#C4C4C4' aria-label='remove-item-from-shopping-bag' sx={{cursor: 'pointer'}} onClick={()=> handleDelete()}/> 
           </Button>
-        </Grid>
+        </GridItemStyled>
       </GridRowStyled>
   )
 }

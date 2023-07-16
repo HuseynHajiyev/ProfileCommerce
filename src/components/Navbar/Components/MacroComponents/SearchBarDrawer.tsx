@@ -7,16 +7,21 @@ import { useDrawerToggle } from '../../../../hooks/useDrawerToggle';
 
 const SearchBarDrawer = () => {
     const { searchIsOpen } = useDrawerToggle();
+    const { closeSearchBarDrawer } = useDrawerToggle();
     return (
-        <>
-            <SearchDrawerStyled
-                anchor='top'
-                variant='temporary'
-                open={ searchIsOpen }          
-            >
-                <SearchInputComponent />
-            </SearchDrawerStyled>
-        </>
+        <SearchDrawerStyled
+            anchor='top'
+            variant='temporary'
+            disableScrollLock={ true }
+            open={ searchIsOpen }
+            onClose={(event, reason) => {
+                if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
+                  closeSearchBarDrawer();
+                }
+              }}
+        >
+            <SearchInputComponent />
+        </SearchDrawerStyled>
     );
 };
 

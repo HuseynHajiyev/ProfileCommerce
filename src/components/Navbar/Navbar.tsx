@@ -5,7 +5,6 @@ import { Stack, useTheme } from '@mui/material';
 // Component Imports
 import { NavbarStyled } from '../StyledComponents/NavbarStyled/NavbarStyled';
 import ToolbarComponent from './Components/MacroComponents/ToolbarComponent';
-import AnnouncementBarComponent from './Components/MicroComponents/AnnouncementBarComponent';
 
 // Context Imports
 import NavigationDrawer from './Components/MacroComponents/NavigationDrawer';
@@ -14,6 +13,7 @@ import NavigationDrawer from './Components/MacroComponents/NavigationDrawer';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadShoppingBag } from '../../features/shoppingBagReducer/shoppingBagSlice';
+import SearchBarDrawer from './Components/MacroComponents/SearchBarDrawer';
 
 
 const Navbar = () => {
@@ -21,16 +21,18 @@ const Navbar = () => {
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(loadShoppingBag(1));
-      console.log('Navbar Dispatch was called');
     }, [dispatch]);
     return (
-        <NavbarStyled sx={{ zIndex: theme.zIndex.drawer + 1 }}>
-                <Stack direction='column'>
-                    <AnnouncementBarComponent />
-                    <ToolbarComponent />
-                    <NavigationDrawer />
-                </Stack>
-        </NavbarStyled>
+        <>
+            <NavbarStyled sx={{ zIndex: theme.zIndex.drawer + 1 }}>
+                    <Stack direction='column'>
+                        <ToolbarComponent />
+                        <NavigationDrawer />    
+                    </Stack>
+            </NavbarStyled>
+            <SearchBarDrawer />
+            <NavigationDrawer />
+        </>
     )
 };
 

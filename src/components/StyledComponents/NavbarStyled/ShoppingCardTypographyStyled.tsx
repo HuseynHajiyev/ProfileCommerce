@@ -82,18 +82,10 @@ export const ShippingStyled = styled(Typography)(() => ({
 }));
 
 export const ViewBagStyled = styled(Typography)(() => ({
-    fontSize: '0.9rem',
+    fontSize: 'clamp(0.8rem, 100%, 1.3rem)',
+    fontWeight: 'bold',
     color: '#black', 
     fontFamily: 'muli',
-    [theme.breakpoints.up('md')]: {
-        fontSize: '2rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '1.8rem',
-    },
-    [theme.breakpoints.up('lg')]: {
-        fontSize: '0.9rem',
-    },
 }));
 
 export const ViewBagLinkStyled = styled(NavLink)<NavLinkProps>`

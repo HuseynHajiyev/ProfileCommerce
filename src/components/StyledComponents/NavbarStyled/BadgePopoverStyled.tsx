@@ -3,34 +3,16 @@ import theme from "../../../themes/theme";
 
 export const BadgePopoverStyled = styled(Popover)(() => ({
     '& .MuiPopover-paper': {
-        width: '20%',
-        height: '80vh',
+        width: '25%',
+        height: '81vh',
         border: '2px solid black',
         borderRadius: '0px',
         position: 'relative', 
         overflow: 'visible',
     },
-    [theme.breakpoints.up('sm')]: {
-        '& .MuiPopover-paper': {
-          width: '40%',
-          height: '60vh',
-        }
-      },
-    [theme.breakpoints.up('md')]: {
-    '& .MuiPopover-paper': {
-        width: '40%',
-        height: '50vh',
-    }
-    },
-    [theme.breakpoints.up('lg')]: {
-    '& .MuiPopover-paper': {
-        width: '25%',
-        height: '80vh',
-    }
-      },
     '& .popoverArrow': { // create another style for our arrow
         position: 'absolute',
-        top: '-2.5%',  // adjust as needed
+        top: '-2.2%',  // adjust as needed
         right: '10.69%',
         borderWidth: '7px',
         borderStyle: 'solid',

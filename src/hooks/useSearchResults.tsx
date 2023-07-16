@@ -1,6 +1,6 @@
 // useSearchResults.ts
 import { useState, useEffect } from 'react';
-import DummyQueryResult from '../../../DummyQueryResult';
+import DummyQueryResult from '../components/Navbar/DummyQueryResult';
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {

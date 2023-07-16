@@ -9,7 +9,8 @@ const initialState: ShoppingBagInterface = {
     loading: false,
     products:[],
     error: null,
-    subTotal: 0
+    subTotal: 0,
+    shipping: 0,
 };
 
 const shoppingBagSlice = createSlice({
@@ -29,6 +30,7 @@ const shoppingBagSlice = createSlice({
             state.error = null;
             state.loading = false;
             state.subTotal = Number(subTotal.toFixed(2));
+            state.shipping = 0;
         },
         loadShoppingBagFailed: (state, action: PayloadAction<string>) =>{
             state.loading = false;
