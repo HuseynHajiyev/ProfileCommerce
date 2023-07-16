@@ -8,6 +8,7 @@ export interface ShoppingBagInterface {
   loading: boolean;
   error: string | null;
   subTotal: number;
+  shipping: 0,
 }
 
 export interface ShoppingBagApiResponseInterface {

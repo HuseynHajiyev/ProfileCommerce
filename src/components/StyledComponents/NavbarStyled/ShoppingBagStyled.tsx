@@ -56,7 +56,7 @@ export const ShoppingBagSubtotalStyled = styled(Box)(() => ({
 export const ProductsGridStyled = styled(Grid)(() => ({
     flex: 8, 
     display: 'flex', 
-    padding: '5%',
+    padding: '0 5%',
     maxHeight: 'calc(100vh * 8 / 12)',
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {

@@ -5,6 +5,7 @@ import theme from '../../../themes/theme';
 const FormControlStyled = styled(FormControl)({
     width: '100%',
     position: 'static',
+    // paddingTop: 'clamp(17vw, (100% * ((2.6vw - 17vw) * ((100vw - 360px) / (1920px - 360px)) + 17vw)), 2.6vw)',
     [theme.breakpoints.up('xs')]: {
         paddingTop: '17vw',
     },
@@ -15,25 +16,22 @@ const FormControlStyled = styled(FormControl)({
         paddingTop: '13.5vw',
     },    
     [theme.breakpoints.up('md')]: {
-        paddingTop: '6.5vw',
+        paddingTop: '5%',
     },
     [`@media (min-width: ${theme.breakpoints.values.md + 200}px) and (max-width: ${theme.breakpoints.values.lg}px)`]: {
-        paddingTop: '5vw',
+        paddingTop: '5.2vh',
     },    
     [theme.breakpoints.up('lg')]: {
-        paddingTop: '4vw',
+        paddingTop: '4.5vw',
     },
     [`@media (min-width: ${theme.breakpoints.values.lg + 100}px) and (max-width: ${theme.breakpoints.values.xl + 200}px)`]: {
-        paddingTop: '3.7vw',
+        paddingTop: '4vw',
     },    
     [theme.breakpoints.up('xl')]: {
-            paddingTop: '2vw',
-    },
-    [`@media(min-width: ${theme.breakpoints.values.xl + 100}px)`]: {
-            paddingTop: '2.7vw',
+            paddingTop: '4vw',
     },
     [`@media(min-width: ${theme.breakpoints.values.xl + 200}px)`]: {
-            paddingTop: '2.4vw',
+            paddingTop: '2.5vw',
     },
 });
 

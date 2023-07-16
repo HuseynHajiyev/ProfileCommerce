@@ -11,7 +11,6 @@ import { CartItemInterface } from '../../../types/CartiItemInterface';
 import { BagEmptyContainer, GridContainerStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled';
 import { BagEmptyTypographyStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageTypographyStyled';
 import ShoppingBagRowSkeleton from './components/ShoppingBagPageProductRow/ShoppingBagRowSkeleton/BagRowSkeleton';
-import { ShoppingBagInterface } from '../../../types/ShoppingBagInterface';
 
 const BagPageGrid = () => {
     const shoppingBag = useSelector((state: RootState) => state.shoppingBag);

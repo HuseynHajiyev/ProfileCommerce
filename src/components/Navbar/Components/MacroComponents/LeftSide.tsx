@@ -1,5 +1,5 @@
 // MUI Imports
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 // Hooks
@@ -11,18 +11,23 @@ import { NavItemContainerLeftStyled } from '../../../StyledComponents/NavbarStyl
 import PrimaryNavigation from '../MicroComponents/PrimaryNavigation';
 
 const LeftSide = () => {
-    const { openNavigationDrawer, } = useDrawerToggle();
+    const { openNavigationDrawer,navigationIsOpen, closeNavigationDrawer } = useDrawerToggle();
     const isMobile = useIsMobile()
+    const { assignNavigationButtonRef } = useDrawerToggle();
     return (
         isMobile ? (
-            <NavItemContainerLeftStyled sx={{p: 0, flex: 1}}>
+            <NavItemContainerLeftStyled 
+            sx={{p: 0, flex: 1}}>
                 <IconButton
                     aria-label="large"
                     sx={{ order: -1}}
-                    onClick={ openNavigationDrawer }
-                    onTouchEnd={ openNavigationDrawer }
+                    onClick={() => {isMobile? (navigationIsOpen ? closeNavigationDrawer() : openNavigationDrawer()) : ( null ) }}
+                    // onTouchStart= { navigationIsOpen ? closeNavigationDrawer : openNavigationDrawer}
+                    onTouchEnd={() => {isMobile ? ( null ) : (navigationIsOpen ? closeNavigationDrawer() : openNavigationDrawer()) }}
                 >
-                    <MenuIcon />
+                    <Box ref={ assignNavigationButtonRef }>
+                        <MenuIcon />
+                    </Box>
                 </IconButton>
             </NavItemContainerLeftStyled>
         ) : (

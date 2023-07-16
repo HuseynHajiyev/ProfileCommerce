@@ -1,14 +1,14 @@
 // SearchInputComponent.tsx
-import { Box, Paper, ClickAwayListener } from '@mui/material';
-import { useSearchResults } from './UseSearchResults';
+import { Box } from '@mui/material';
 
 // Component imports
-import RenderInput from './RenderInput';
-import FormConteolStyled from '../../../../StyledComponents/NavbarStyled/FormControlStyled';
+import RenderInputTextField from './components/RenderInputTextField';
+import FormControllStyled from '../../../../StyledComponents/NavbarStyled/FormControlStyled';
 import AutocompleteStyled from '../../../../StyledComponents/NavbarStyled/AutocompleteStyled';
+import MemorizedPaper from './components/MemorizedPaper';
 
-// Hook imports
-import { useDrawerToggle } from '../../../../../hooks/useDrawerToggle';
+// Hooks 
+import { useSearchResults } from '../../../../../hooks/useSearchResults';
 
 interface SearchResultInterface {
   title: string;
@@ -17,10 +17,8 @@ interface SearchResultInterface {
 
 const SearchInputComponent = () => {
   const { options, loading, open, setOpen } = useSearchResults();
-  const { closeSearchBarDrawer } = useDrawerToggle();
   return (
-    <ClickAwayListener onClickAway={ closeSearchBarDrawer }>
-      <FormConteolStyled >
+    <FormControllStyled>
         <Box sx={{ display: 'flex', justifyContent: 'center', paddingY: '0.5%' }} >
           <AutocompleteStyled
             id="async-autocomplete"
@@ -38,20 +36,19 @@ const SearchInputComponent = () => {
               value: unknown
             ) => (option as SearchResultInterface).title === (value as SearchResultInterface).title}
             PaperComponent={({ children }) => (
-              <Paper style={{ maxHeight: '200px', overflow: 'auto' }}>{children}</Paper>
+              <MemorizedPaper>{children}</MemorizedPaper>
             )}
-            ListboxProps={{ style: { overflow: 'hidden' } }}
+            ListboxProps={{style: { overflow: 'hidden' } }}
             getOptionLabel={(option: unknown) =>
               typeof option === "string" ? option : (option as SearchResultInterface).title
               }
             options={options}
             loading={loading}
             placeholder="Search.."
-            renderInput={(params) => <RenderInput {...params} loading={loading} />}
+            renderInput={(params) => <RenderInputTextField {...params} loading={loading} />}
           />
         </Box>
-      </FormConteolStyled>
-    </ClickAwayListener>
+      </FormControllStyled>
   );     
 }
 

@@ -5,16 +5,15 @@ import { ShoppingBagPageTypographyStyled, ShoppingBagProductContentTypographySty
 
 // Interface imports
 import { ProductInterface } from "../../../../../../types/ProductInterface";
-import { GridCellStyled } from "../../../../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled";
 import { useIsMobile } from "../../../../../../hooks/useIsMobile";
-import { Tooltip } from "@mui/material";
+import { Grid, Tooltip } from "@mui/material";
 
 
 
 
 const ProductDetail = ({ product } : {product : ProductInterface}) => {
   const isMobile = useIsMobile();
-  const descrExpectedLength = isMobile ? 40 : 70;
+  const descrExpectedLength = isMobile ? 30 : 35;
   const trimTitle = (title : string, descrExpectedLength: number) => {
     if (title.length > descrExpectedLength) {
       return title.slice(0, descrExpectedLength) + '...';
@@ -22,23 +21,27 @@ const ProductDetail = ({ product } : {product : ProductInterface}) => {
     return title;
   };
   return (
-    <>
-      <GridCellStyled item aria-label='product-title' maxWidth={'100%'} paddingRight='15%'>
+    <Grid item container xs={8} direction={'column'} justifyContent={'space-between'}>
+      <Grid container xs={9} item aria-label='product-title' justifyContent={'flex-start'} direction={'row'}>
         <Tooltip title={product.title} placement='top-start' aria-label="full-title">
           <ShoppingBagProductContentTypographyStyled>
               {trimTitle(product.title, descrExpectedLength)}
           </ShoppingBagProductContentTypographyStyled>
         </Tooltip>
-      </GridCellStyled>
-      <GridCellStyled item aria-label='product-size'>
-          <ShoppingBagPageTypographyStyled>
+      </Grid>
+      <Grid item xs={3} container aria-label='product-size' justifyContent='flex-start' direction={'row'}>
+        <Grid item xs={6} lg={3} aria-label='product-size'>
+          <ShoppingBagPageTypographyStyled sx={{alignItems:'flex-end', display: 'flex' }}>
               Size:
           </ShoppingBagPageTypographyStyled>
-          <ShoppingBagProductContentTypographyStyled sx={{paddingLeft: '2%'}}>
+        </Grid>
+        <Grid item xs={6} lg={2}>
+          <ShoppingBagProductContentTypographyStyled sx={{alignItems:'flex-end', display: 'flex' }}>
               {product.size}
           </ShoppingBagProductContentTypographyStyled>
-      </GridCellStyled>
-    </>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 

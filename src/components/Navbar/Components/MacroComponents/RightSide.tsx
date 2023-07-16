@@ -4,7 +4,7 @@ import { Stack } from '@mui/material';
 // Components
 import SignInLinkComponent from '../MicroComponents/SignInLinkComponent';
 import BadgeComponent from '../MicroComponents/BadgePopover/BadgeComponent';
-import SearchButtonComponent from '../MicroComponents/Search/SearchButtonComponent';
+import SearchButtonComponent from '../MicroComponents/SearchButtonComponent';
 import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 const RightSide = () => {

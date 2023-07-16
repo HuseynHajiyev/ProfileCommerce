@@ -17,7 +17,6 @@ const ShoppingBagPageQuantityInput = ({ cartItem } : {cartItem: CartItemInterfac
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;
-        console.log(newValue);
         if (/^\d+$/.test(newValue)) {
             setValue(newValue);
             const newCartItem = {
