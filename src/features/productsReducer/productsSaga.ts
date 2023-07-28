@@ -1,19 +1,21 @@
-import {call, put, takeEvery } from 'redux-saga/effects';
+import {call, put, takeLatest } from 'redux-saga/effects';
 import { getProducts } from '../../api/productsApi';
-import { setProducts } from './productsSlice';
+import { loadProductsFailed, setProducts } from './productsSlice';
 import { ProductInterface } from '../../types/ProductInterface';
+import { PayloadAction } from '@reduxjs/toolkit';
 
-function* fetchProductsSaga() {
+function* loadProductsSaga(action: PayloadAction<number>) {
     try {
-        const products: ProductInterface[] = yield call(getProducts);
+        const products: ProductInterface[] = yield call(getProducts, action.payload);
         yield put(setProducts(products));
     } catch(e) {
         console.log(e)
+        yield put(loadProductsFailed);
     }
 }
 
 
-export function* watchFetchProductsSaga() {
-    yield takeEvery('product/fetchProducts', fetchProductsSaga);
+export function* watchLoadProductsSaga() {
+    yield takeLatest('products/loadProducts', loadProductsSaga);
 }
 

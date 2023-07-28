@@ -3,19 +3,19 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store'
 
 // Component imports
-import ProductRow from './components/ShoppingBagPageProductRow/ProductRow';
-import BagPageGridHeader from './components/BagPageGridHeader';
+import ProductRow from './MicroComponents/ShoppingBagPageProductRow/ProductRow';
+import BagPageGridHeader from './MicroComponents/BagPageGridHeader';
 
 // Interface imports
 import { CartItemInterface } from '../../../types/CartiItemInterface';
 import { BagEmptyContainer, GridContainerStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled';
 import { BagEmptyTypographyStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageTypographyStyled';
-import ShoppingBagRowSkeleton from './components/ShoppingBagPageProductRow/ShoppingBagRowSkeleton/BagRowSkeleton';
+import ShoppingBagRowSkeleton from './MicroComponents/ShoppingBagPageProductRow/ShoppingBagRowSkeleton/BagRowSkeleton';
 
 const BagPageGrid = () => {
     const shoppingBag = useSelector((state: RootState) => state.shoppingBag);
     return (
-        <GridContainerStyled container direction='column' maxHeight='100vh' overflow='scroll'>
+        <GridContainerStyled item container direction='column' maxHeight='100vh' overflow='scroll'>
             <BagPageGridHeader />
             {
                 shoppingBag.loading ? (

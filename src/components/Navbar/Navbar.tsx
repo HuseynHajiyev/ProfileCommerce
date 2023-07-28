@@ -4,16 +4,17 @@ import { Stack, useTheme } from '@mui/material';
 
 // Component Imports
 import { NavbarStyled } from '../StyledComponents/NavbarStyled/NavbarStyled';
-import ToolbarComponent from './Components/MacroComponents/ToolbarComponent';
+import ToolbarComponent from './navComponents/MacroComponents/ToolbarComponent';
 
 // Context Imports
-import NavigationDrawer from './Components/MacroComponents/NavigationDrawer';
+import NavigationDrawer from './navComponents/MacroComponents/NavigationDrawer';
 
 // Redux Imports
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadShoppingBag } from '../../features/shoppingBagReducer/shoppingBagSlice';
-import SearchBarDrawer from './Components/MacroComponents/SearchBarDrawer';
+import { loadProducts } from '../../features/productsReducer/productsSlice';
+import SearchBarDrawer from './navComponents/MacroComponents/SearchBarDrawer';
 
 
 const Navbar = () => {
@@ -21,6 +22,7 @@ const Navbar = () => {
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(loadShoppingBag(1));
+      dispatch(loadProducts(0));
     }, [dispatch]);
     return (
         <>

@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import theme from '../../../themes/theme';
 
 // Custom Components
-import NavTypographyComponent from '../../Navbar/Components/MicroComponents/NavTypographyComponent';
+import NavTypographyComponent from '../../Navbar/navComponents/MicroComponents/NavTypographyComponent';
 
 
 export const ShoppingBagProductCardStyled = styled(Card)(() => ({
@@ -26,6 +26,10 @@ export const ShoppingBagCheckoutButtonStyled = styled(Box)(() => ({
     fontSize: '0.8rem',
     textTransform: 'none',
     fontWeight: 'bold',
+    [theme.breakpoints.up('lg')]: {
+        fontSize: '0.6rem',
+        padding: '3%',
+    },
 }))
 
 export const ShoppingBagAddRemoveStyled = styled(IconButton)(() => ({

@@ -10,6 +10,16 @@ export const BadgePopoverStyled = styled(Popover)(() => ({
         position: 'relative', 
         overflow: 'visible',
     },
+    [theme.breakpoints.up('lg')]: {
+      '& .MuiPopover-paper': {
+          width: '30%',
+          height: '81vh',
+          border: '2px solid black',
+          borderRadius: '0px',
+          position: 'relative', 
+          overflow: 'visible',
+      },
+    },
     '& .popoverArrow': { // create another style for our arrow
         position: 'absolute',
         top: '-2.2%',  // adjust as needed

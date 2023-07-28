@@ -14,7 +14,7 @@ export const gridColumns = {
         },
         quantity: {
             sm: 3,
-            md: 2,
+            md: 3,
         },
         subtotal: {
             sm: 2,

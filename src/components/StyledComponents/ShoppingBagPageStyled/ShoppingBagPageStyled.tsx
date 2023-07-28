@@ -7,9 +7,11 @@ import Checkbox from '@mui/material/Checkbox';
 export const BagGridHeaderRowStyled = styled(Grid)({
     backgroundColor: '#F7F7F7',
     padding: '0.5rem 0',
-    position: 'sticky',
+    // position: 'sticky',
     top: 0,
     display: 'flex',
+    position: 'sticky',
+    zIndex: 1,
 })
 
 export const ShoppingBagPageHeaderStyled = styled(Grid)({
@@ -107,8 +109,10 @@ export const GridCellStyled = styled(Grid)({
 
 
 export const GridContainerStyled = styled(Grid)({
-  maxHeight: '100vh',
-  overflowY: 'auto',
+  display: 'block',
+  maxHeight: '70vh',
+  flexWrap: 'wrap',
+  overflowY: 'scroll',
   overflowX: 'hidden',
   minHeight: '10vh',
   '&::-webkit-scrollbar': {

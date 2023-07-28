@@ -28,10 +28,10 @@ const FormControlStyled = styled(FormControl)({
         paddingTop: '4vw',
     },    
     [theme.breakpoints.up('xl')]: {
-            paddingTop: '4vw',
+            paddingTop: 'clamp(2rem, 3vw, 4rem)',
     },
     [`@media(min-width: ${theme.breakpoints.values.xl + 200}px)`]: {
-            paddingTop: '2.5vw',
+            paddingTop: 'clamp(2rem, 1vw, 3rem)',
     },
 });
 
