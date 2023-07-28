@@ -6,5 +6,6 @@ export const ENDPOINTS = {
   ADD_PRODUCT_TO_BAG: `${API_URL}/carts`,
   GET_PRODUCTS: `${API_URL}/products`,
   GET_PRODUCTS_LIMIT: `${API_URL}/products?limit=`,
-  
+  GET_PRODUCTS_IN_CATEGORY: `${API_URL}/products/category/`,
+  GET_PRODUCT: `${API_URL}/products/`,
 };

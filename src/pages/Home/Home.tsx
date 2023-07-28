@@ -1,11 +1,11 @@
-import { Container, Typography } from '@mui/material';
-import React from 'react';
+import { Box } from '@mui/material'
+import { Typography } from '@mui/material'
 
 const Home = () => {
   return (
-    <Container>
+    <Box>
         <Typography variant="h1">Home</Typography>
-    </Container>           
+    </Box>
   )
 }
 

@@ -4,6 +4,7 @@ export interface ProductInterface {
     title: string;
     color: string;
     size: string;
+    description: string;
     price: number;
     image: string;
     rating: {

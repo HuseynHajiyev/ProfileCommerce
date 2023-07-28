@@ -20,7 +20,7 @@ export const NavigationDrawerStyled = styled(Drawer)(() => ({
     justifyContent: 'center',
     maxWidth: '100%',
     width: '100%',
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer - 2,
     '& .MuiDrawerPaper': {
             display: 'flex',
             alignItems: 'center',
@@ -37,7 +37,7 @@ export const NavigationDrawerStyled = styled(Drawer)(() => ({
     },
     [theme.breakpoints.up('md')]: {
     '& .MuiDrawer-paper': {
-            paddingTop: '12%',
+            paddingTop: 'clamp(11vw, 10%, 5vh)',
             display: 'flex',
             alignItems: 'center',
     }
@@ -90,6 +90,7 @@ export const NavLinkStyled = styled(NavLink)<NavLinkProps>`
     transition: color 0.2s;
     display: block;
     padding: 0;
+    color: inherit;
     &:hover {
         color: #888;
     }

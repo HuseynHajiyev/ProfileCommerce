@@ -1,11 +1,11 @@
 // MUI Imports
-import { Container, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 const NewArrivals = () => {
   return (
-    <Container>
+    <Box>
         <Typography variant="h1">New Arrivals</Typography>
-    </Container>
+    </Box>
   )
 }
 

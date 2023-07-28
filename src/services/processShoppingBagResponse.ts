@@ -4,7 +4,7 @@ import { ProductInterface } from '../types/ProductInterface';
 
 export function processShoppingBagProducts(
     cartItems: CartItemApiResponseInterface[],
-    productDetails: ProductInterface[]
+    products: ProductInterface[]
   ): CartItemInterface[] {
     const sizes = ["S", "M", "L", "XL"];
     const colors = ["Red", "Blue", "Green", "Black", "White"];
@@ -13,18 +13,20 @@ export function processShoppingBagProducts(
       const size = sizes[Math.floor(Math.random() * sizes.length)];
       const color = colors[Math.floor(Math.random() * colors.length)];
   
-      const product = productDetails.find((product) => product.id === cartItem.productId);
+      const product = products.find((product) => product.id === cartItem.productId);
       
       if (!product) {
         throw new Error(`Product with id ${cartItem.productId} not found`);
       }
-      product.size = size;
-      product.color = color;
-  
       return {
-        product: product,
+        product: {
+          ...product,
+          size,
+          color
+        },
         quantity: cartItem.quantity
       } as CartItemInterface;
+      
     });
   
     const combinedProducts: { [id: number]: CartItemInterface } = {};

@@ -1,11 +1,11 @@
-import { Container, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 
 const NotFound404 = () => {
   return (
-    <Container>
+    <Box>
         <Typography variant="h1">404: Page not found</Typography>
-    </Container>
+    </Box>
   )
 }
 

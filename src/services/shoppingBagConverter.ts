@@ -13,6 +13,7 @@ export const ApiToShoppingBagConverter = (response: ShoppingBagApiResponseInterf
         products: loadedProducts, 
         loading: false, 
         error: null, 
+        shipping: 0,
         subTotal: shoppingBagCalculateTotal(loadedProducts)
     }
     return {bag: loadedShoppingBag, __v: __v};

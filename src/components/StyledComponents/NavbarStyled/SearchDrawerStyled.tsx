@@ -37,7 +37,7 @@ const SearchDrawerStyled = styled(Drawer)(() => ({
     },
     [`@media(min-width: ${theme.breakpoints.values.xl + 100}px)`]: {
         '& .MuiDrawerPaper' :{
-            paddingTop: '5vh',
+            paddingTop: 'clamp(2rem, 5vw, 4rem)',
         }
     },
 }));

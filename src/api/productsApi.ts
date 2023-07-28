@@ -1,16 +1,19 @@
+import axios from "axios";
 
-export const getProducts= (limit?: number) => {
-    if(limit === undefined ) {
-        return fetch(`https://fakestoreapi.com/products`).then(response => response.json());
+import { ENDPOINTS } from "../config";
+
+const { GET_PRODUCTS, GET_PRODUCTS_LIMIT } = ENDPOINTS;
+
+export const getProducts= async (limit?: number) => {
+    if(limit === 0 ) {
+        const response = await axios.get(`${GET_PRODUCTS}`);
+        return response.data;
     }
-    
-    return fetch(`https://fakestoreapi.com/users?limit=${limit}`).then(response => response.json());
+    const response = await axios.get(`${GET_PRODUCTS_LIMIT}${limit}`);
+    return response.data;
 }
 
-export const getProduct = (productId: number) => {
-    return fetch(`https://fakestoreapi.com/products/${productId}`).then(response => response.json());
-}
-
-export const getProductsInCategory = (categoryName: string) => {
-    return fetch(`https://fakestoreapi.com/category/${categoryName}`).then(response => response.json());
+export const getProductsInCategory = async (categoryName: string) => {
+   const response = await axios.get(`${GET_PRODUCTS}/${categoryName}`);
+    return response.data;
 }

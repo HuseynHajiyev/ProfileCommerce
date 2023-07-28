@@ -2,12 +2,12 @@ import { Box, Typography } from '@mui/material'
 import { SummaryTitleTypographyStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageTypographyStyled'
 import { BagSummaryAccordionStyled, BagAccordionHeaderStyled, SummaryContainerBoxStyled, AccordDetailsStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ShippingAndTaxInput from './components/ShippingAndTaxInput';
-import StateProvinceInput from './components/StateProvinceInput';
-import ZipPostalInput from './components/ZipPostalInput';
-import ZipPostalRadio from './components/ZipPostalRadio';
-import SubtotalSummary from './components/SubtotalSummary';
-import DiscountCodeInput from './components/DiscountCodeInput';
+import ShippingAndTaxInput from './MicroComponents/ShippingAndTaxInput';
+import StateProvinceInput from './MicroComponents/StateProvinceInput';
+import ZipPostalInput from './MicroComponents/ZipPostalInput';
+import ZipPostalRadio from './MicroComponents/ZipPostalRadio';
+import SubtotalSummary from './MicroComponents/SubtotalSummary';
+import DiscountCodeInput from './MicroComponents/DiscountCodeInput';
 import { ShoppingBagCheckoutButtonStyled } from '../../StyledComponents/NavbarStyled/ShoppingBagStyled';
 
 const BagPageSummaryAccordion = () => {
