@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app/store';
-import DynamicBreadcrumbs from '../../../components/BreadCrumbs/DynamicBreadcrumbs';
 import ShopGrid from '../../../components/Shop/ShopGrid';
 import ShopSkeletonGrid from '../../../components/Shop/ShopSkeletonGrid';
 

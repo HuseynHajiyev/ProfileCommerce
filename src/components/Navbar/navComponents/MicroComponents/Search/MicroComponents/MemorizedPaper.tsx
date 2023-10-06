@@ -1,4 +1,4 @@
-import { memo, ReactNode } from 'react'
+import { memo, ReactNode, useRef } from 'react'
 
 // MUI Imports
 import { Paper } from '@mui/material'
@@ -8,8 +8,9 @@ interface MemorizedPaperProps {
 }
 
 const MemorizedPaper = memo(({children} : MemorizedPaperProps) => {
+    const paperRef = useRef<HTMLDivElement>(null);
     return (
-        <Paper style={{ maxHeight: '200px', overflow: 'auto' }}>
+        <Paper ref={paperRef}>
             {children}
         </Paper>
     )

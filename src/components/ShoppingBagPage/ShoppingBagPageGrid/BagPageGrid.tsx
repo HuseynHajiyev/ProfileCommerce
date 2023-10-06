@@ -7,7 +7,7 @@ import ProductRow from './MicroComponents/ShoppingBagPageProductRow/ProductRow';
 import BagPageGridHeader from './MicroComponents/BagPageGridHeader';
 
 // Interface imports
-import { CartItemInterface } from '../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../models/CartiItemInterface';
 import { BagEmptyContainer, GridContainerStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled';
 import { BagEmptyTypographyStyled } from '../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageTypographyStyled';
 import ShoppingBagRowSkeleton from './MicroComponents/ShoppingBagPageProductRow/ShoppingBagRowSkeleton/BagRowSkeleton';

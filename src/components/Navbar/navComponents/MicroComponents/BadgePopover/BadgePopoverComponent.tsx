@@ -16,7 +16,7 @@ interface PopperProps {
 
 const BadgePopover = ({ buttonRef } : PopperProps) => {
     const { shoppingBagIsOpen, closeShoppingPopper } = useDrawerToggle();
-    const isMobile = useIsMobile();
+    const isMobile = useIsMobile('mobile');
     useEffect(() => {
         if(isMobile) {
             closeShoppingPopper();
@@ -43,7 +43,7 @@ const BadgePopover = ({ buttonRef } : PopperProps) => {
                     { 
                         marginTop: '2%',
                     } 
-                } // adjust the value as needed
+                }
             }}
         >   
             <div className="popoverArrow" />

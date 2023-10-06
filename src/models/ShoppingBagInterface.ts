@@ -5,10 +5,17 @@ export interface ShoppingBagInterface {
   userId: number;
   date: string;
   products: CartItemInterface[];
+  tempProducts: TempProductSelection[];
   loading: boolean;
   error: string | null;
   subTotal: number;
   shipping: 0,
+  log: string[],
+}
+
+export interface TempProductSelection {
+  productId: number;
+  size: string;
 }
 
 export interface ShoppingBagApiResponseInterface {

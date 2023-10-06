@@ -12,8 +12,8 @@ import ShoppingBagProductCardComponent from './ShoppingBagProduct/ShoppingBagPro
 // Type imports
 import { RootState } from '../../../../../app/store';
 import SubtotalComponent from './SubtotalComponent';
-import { ShoppingBagInterface } from '../../../../../types/ShoppingBagInterface';
-import { CartItemInterface } from '../../../../../types/CartiItemInterface';
+import { ShoppingBagInterface } from '../../../../../models/ShoppingBagInterface';
+import { CartItemInterface } from '../../../../../models/CartiItemInterface';
 import { BadgePopoverContentGridStyled } from '../../../../StyledComponents/NavbarStyled/BadgePopoverStyled';
 import { ProductsGridStyled } from '../../../../StyledComponents/NavbarStyled/ShoppingBagStyled';
 import { useIsMobile } from '../../../../../hooks/useIsMobile';
@@ -51,7 +51,7 @@ const ShoppingBagContents = () => {
           ) : (
               shoppingBag.products.map((cartItem: CartItemInterface, index: number) => (
                   <Grid item xs={12} key={index} sx={{minWidth:'100%'}}>
-                      <ShoppingBagProductCardComponent cartItem={cartItem}/>
+                    <ShoppingBagProductCardComponent cartItem={cartItem}/>
                   </Grid>
               ))
           )

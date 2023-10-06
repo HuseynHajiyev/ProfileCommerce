@@ -1,5 +1,5 @@
-import { ShoppingBagInterface, ShoppingBagApiResponseInterface } from "../types/ShoppingBagInterface";
-import { CartItemInterface, CartItemApiResponseInterface } from "../types/CartiItemInterface";
+import { ShoppingBagInterface, ShoppingBagApiResponseInterface } from "../models/ShoppingBagInterface";
+import { CartItemInterface, CartItemApiResponseInterface } from "../models/CartiItemInterface";
 
 export const shoppingBagCalculateTotal = (cartItems: CartItemInterface[]): number => {
     return cartItems.reduce((total, cartItem) => total + cartItem.product.price * cartItem.quantity, 0);

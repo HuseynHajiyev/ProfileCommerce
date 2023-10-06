@@ -8,4 +8,8 @@ export const ENDPOINTS = {
   GET_PRODUCTS_LIMIT: `${API_URL}/products?limit=`,
   GET_PRODUCTS_IN_CATEGORY: `${API_URL}/products/category/`,
   GET_PRODUCT: `${API_URL}/products/`,
+  GET_CATEGORIES: `${API_URL}/products/categories`,
+  GET_IN_CATEGORY: `${API_URL}/products/category/`,
+  LOGIN_USER: `${API_URL}/auth/login`,
+  GET_USERS: `${API_URL}/users`,
 };

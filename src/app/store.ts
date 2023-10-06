@@ -4,6 +4,7 @@ import shoppingBagReducer from "../features/shoppingBagReducer/shoppingBagSlice"
 import productsReducer from "../features/productsReducer/productsSlice";
 import productReducer from "../features/productReducer/productSlice";
 import rootSaga from "../sagas";
+import searchResultsSlice from "../features/searchResultsReducer/searchResultsSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -12,6 +13,7 @@ export const store = configureStore({
         shoppingBag: shoppingBagReducer,
         products: productsReducer,
         product: productReducer,
+        search: searchResultsSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });

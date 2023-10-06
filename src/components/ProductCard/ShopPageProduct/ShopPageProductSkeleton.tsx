@@ -1,6 +1,6 @@
 import { Grid, Skeleton } from '@mui/material'
 
-const ProductSkeleton = () => {
+const ShopPageProductSkeleton = () => {
     return (
         <Grid container direction={'column'}>
             <Grid item xs={9} height={'100%'} minHeight={'100%'} minWidth={'100%'}>
@@ -13,4 +13,4 @@ const ProductSkeleton = () => {
     )
 }
 
-export default ProductSkeleton
+export default ShopPageProductSkeleton

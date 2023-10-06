@@ -15,6 +15,7 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
     closeSearchBarDrawer: () => void;
     openNavigationDrawer: () => void;
     closeNavigationDrawer: () => void;
+    closeAllDrawers: () => void;
     assignNavigationDrawerRef : (node: HTMLDivElement) => void;
     assignNavigationButtonRef : (node: HTMLDivElement) => void;
   }
@@ -36,9 +37,6 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
     const [drawerRef, setDrawerRef] = useState<null | HTMLDivElement>(null);
     const [drawerButtonRef, setdrawerButtonRef] = useState<null | HTMLDivElement>(null);
 
-    // Search bar drawer
-    const [searcButtonRef, setSearcButtonhRef] = useState<null | HTMLDivElement>(null);
-    // Shopping bag and popper
 
     const openShoppingPopper = () => {
       if(navigationIsOpen || searchIsOpen){
@@ -48,23 +46,23 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
       setShoppingBagIsOpen(prevState => !prevState);
     };
 
-    const closeShoppingPopper = () => {
+    const closeShoppingPopper = useCallback(() => {
       setShoppingBagIsOpen(false);
-    };
+    }, [setShoppingBagIsOpen]);
 
 
     // Search bar drawer
-    const openSearchBarDrawer = () => {
+    const openSearchBarDrawer = useCallback(() => {
       if(navigationIsOpen || shoppingBagIsOpen){
         setShoppingBagIsOpen(false);
         setNavigationIsOpen(false);
       }
       setSearchIsOpen(true);
-    };
+    }, [navigationIsOpen,shoppingBagIsOpen ,setSearchIsOpen, setNavigationIsOpen, setShoppingBagIsOpen]);
     
-    const closeSearchBarDrawer = () => {
+    const closeSearchBarDrawer = useCallback(() => {
       setSearchIsOpen(false);
-    };
+    }, [setSearchIsOpen]);
 
     
     // Mobile Navigation drawer
@@ -89,6 +87,13 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
       setNavigationIsOpen(false);
     }, [setNavigationIsOpen]);
 
+    // all drawers
+    
+    const closeAllDrawers = useCallback(() => {
+      closeSearchBarDrawer();
+      closeNavigationDrawer();
+      closeShoppingPopper();
+    }, [closeSearchBarDrawer, closeNavigationDrawer, closeShoppingPopper]);
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -109,7 +114,7 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
     return (
       <DrawerToggleContext.Provider value={
         { searchIsOpen, navigationIsOpen, shoppingBagIsOpen,
-          openShoppingPopper, closeShoppingPopper, openSearchBarDrawer, closeSearchBarDrawer, 
+          openShoppingPopper, closeShoppingPopper, openSearchBarDrawer, closeSearchBarDrawer, closeAllDrawers,
           openNavigationDrawer, closeNavigationDrawer, assignNavigationDrawerRef, assignNavigationButtonRef,
         }}>
         {children}

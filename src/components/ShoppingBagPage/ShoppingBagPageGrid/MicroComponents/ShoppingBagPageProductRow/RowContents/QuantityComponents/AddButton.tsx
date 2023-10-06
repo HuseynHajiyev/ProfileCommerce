@@ -1,29 +1,24 @@
 // React Imports
 import { useState } from 'react'
 import { AiFillPlusSquare, AiOutlinePlusSquare } from 'react-icons/ai';
-
-// Redux imports
-import { useDispatch } from 'react-redux';
-import { addToShoppingBag } from '../../../../../../../features/shoppingBagReducer/shoppingBagSlice';
-
-// Styled components
 import { ShoppingBagAddRemoveStyled } from '../../../../../../StyledComponents/NavbarStyled/ShoppingBagStyled';
 
 // Interface imports
-import { CartItemInterface } from '../../../../../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../../../../../models/CartiItemInterface';
 import { iconSize } from '../../../../../../../utilities/ShoppingBagPageIconSize';
 
 // Hooks
 import { useIsMobile } from '../../../../../../../hooks/useIsMobile';
+import { useProductQuantity } from '../../../../../../../hooks/useProductQuantity';
 
 
 const AddButton = ({ cartItem } : { cartItem : CartItemInterface}) => {
     const isMobile = useIsMobile();
     const [plusHover, setPlusHover] = useState(false);
-    const dispatch = useDispatch();
+    const { addProductToShoppingBag } = useProductQuantity();
     const iconsSize = iconSize(isMobile);
     const handleAdd = () => {
-        dispatch(addToShoppingBag(cartItem));
+        addProductToShoppingBag(cartItem.product, cartItem.sizeSelected, 0);
     }
     return (
         <ShoppingBagAddRemoveStyled aria-label="increase-item-quantity"

@@ -67,10 +67,10 @@ let theme = createTheme({
       fontSize: '1rem',
       whiteSpace: 'nowrap',
       '@media (min-width:600px)': {
-        fontSize: '1.5rem',
+        fontSize: '1.1rem',
       },
       '@media (min-width:960px)': {
-        fontSize: '1.8rem',
+        fontSize: '1.1rem',
       },
       '@media (min-width:1280px)': {
         fontSize: '1rem',

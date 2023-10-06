@@ -1,5 +1,5 @@
 // Component imports
-import { ProductInterface } from '../../../../../../types/ProductInterface';
+import { ProductInterface } from '../../../../../../models/ProductInterface';
 import { ShoppingBagPageTypographyStyled } from '../../../../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageTypographyStyled';
 import { GridCellStyled } from '../../../../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled';
 

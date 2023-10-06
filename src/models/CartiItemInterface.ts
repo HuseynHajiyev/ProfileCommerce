@@ -1,9 +1,12 @@
 import { ProductInterface } from "./ProductInterface";
 
 export interface CartItemInterface {
-    product: ProductInterface,
-    quantity: number,
+    product: ProductInterface;
+    cartPrice: number;
+    quantity: number;
+    sizeSelected: string;
 }
+
 
 export interface CartItemApiResponseInterface {
     productId: number,

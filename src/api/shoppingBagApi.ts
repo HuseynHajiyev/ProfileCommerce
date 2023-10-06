@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AddProductToBagProps, UpdateShoppingBagProps } from "../types/ShoppingBagInterface";
+import { AddProductToBagProps, UpdateShoppingBagProps } from "../models/ShoppingBagInterface";
 import { ENDPOINTS} from '../config';
 
 const { GET_SHOPPING_BAG, UPDATE_SHOPPING_BAG, ADD_PRODUCT_TO_BAG } = ENDPOINTS;

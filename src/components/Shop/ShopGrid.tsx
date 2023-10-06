@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
-import { ProductInterface } from '../../types/ProductInterface'
+import { ProductInterface } from '../../models/ProductInterface'
 import NotFound404 from '../../pages/NotFound404/NotFound404'
-import ShopPageProduct from '../ProductCard/ShopPageProduct'
+import ShopPageProduct from '../ProductCard/ShopPageProduct/ShopPageProduct'
 
 
 const ShopGrid = ({products} : {products: ProductInterface[] | null}) => {

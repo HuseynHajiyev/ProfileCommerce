@@ -25,14 +25,15 @@ import { useDrawerToggle } from '../../../../../hooks/useDrawerToggle';
 import { RootState } from '../../../../../app/store';
 
 const BadgeComponent = () => {
-  const isMobile = useIsMobile();
+  const isLargeDesktop = useIsMobile('largeDesktop');
+  const isTablet = useIsMobile('tablet');
   const buttonRef = useRef(null)
   const bagItemsCount = useSelector((state: RootState) => state.shoppingBag.products.length);
   const shoppingBag = useSelector((state: RootState) => state.shoppingBag);
   const { openShoppingPopper } = useDrawerToggle();
   const navigate = useNavigate();
   const handleShoppingBagClick = () => {
-    if(isMobile) {
+    if(!isLargeDesktop) {
       navigate('/shopping-bag')
     } else {
       openShoppingPopper();
@@ -48,10 +49,10 @@ const BadgeComponent = () => {
     <>
       <NavItemContainerRightStyled>
           <Button aria-label="cart" 
-            sx={{textTransform: 'none', p: 0, width: '100%', justifyContent: isMobile? 'flex-end' : 'inherit'}}
+            sx={{textTransform: 'none', p: 0, width: '100%', justifyContent: !isLargeDesktop? 'flex-end' : 'inherit'}}
             onClick={ handleShoppingBagClick }
             onTouchEnd={(e: React.TouchEvent<HTMLButtonElement>) => {
-              if(isMobile) {
+              if(!isLargeDesktop) {
                   e.preventDefault() 
                   handleShoppingBagClick();
                 }
@@ -62,17 +63,17 @@ const BadgeComponent = () => {
             <BadgeContainerStyled> 
               {
                 shoppingBag.loading ? (
-                  <CircularProgress size={isMobile ? 25 : 30} color="inherit" />
+                  <CircularProgress size={!isLargeDesktop ? 25 : 30} color="inherit" />
                 ) : shoppingBag.products.length === 0 ?( 
                   <NavTypographyComponent>
-                    {isMobile ? 'Bag' : 'Your Bag'}
+                    {!isLargeDesktop ? 'Bag' : 'Your Bag'}
                   </NavTypographyComponent>
                 ) : (
                   <>
                       <NavTypographyComponent>
-                        {`${trimedItemsCount()}${isMobile ? '' : ' Items'}`}
+                        {`${trimedItemsCount()}${!isLargeDesktop ? '' : ' Items'}`}
                       </NavTypographyComponent>
-                      <AiFillShopping size={isMobile ? 25 : 30} color="black" id='shopping-cart-icon'/>
+                      <AiFillShopping size={!isLargeDesktop || isTablet ? 20 : 30} color="black" id='shopping-cart-icon'/>
                   </>
 
                 )

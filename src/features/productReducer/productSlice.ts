@@ -1,17 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProductInterface } from '../../types/ProductInterface';
-import { setProducts } from '../productsReducer/productsSlice';
-
-interface ProductState {
-  product: ProductInterface | null;
-  loading: boolean;
-  error: string | null;
-}
+import { ProductInterface, ProductState } from '../../models/ProductInterface';
 
 const initialState: ProductState = {
   product: null,
   loading: false,
   error: null,
+  log: [],
 };
 
 const productSlice = createSlice({
@@ -20,6 +14,10 @@ const productSlice = createSlice({
   reducers: {
     loadProduct(state, action: PayloadAction<number>) {
       state.loading = true;
+      state.error = null;
+      state.log.push(
+        `loadProduct action dispatched at ${new Date().toISOString()} with payload ${action.payload}`
+      );
     },
     setProduct(state, action: PayloadAction<ProductInterface>) {
       state.product = action.payload;
@@ -29,8 +27,7 @@ const productSlice = createSlice({
     loadProductFailed(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
-    },
-    // TODO: Add your updateProduct, addProduct, deleteProduct here
+    }, 
   },
 });
 

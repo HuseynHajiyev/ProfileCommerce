@@ -3,7 +3,7 @@ import { ShoppingBagPageTypographyStyled } from "../../../../../StyledComponents
 import { GridCellStyled } from "../../../../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled";
 
 // Interface imports
-import { CartItemInterface } from "../../../../../../types/CartiItemInterface";
+import { CartItemInterface } from "../../../../../../models/CartiItemInterface";
 
 // Utility imports
 import { roundNumberToFixed } from "../../../../../../utilities/roundNumber";

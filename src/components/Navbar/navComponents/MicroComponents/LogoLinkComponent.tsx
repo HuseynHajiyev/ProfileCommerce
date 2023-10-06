@@ -10,7 +10,8 @@ import { useIsMobile } from '../../../../hooks/useIsMobile'
 
 
 const LogoLinkComponent = () => {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile('mobile');
+  const isTablet = useIsMobile('tablet');
   return (
     <NavLink to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
         <Button aria-label='Logo' sx={{ textTransform: 'none', paddingTop: '0'}}>
@@ -22,7 +23,7 @@ const LogoLinkComponent = () => {
                     letterSpacing: '-0.055em',
                 }
             }>
-            Participle+
+            {isMobile || isTablet ? `P+` : `Participle+`}
           </Typography>
         </Button>
       </NavLink>

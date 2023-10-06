@@ -8,11 +8,11 @@ import SearchButtonComponent from '../MicroComponents/SearchButtonComponent';
 import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 const RightSide = () => {
-  const isMobile = useIsMobile();
+  const isLargeDesktop = useIsMobile('largeDesktop');
   return (
-    <Stack direction='row' justifyContent='space-between' spacing={ isMobile ? 2 : 6 } sx={{ flex: '1 1 0px;', width: 0 }}>
+    <Stack direction='row' justifyContent='space-between' spacing={ !isLargeDesktop ? 2 : 6 } sx={{ flex: '1 1 0px;', width: 0 }}>
       <SearchButtonComponent /> 
-        {isMobile ? null : <SignInLinkComponent />}
+        {!isLargeDesktop ? null : <SignInLinkComponent />}
       <BadgeComponent />
     </Stack>
   )
