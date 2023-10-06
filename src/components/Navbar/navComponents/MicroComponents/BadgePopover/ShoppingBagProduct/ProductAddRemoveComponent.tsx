@@ -1,16 +1,13 @@
 import { useState } from 'react'
 
-// Redux Imports
-import { useDispatch } from 'react-redux';
-import { decreaseQuantity, addToShoppingBag } from '../../../../../../features/shoppingBagReducer/shoppingBagSlice';
-
 // React Imports
 import { AiFillPlusSquare, AiFillMinusSquare, AiOutlineMinusSquare, AiOutlinePlusSquare } from "react-icons/ai";
 
 // Styled Components imports
 import { ShoppingBagAddRemoveStyled } from '../../../../../StyledComponents/NavbarStyled/ShoppingBagStyled';
-import { CartItemInterface } from '../../../../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../../../../models/CartiItemInterface';
 import { useIsMobile } from '../../../../../../hooks/useIsMobile';
+import { useProductQuantity } from '../../../../../../hooks/useProductQuantity';
 
 
 
@@ -18,15 +15,15 @@ import { useIsMobile } from '../../../../../../hooks/useIsMobile';
 const ProductAddRemove = ({ cartItem } : {cartItem: CartItemInterface}) => {
     const [plusHover, setPlusHover] = useState(false);
     const [minusHover, setMinusHover] = useState(false);
-    const dispatch = useDispatch();
+    const { addProductToShoppingBag, decreaseShoppingBagProductQuantity } = useProductQuantity();
     const isMobile = useIsMobile()
 
     const handleAdd = () => {
-        dispatch(addToShoppingBag(cartItem));
+        addProductToShoppingBag(cartItem.product, cartItem.sizeSelected, 0)
     }
     const handleRemove = () => {
         if(cartItem.quantity > 1) {
-            dispatch(decreaseQuantity(cartItem));
+            decreaseShoppingBagProductQuantity(cartItem);
         }
     }
     return (

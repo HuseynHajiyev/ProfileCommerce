@@ -1,33 +1,28 @@
 import { useState } from 'react';
 import { AiFillMinusSquare, AiOutlineMinusSquare } from 'react-icons/ai';
 
-// Redux imports
-import { useDispatch } from 'react-redux';
-import { decreaseQuantity } from '../../../../../../../features/shoppingBagReducer/shoppingBagSlice';
-
 // Styled components
 import { ShoppingBagAddRemoveStyled } from '../../../../../../StyledComponents/NavbarStyled/ShoppingBagStyled';
 
 // Inteface imports
-import { CartItemInterface } from '../../../../../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../../../../../models/CartiItemInterface';
 
 // Utils
 import { iconSize } from '../../../../../../../utilities/ShoppingBagPageIconSize';
 
 // Hooks
 import { useIsMobile } from '../../../../../../../hooks/useIsMobile';
+import { useProductQuantity } from '../../../../../../../hooks/useProductQuantity';
 
 
 const RemoveButton = ({ cartItem } : {cartItem : CartItemInterface}) => {
   const [minusHover, setMinusHover] = useState(false);
-  const dispatch = useDispatch();
   const isMobile = useIsMobile();
   const iconsSize = iconSize(isMobile);
+  const { decreaseShoppingBagProductQuantity } = useProductQuantity();
   const handleRemove = () => {
-    if(cartItem.quantity > 1) {
-        dispatch(decreaseQuantity(cartItem));
-    }
-}
+    decreaseShoppingBagProductQuantity(cartItem);
+  }
 
   return (
     <ShoppingBagAddRemoveStyled aria-label="decrease-item-quantity"

@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 
 // MUI Imports
 import { Typography } from '@mui/material';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 
 // Hooks
@@ -14,8 +15,9 @@ interface NavLinkTypographyStyledProps {
 
 
 const NavTypographyComponent = ({children} : NavLinkTypographyStyledProps) => {
+  const isDesktop = useIsMobile('desktop');
   return (
-    <Typography variant='h6' fontFamily='Mulish'>
+    <Typography variant={ !isDesktop ? 'body1' : 'h6'} fontFamily='Mulish'>
         {children}
     </Typography>
   )

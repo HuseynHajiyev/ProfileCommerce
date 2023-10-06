@@ -9,7 +9,8 @@ import ProductCardContentComponent from './ProductCardContentComponent';
 import { ShoppingBagProductCardStyled }from '../../../../../StyledComponents/NavbarStyled/ShoppingBagStyled';
 
 // Interface imports
-import { CartItemInterface } from '../../../../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../../../../models/CartiItemInterface';
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,7 +23,9 @@ const ProductCard = ({cartItem}: {cartItem: CartItemInterface}) => {
         <ShoppingBagProductCardStyled>
             <Grid container direction='row' spacing={1} sx={{ paddingY: '5%', '& .MuiCardContent-root': { p:0 }}}>
                 <Grid item xs={3} sx={{position: 'relative', width: '100%', paddingTop: '100%', backgroundColor: '#ffffff'}}>
-                    <ProductCardMediaComponent product={cartItem.product} />
+                    <Link to={`/shop/view-all/${cartItem.product.id}`}>
+                        <ProductCardMediaComponent product={cartItem.product} />
+                    </Link>
                 </Grid>
                 <Grid item xs={9}>
                     <ProductCardContentComponent cartItem={cartItem} />

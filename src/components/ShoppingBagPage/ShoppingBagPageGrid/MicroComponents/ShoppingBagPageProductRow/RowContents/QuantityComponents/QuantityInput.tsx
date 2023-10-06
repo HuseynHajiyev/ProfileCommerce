@@ -1,35 +1,55 @@
-// React imports
-import { ChangeEvent, useState, useEffect } from 'react';
-
-// Redux imports
-import { useDispatch } from 'react-redux';
+import { ChangeEvent, useState, useEffect, useRef, useCallback } from 'react';
 import { updateQuantity } from '../../../../../../../features/shoppingBagReducer/shoppingBagSlice';
 
 // Interface imports
-import { CartItemInterface } from '../../../../../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../../../../../models/CartiItemInterface';
 
 // Styled Components imports
 import { SetQuantityFieldStyled } from '../../../../../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled';
+import { useProductQuantity } from '../../../../../../../hooks/useProductQuantity';
 
 const ShoppingBagPageQuantityInput = ({ cartItem } : {cartItem: CartItemInterface}) => {
     const [value, setValue] = useState(cartItem.quantity.toString());
-    const dispatch = useDispatch();
+    const { updateProductQuantity, getSizeAvailability } = useProductQuantity();
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        if (/^\d+$/.test(newValue)) {
-            setValue(newValue);
+    const sizeAvailability = useRef(0);
+
+    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        const inputValue = e.target.value;
+        let quantity = parseInt(inputValue, 10);
+
+        if (inputValue === "") {
+            setValue("0");
+            quantity = 0;
             const newCartItem = {
                 ...cartItem,
-                quantity: parseInt(newValue, 10),
+                quantity: quantity,
             };
-            dispatch(updateQuantity(newCartItem));
+            updateProductQuantity(newCartItem);
         }
-    };
+        
+        if (/^\d+$/.test(inputValue)) {
+            const newCartItem = {
+                ...cartItem,
+                quantity: 0,
+            };
+            if (quantity > sizeAvailability.current) {
+                setValue(sizeAvailability.current.toString());
+                quantity = sizeAvailability.current;
+                newCartItem.quantity = sizeAvailability.current;
+            } else {
+                setValue(inputValue);
+                newCartItem.quantity = quantity;
+            }
+            updateProductQuantity(newCartItem);
+            }
+        }, [cartItem, updateProductQuantity]);
+    
 
     useEffect(() => {
+        sizeAvailability.current = getSizeAvailability(cartItem.product.id, cartItem.sizeSelected)
         setValue(cartItem.quantity.toString());
-    }, [cartItem.quantity]);
+    }, [cartItem.quantity, cartItem.product.id, cartItem.sizeSelected, getSizeAvailability]);
 
     return (
         <SetQuantityFieldStyled
@@ -45,6 +65,9 @@ const ShoppingBagPageQuantityInput = ({ cartItem } : {cartItem: CartItemInterfac
                 style: { borderRadius: '0px' }
             }}
             aria-label='shopping-bag-item-quantity-input'
+            sx={{
+                color: parseInt(value, 10) > sizeAvailability.current ? 'red' : 'black',
+            }}
         />
     );
 }

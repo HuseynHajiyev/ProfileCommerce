@@ -4,7 +4,7 @@ import { memo } from 'react'
 import { CardMedia } from '@mui/material';
 
 // Interface imports
-import { ProductInterface } from '../../../../../../types/ProductInterface';
+import { ProductInterface } from '../../../../../../models/ProductInterface';
 
 const ProductCardMediaComponent = memo(({product}: {product: ProductInterface})  => {
   return (

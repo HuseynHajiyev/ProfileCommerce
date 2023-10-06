@@ -7,7 +7,7 @@ import RemoveButton from './RemoveButton';
 import AddButton from './AddButton';
 
 // Interface imports
-import { CartItemInterface } from '../../../../../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../../../../../models/CartiItemInterface';
 import { useIsMobile } from '../../../../../../../hooks/useIsMobile';
 
 const ProductQuantityCell = ({ cartItem } : {cartItem : CartItemInterface}) => {

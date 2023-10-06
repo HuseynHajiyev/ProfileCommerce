@@ -12,18 +12,17 @@ import PrimaryNavigation from '../MicroComponents/PrimaryNavigation';
 
 const LeftSide = () => {
     const { openNavigationDrawer,navigationIsOpen, closeNavigationDrawer } = useDrawerToggle();
-    const isMobile = useIsMobile()
+    const isLargeDesktop = useIsMobile('largeDesktop');
     const { assignNavigationButtonRef } = useDrawerToggle();
     return (
-        isMobile ? (
+        !isLargeDesktop  ? (
             <NavItemContainerLeftStyled 
             sx={{p: 0, flex: 1}}>
                 <IconButton
                     aria-label="large"
                     sx={{ order: -1}}
-                    onClick={() => {isMobile? (navigationIsOpen ? closeNavigationDrawer() : openNavigationDrawer()) : ( null ) }}
-                    // onTouchStart= { navigationIsOpen ? closeNavigationDrawer : openNavigationDrawer}
-                    onTouchEnd={() => {isMobile ? ( null ) : (navigationIsOpen ? closeNavigationDrawer() : openNavigationDrawer()) }}
+                    onClick={() => {!isLargeDesktop ? (navigationIsOpen ? closeNavigationDrawer() : openNavigationDrawer()) : ( null ) }}
+                    onTouchEnd={() => {!isLargeDesktop  ? ( null ) : (navigationIsOpen ? closeNavigationDrawer() : openNavigationDrawer()) }}
                 >
                     <Box ref={ assignNavigationButtonRef }>
                         <MenuIcon />

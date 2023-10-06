@@ -9,20 +9,17 @@ import UnitPrice from './RowContents/UnitPrice'
 import SubTotalPrice from './RowContents/SubtotalPrice'
 
 
-// Redux imports
-import { useDispatch } from 'react-redux'
-import { removeFromShoppingBag } from '../../../../../features/shoppingBagReducer/shoppingBagSlice'
-
 // Interface imports
-import { CartItemInterface } from '../../../../../types/CartiItemInterface'
+import { CartItemInterface } from '../../../../../models/CartiItemInterface'
 import { Button } from '@mui/material'
 import { GridRowStyled, GridItemStyled } from '../../../../StyledComponents/ShoppingBagPageStyled/ShoppingBagPageStyled'
 import QuantityComponent from './RowContents/QuantityComponent'
+import { useProductQuantity } from '../../../../../hooks/useProductQuantity'
 
 const ShoppingProductRow = ({ cartItem } : { cartItem: CartItemInterface }) => {
-  const dispatch = useDispatch();
-  const handleDelete = () => {
-    dispatch(removeFromShoppingBag(cartItem));
+    const { removeProductFromShoppingBag } = useProductQuantity();
+    const handleDelete = () => {
+      removeProductFromShoppingBag(cartItem);
   }
   return (
       <GridRowStyled item xs={12} container direction='row' minWidth='100%' spacing={0}>
@@ -30,7 +27,7 @@ const ShoppingProductRow = ({ cartItem } : { cartItem: CartItemInterface }) => {
           <CardMediaComponent product={cartItem.product}  />
         </GridItemStyled>
         <GridItemStyled item container justifyContent={'flex-start'} padding={0}>
-          <ProductDetail product={cartItem.product} />
+          <ProductDetail cartItem={cartItem} />
         </GridItemStyled>
         <GridItemStyled item container>
           <UnitPrice product={cartItem.product} />

@@ -1,24 +1,32 @@
-// React imports
-import { createContext, ReactNode } from 'react';
-
-// MUI Imports
-import { useTheme } from '@mui/material/styles';
+import { createContext, useContext, ReactNode } from 'react';
+import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-// Context declaration
-export const IsMobileContext = createContext<boolean | undefined>(undefined);
+interface IsMobileContextProps {
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+  isLargeDesktop: boolean;
+}
 
-// Provider Component
+const IsMobileContext = createContext<IsMobileContextProps | undefined>(undefined);
+
 interface IsMobileProviderProps {
   children: ReactNode;
 }
 
 export const IsMobileProvider = ({ children }: IsMobileProviderProps): JSX.Element => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xl'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isLargeDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+
   return (
-    <IsMobileContext.Provider value={isMobile}>
+    <IsMobileContext.Provider value={{ isMobile, isTablet, isDesktop, isLargeDesktop }}>
       {children}
     </IsMobileContext.Provider>
   );
 };
+
+export default IsMobileContext;

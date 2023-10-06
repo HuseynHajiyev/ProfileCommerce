@@ -2,7 +2,7 @@
 import { CardMedia, Box } from '@mui/material'
 
 // Interface imports
-import { ProductInterface } from '../../../types/ProductInterface'
+import { ProductInterface } from '../../../models/ProductInterface'
 
 interface ProductCardImageProps {
   product: ProductInterface

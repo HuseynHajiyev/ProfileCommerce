@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartItemInterface } from "../../types/CartiItemInterface";
-import { ShoppingBagInterface } from "../../types/ShoppingBagInterface";
+import { CartItemInterface } from "../../models/CartiItemInterface";
+import { ShoppingBagInterface } from "../../models/ShoppingBagInterface";
 
 const initialState: ShoppingBagInterface = {
     id: 0,
@@ -8,9 +8,11 @@ const initialState: ShoppingBagInterface = {
     date: "",
     loading: false,
     products:[],
+    tempProducts: [],
     error: null,
     subTotal: 0,
     shipping: 0,
+    log: [],
 };
 
 const shoppingBagSlice = createSlice({
@@ -20,6 +22,7 @@ const shoppingBagSlice = createSlice({
         loadShoppingBag: (state, action: PayloadAction<number>) => {
             state.loading = true;
             state.error = null;
+            state.log.push(`loadShoppingBag action dispatched at ${new Date().toISOString()} with payload ${action.payload}`)
         },
         setShoppingBag: (state, action: PayloadAction<ShoppingBagInterface>) => {
             const { id, userId, date, products, subTotal } = action.payload;
@@ -37,19 +40,20 @@ const shoppingBagSlice = createSlice({
             state.error = action.payload;
         },
         addToShoppingBag: (state, action: PayloadAction<CartItemInterface>) => {
-            const index = state.products.findIndex((item) => item.product.id === action.payload.product.id);
-            if (index !== -1) {
+            const index = state.products.findIndex((item) => item.product.id === action.payload.product.id && item.sizeSelected === action.payload.sizeSelected);
+            if (index !== -1 && state.products[index].sizeSelected === action.payload.sizeSelected) {
                 state.products[index].quantity += 1;
                 state.subTotal = Number((state.subTotal + state.products[index].product.price).toFixed(2));
-            } else {
+            } else{
                 action.payload.quantity = 1;
                 state.products.push(action.payload);
+                state.subTotal = Number((state.subTotal + action.payload.product.price).toFixed(2));
             }
         },
         removeFromShoppingBag: (state, action: PayloadAction<CartItemInterface>) => {
-            state.products = state.products.filter(
-                (item) => item.product.id !== action.payload.product.id
-            )
+            const index = state.products.findIndex((item) => item.product.id === action.payload.product.id && item.sizeSelected === action.payload.sizeSelected);
+            if(index === -1) return;
+            state.products.splice(index, 1);
             state.subTotal = Number((state.subTotal - action.payload.product.price * action.payload.quantity).toFixed(2));
         },
         updateQuantity: (state, action: PayloadAction<CartItemInterface>) => {
@@ -58,13 +62,13 @@ const shoppingBagSlice = createSlice({
                 state.products[index].quantity = action.payload.quantity;
                 state.subTotal = Number(state.products.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2));
             } else {
-                state.products.push(action.payload); // if the product isn't already in the cart, add it
+                state.products.push(action.payload);
             }
         },
 
         decreaseQuantity: (state, action: PayloadAction<CartItemInterface>) => {
             const productIndex = state.products.findIndex(
-                (item) => item.product.id === action.payload.product.id
+                (item) => item.product.id === action.payload.product.id && item.sizeSelected === action.payload.sizeSelected
             );
         
             if (productIndex !== -1) {
@@ -83,11 +87,34 @@ const shoppingBagSlice = createSlice({
                 }
             }
         },
-         
-        
+        addTempSizeSelection: (state, action: PayloadAction<{productId: number, size: string}>) => {
+            const indexOfTempProduct = state.tempProducts.findIndex((item) => item.productId === action.payload.productId && item.size === action.payload.size);
+            if(indexOfTempProduct === -1) {
+            state.tempProducts.push({productId: action.payload.productId, size: action.payload.size});
+            }
+        },
+        removeTempSizeSelection: (state, action: PayloadAction<{productId: number, size: string}>) => {
+            const indexOfTempProduct = state.tempProducts.findIndex((item) => item.productId === action.payload.productId && item.size === action.payload.size);
+            if(indexOfTempProduct !== -1) {
+                state.tempProducts.splice(indexOfTempProduct, 1);
+            }
+        },
+        removeTempProductSelection: (state, action: PayloadAction<number>) => {
+            state.tempProducts = state.tempProducts.filter((item) => item.productId !== action.payload);
+        },
     }
 });
 
-export const { loadShoppingBag, setShoppingBag, loadShoppingBagFailed, addToShoppingBag, removeFromShoppingBag, updateQuantity, decreaseQuantity } = shoppingBagSlice.actions;
+export const { 
+    loadShoppingBag,
+    setShoppingBag,
+    loadShoppingBagFailed,
+    addToShoppingBag,
+    removeFromShoppingBag,
+    updateQuantity, 
+    decreaseQuantity,
+    addTempSizeSelection,
+    removeTempSizeSelection,
+ } = shoppingBagSlice.actions;
 
 export default shoppingBagSlice.reducer;

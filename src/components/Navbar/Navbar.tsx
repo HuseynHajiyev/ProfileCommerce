@@ -21,8 +21,8 @@ const Navbar = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     useEffect(() => {
-      dispatch(loadShoppingBag(1));
-      dispatch(loadProducts(0));
+        dispatch(loadProducts(0));
+        dispatch(loadShoppingBag(1));
     }, [dispatch]);
     return (
         <>

@@ -4,6 +4,10 @@ import theme from '../../../themes/theme'
 const PagesContainerStyled = styled(Box)(() => ({
     paddingLeft: '5%',
     paddingRight: '5%',
+    overflow: 'auto',
+    overflowY: 'scroll',
+    maxHeight: '100vh',
+    minHeight: '100vh',
     [theme.breakpoints.up('lg')]: {
         paddingLeft: '5%',
         paddingRight: '5%',

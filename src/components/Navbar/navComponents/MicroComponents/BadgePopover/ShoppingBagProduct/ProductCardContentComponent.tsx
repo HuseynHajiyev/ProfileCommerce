@@ -12,20 +12,18 @@ import { ProductDescriptionStyled, ProductPriceStyled, ProductTitleStyled } from
 import ProductAddRemove from './ProductAddRemoveComponent';
 
 // Interface imports
-import { CartItemInterface } from '../../../../../../types/CartiItemInterface';
-
-// Redux imports
-import { useDispatch } from 'react-redux';
-import { removeFromShoppingBag } from '../../../../../../features/shoppingBagReducer/shoppingBagSlice';
+import { CartItemInterface } from '../../../../../../models/CartiItemInterface'
 
 // Utilities
 import { trimTitle } from '../../../../../../utilities/TrimTitle';
+import { mapNumericToAlphabeticSizes } from '../../../../../../utilities/mapProductSizes';
+import { useProductQuantity } from '../../../../../../hooks/useProductQuantity';
 
 
 const ProductCardContentComponent = memo(({cartItem}: {cartItem: CartItemInterface}) => {
-    const dispatch = useDispatch();
+    const {removeProductFromShoppingBag} = useProductQuantity();
     const handleDelete = () => {
-        dispatch(removeFromShoppingBag(cartItem));
+        removeProductFromShoppingBag(cartItem);
     }
 
     return (
@@ -51,7 +49,7 @@ const ProductCardContentComponent = memo(({cartItem}: {cartItem: CartItemInterfa
                     </Box>
                     <Box aria-label='Details' sx={{ display: 'flex', alignItems: 'center'}}>
                         <ProductDescriptionStyled aria-label='product-color' variant="body2" color="text.secondary" sx={{marginRight: '2px'}}>
-                            {`Size: ${cartItem.product.size}`}
+                            {`Size: ${mapNumericToAlphabeticSizes(parseInt(cartItem.sizeSelected))}`}
                         </ProductDescriptionStyled>
                         <ProductDescriptionStyled variant="body2" color="text.secondary" aria-label='product-bag-quantity'>
                             {`Quantity: ${cartItem.quantity}`}

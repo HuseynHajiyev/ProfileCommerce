@@ -8,6 +8,8 @@ import { ShoppingBagPageHeaderStyled } from '../../components/StyledComponents/S
 import BagPageGrid from '../../components/ShoppingBagPage/ShoppingBagPageGrid/BagPageGrid'
 import theme from '../../themes/theme'
 import BagPageSummaryAccordion from '../../components/ShoppingBagPage/ShoppingBagPageSummary/BagPageSummaryAccordion'
+
+// Hooks
 import { useIsMobile } from '../../hooks/useIsMobile'
 
 const ShoppingBag = () => {

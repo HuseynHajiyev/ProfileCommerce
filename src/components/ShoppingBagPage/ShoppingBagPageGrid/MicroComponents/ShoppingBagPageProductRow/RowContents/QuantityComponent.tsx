@@ -1,7 +1,7 @@
 // Component Imports
 import ProductQuantityCell from './QuantityComponents/ProductQuantityCell';
 // Interface Imports
-import { CartItemInterface } from '../../../../../../types/CartiItemInterface';
+import { CartItemInterface } from '../../../../../../models/CartiItemInterface';
 
 
 const QuantityComponent = ({ cartItem } : { cartItem : CartItemInterface}) => (

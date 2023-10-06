@@ -1,4 +1,6 @@
 // Components
+import { useCallback } from 'react';
+import { useDrawerToggle } from '../../../../hooks/useDrawerToggle';
 import { NavLinkStyled } from '../../../StyledComponents/NavbarStyled/NavbarStyled';
 import { NavItemContainerLeftStyled } from '../../../StyledComponents/NavbarStyled/NavbarStyled';
 import NavTypographyComponent from './NavTypographyComponent';
@@ -20,10 +22,14 @@ const formatLinkText = (str: string) => {
 
 const NavLinkComponent = ({ to, justify }: NavLinkComponentProps): JSX.Element => {
     const linkText = formatLinkText(to);
+    const { closeAllDrawers } = useDrawerToggle();
+    const handleClick = useCallback(() => {
+        closeAllDrawers();
+    }, [closeAllDrawers])
     return (
             <NavItemContainerLeftStyled
                 sx={{justifyContent: justify ? justify : 'inherit'}}
-                onClick={(e) => { e.stopPropagation(); }} 
+                onClick={(e) => { e.stopPropagation(); handleClick(); }} 
                 onTouchStart={(e) => { e.stopPropagation(); }} 
             >
                 <NavLinkStyled to={to} replace aria-label={`Link to ${linkText}`}>

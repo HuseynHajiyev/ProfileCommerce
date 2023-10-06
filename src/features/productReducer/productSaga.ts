@@ -1,30 +1,27 @@
 import {call, put, select, takeLatest } from 'redux-saga/effects';
 import { getProduct } from '../../api/productApi';
 import { loadProductFailed, setProduct } from './productSlice';
-import { ProductInterface } from '../../types/ProductInterface';
+import { ProductInterface } from '../../models/ProductInterface';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
-import { setProducts } from '../productsReducer/productsSlice';
-
-const selectProductById = (state: RootState, productId: number) => state.products.products[productId];
-const getProducts = (state: RootState) => state.products.products;
+import { processProductResponse } from '../../services/processProductResponse';
+import { addProduct } from '../productsReducer/productsSlice';
 
 function* loadProductSaga(action: PayloadAction<number>) {
-    const productId = action.payload;
-    const product: ProductInterface | undefined = yield select(selectProductById, productId);
-    const products : ProductInterface[] = yield select(getProducts);
-    if (product) {
-        return;
-    }
     try {
-        const product: ProductInterface = yield call(getProduct, action.payload);
+        const products: ProductInterface[] = yield select((state): ProductInterface[] => state.products.products);
+        const storeProduct: ProductInterface | undefined = products.find((product) => product.id === action.payload);
+        if(storeProduct) {
+            yield put(setProduct(storeProduct));
+            return;
+        }
+        const productResponse: ProductInterface = yield call(getProduct, action.payload);
+        const product: ProductInterface = processProductResponse(productResponse);
         yield put(setProduct(product));
-        yield put (setProducts([...products, product]));
+        yield put(addProduct(product));
     } catch(e) {
         console.log(e)
         yield put(loadProductFailed((e as Error).message));
     }
-    
 }
 
 

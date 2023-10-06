@@ -1,7 +1,7 @@
-import { ProductInterface } from '../../types/ProductInterface'
+import { ProductInterface } from '../../../models/ProductInterface'
 import { Card, Grid } from '@mui/material';
-import ProductCardImage from './MicroComponents/ProductCardImage';
-import ProductCardDescription from './MicroComponents/ProductCardDescription';
+import ProductCardImage from '../MicroComponents/ProductCardImage';
+import ProductCardDescription from '../MicroComponents/ProductCardDescription';
 import { Link } from 'react-router-dom';
 
 interface ProductProps {

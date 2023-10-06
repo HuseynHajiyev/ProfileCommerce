@@ -1,43 +1,30 @@
-// useSearchResults.ts
 import { useState, useEffect } from 'react';
-import DummyQueryResult from '../components/Navbar/DummyQueryResult';
-
-function sleep(delay = 0) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, delay);
-  });
-}
-
-interface SearchResultInterface {
-    title: string;
-  }
-  
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
+import { SearchResutProduct } from '../models/ProductInterface';  
 
 
 export const useSearchResults = () => {
-  const [options, setOptions] = useState<SearchResultInterface[]>([]);
+  const products = useSelector((state: RootState) => state.search.searchResults);
+  const [query, setQuery] = useState('');
+  const [productOptions, setProductOptions] = useState<SearchResutProduct[]>([]);
   const [open, setOpen] = useState(false);
-  const loading = open && options.length === 0;
-
+  const loading = open && productOptions.length === 0;
   useEffect(() => {
     let active = true;
-
     if (!loading) {
       return undefined;
     }
-
     (async () => {
-      await sleep(1e3); // For demo purposes.
-
       if (active) {
-        setOptions([...DummyQueryResult]);
+        setProductOptions([...products]);
       }
     })();
 
     return () => {
       active = false;
     };
-  }, [loading]);
+  }, [loading, productOptions, products]);
 
-  return { options, loading, open, setOpen };
+  return { productOptions, loading, open, query, setOpen, setQuery };
 };
