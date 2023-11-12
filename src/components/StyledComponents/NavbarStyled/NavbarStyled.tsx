@@ -1,5 +1,4 @@
-import { AppBar, Drawer, Box } from '@mui/material';
-import { styled } from '@mui/system';
+import { AppBar, Drawer, Box, styled} from '@mui/material';
 import { NavLink, NavLinkProps } from 'react-router-dom';
 import theme from '../../../themes/theme';
 
@@ -45,23 +44,6 @@ export const NavigationDrawerStyled = styled(Drawer)(() => ({
 }));    
 
 
-export const NavItemContainerLeftStyled = styled(Box)(() => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    flex: '1 1 0px;',
-    '&:first-of-type': {
-        justifyContent: 'flex-start',
-    },
-    '&:nth-of-type(2)': {
-        justifyContent: 'center',
-    },
-    [theme.breakpoints.down('lg')]: {
-        '&': {
-            justifyContent: 'center',
-        },
-    },
-}));
 
 
 export const NavItemContainerRightStyled = styled(Box)(() => ({
@@ -70,7 +52,7 @@ export const NavItemContainerRightStyled = styled(Box)(() => ({
     justifyContent: 'flex-end',
     flex: '1 1 0px;',
     '&:first-of-type': {
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
     },
     '&:nth-of-type(2)': {
         justifyContent: 'center',

@@ -1,5 +1,4 @@
-import { Drawer } from '@mui/material';
-import { styled } from '@mui/system';
+import { Drawer, styled } from '@mui/material';
 import theme from '../../../themes/theme';
 
 const SearchDrawerStyled = styled(Drawer)(() => ({

@@ -9,7 +9,7 @@ export const useIsMobile = (deviceType?: string): boolean => {
   }
 
   if (!deviceType) {
-    return context.isMobile; // Default behavior for backward compatibility
+    return context.isMobile;
   }
 
   switch (deviceType.toLowerCase()) {

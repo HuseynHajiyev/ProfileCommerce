@@ -12,7 +12,6 @@ const initialState: ShoppingBagInterface = {
     error: null,
     subTotal: 0,
     shipping: 0,
-    log: [],
 };
 
 const shoppingBagSlice = createSlice({
@@ -22,7 +21,6 @@ const shoppingBagSlice = createSlice({
         loadShoppingBag: (state, action: PayloadAction<number>) => {
             state.loading = true;
             state.error = null;
-            state.log.push(`loadShoppingBag action dispatched at ${new Date().toISOString()} with payload ${action.payload}`)
         },
         setShoppingBag: (state, action: PayloadAction<ShoppingBagInterface>) => {
             const { id, userId, date, products, subTotal } = action.payload;
@@ -102,6 +100,11 @@ const shoppingBagSlice = createSlice({
         removeTempProductSelection: (state, action: PayloadAction<number>) => {
             state.tempProducts = state.tempProducts.filter((item) => item.productId !== action.payload);
         },
+        resetShoppingBag: () => {
+            return {
+                ...initialState,
+            }
+        }
     }
 });
 
@@ -115,6 +118,8 @@ export const {
     decreaseQuantity,
     addTempSizeSelection,
     removeTempSizeSelection,
+    removeTempProductSelection,
+    resetShoppingBag
  } = shoppingBagSlice.actions;
 
 export default shoppingBagSlice.reducer;

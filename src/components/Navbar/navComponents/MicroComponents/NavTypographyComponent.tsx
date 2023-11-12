@@ -16,8 +16,9 @@ interface NavLinkTypographyStyledProps {
 
 const NavTypographyComponent = ({children} : NavLinkTypographyStyledProps) => {
   const isDesktop = useIsMobile('desktop');
+  const isLargeDesktop = useIsMobile('largeDesktop');
   return (
-    <Typography variant={ !isDesktop ? 'body1' : 'h6'} fontFamily='Mulish'>
+    <Typography variant='body2' fontFamily='Mulish' fontSize={!isDesktop && !isLargeDesktop ? '1rem' : 'inherit'}>
         {children}
     </Typography>
   )

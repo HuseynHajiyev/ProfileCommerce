@@ -14,7 +14,7 @@ const SearchBarDrawer = () => {
             variant='temporary'
             disableScrollLock={ true }
             open={ searchIsOpen }
-            onClose={(event, reason) => {
+            onClose={(_, reason) => {
                 if (reason === 'backdropClick' || reason === 'escapeKeyDown') {
                   closeSearchBarDrawer();
                 }

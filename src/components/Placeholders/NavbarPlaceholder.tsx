@@ -1,7 +1,6 @@
 import { Box } from "@mui/material"
 
 // Hooks
-import { useIsMobile } from "../../hooks/useIsMobile";
 import theme from "../../themes/theme";
 
 const NavbarPlaceholder = () => {

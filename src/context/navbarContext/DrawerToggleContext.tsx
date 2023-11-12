@@ -1,4 +1,5 @@
-import { createContext, useState, ReactNode, useEffect, useCallback } from 'react';
+import { createContext, useState, ReactNode, useEffect, useCallback, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 
   // create a context
@@ -9,12 +10,15 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
     searchIsOpen: boolean;
     navigationIsOpen: boolean;
     shoppingBagIsOpen: boolean;
+    loginPopoverOpen: boolean;
     openShoppingPopper: () => void;
     closeShoppingPopper: () => void;
     openSearchBarDrawer: () => void;
     closeSearchBarDrawer: () => void;
     openNavigationDrawer: () => void;
     closeNavigationDrawer: () => void;
+    openLoginPopover: () => void;
+    closeLoginPopover: () => void;
     closeAllDrawers: () => void;
     assignNavigationDrawerRef : (node: HTMLDivElement) => void;
     assignNavigationButtonRef : (node: HTMLDivElement) => void;
@@ -27,11 +31,10 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
 
   // create a provider
   export function DrawerToggleProvider({ children } : DrawerToggleProviderProps) {
-    const [searchIsOpen, setSearchIsOpen] = useState(false);
-    const [navigationIsOpen, setNavigationIsOpen] = useState(false);
-    const [shoppingBagIsOpen, setShoppingBagIsOpen] = useState(false);
-
-    // Refs
+    const [searchIsOpen, setSearchIsOpen] = useState<boolean>(false);
+    const [navigationIsOpen, setNavigationIsOpen] = useState<boolean>(false);
+    const [shoppingBagIsOpen, setShoppingBagIsOpen] = useState<boolean>(false);
+    const [loginPopoverOpen, setLoginPopoverOpen] = useState<boolean>(false);
 
     // Navigation drawer
     const [drawerRef, setDrawerRef] = useState<null | HTMLDivElement>(null);
@@ -87,13 +90,30 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
       setNavigationIsOpen(false);
     }, [setNavigationIsOpen]);
 
+    // Login Popover
+    const openLoginPopover = useCallback(() => {
+      if(searchIsOpen || shoppingBagIsOpen || navigationIsOpen){
+        setShoppingBagIsOpen(false);
+        setSearchIsOpen(false);
+        setNavigationIsOpen(false);
+      }
+      setLoginPopoverOpen(true);
+    },[searchIsOpen, shoppingBagIsOpen, navigationIsOpen, setShoppingBagIsOpen, setSearchIsOpen, setNavigationIsOpen, setLoginPopoverOpen]);
+
+    const closeLoginPopover = useCallback(() => {
+      setLoginPopoverOpen(false);
+    }, [setLoginPopoverOpen]);
+
     // all drawers
     
     const closeAllDrawers = useCallback(() => {
       closeSearchBarDrawer();
       closeNavigationDrawer();
       closeShoppingPopper();
-    }, [closeSearchBarDrawer, closeNavigationDrawer, closeShoppingPopper]);
+      closeLoginPopover();
+    }, [closeSearchBarDrawer, closeNavigationDrawer, closeShoppingPopper, closeLoginPopover]);
+
+    // url
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -111,10 +131,13 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
       };
     }, [drawerRef, closeNavigationDrawer, drawerButtonRef]);
 
+
     return (
       <DrawerToggleContext.Provider value={
-        { searchIsOpen, navigationIsOpen, shoppingBagIsOpen,
-          openShoppingPopper, closeShoppingPopper, openSearchBarDrawer, closeSearchBarDrawer, closeAllDrawers,
+        { searchIsOpen, navigationIsOpen, shoppingBagIsOpen, loginPopoverOpen,
+          openShoppingPopper, closeShoppingPopper, openSearchBarDrawer, closeSearchBarDrawer, 
+          openLoginPopover, closeLoginPopover,
+          closeAllDrawers,
           openNavigationDrawer, closeNavigationDrawer, assignNavigationDrawerRef, assignNavigationButtonRef,
         }}>
         {children}

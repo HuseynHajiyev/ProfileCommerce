@@ -7,7 +7,6 @@ import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useDrawerToggle } from '../../../../hooks/useDrawerToggle';
 
 // Custom Components
-import { NavItemContainerLeftStyled } from '../../../StyledComponents/NavbarStyled/NavbarStyled';
 import PrimaryNavigation from '../MicroComponents/PrimaryNavigation';
 
 const LeftSide = () => {
@@ -16,7 +15,7 @@ const LeftSide = () => {
     const { assignNavigationButtonRef } = useDrawerToggle();
     return (
         !isLargeDesktop  ? (
-            <NavItemContainerLeftStyled 
+            <Box 
             sx={{p: 0, flex: 1}}>
                 <IconButton
                     aria-label="large"
@@ -28,7 +27,7 @@ const LeftSide = () => {
                         <MenuIcon />
                     </Box>
                 </IconButton>
-            </NavItemContainerLeftStyled>
+            </Box>
         ) : (
             <PrimaryNavigation />
         )

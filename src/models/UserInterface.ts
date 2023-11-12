@@ -1,3 +1,5 @@
+import { ProductInterface } from "./ProductInterface";
+
 export interface UserInterface {
     address: {
         geolocation: {
@@ -24,4 +26,24 @@ export interface UserInterface {
 export interface LoggedInPayloadInterface {
     user: UserInterface,
     token: string,
+}
+
+export interface LoginCredentials {
+    username: string,
+    password: string,
+}
+
+export interface logginSuccessPayload {
+    user: UserInterface,
+    token: string,
+}
+
+export interface UserStateInterface {
+    token: string | null,
+    user: UserInterface | null,
+    userFavourites: ProductInterface[] | null,
+    loading: boolean,
+    loggedIn: boolean,
+    error: string | null,
+    loginCredentials: LoginCredentials,
 }

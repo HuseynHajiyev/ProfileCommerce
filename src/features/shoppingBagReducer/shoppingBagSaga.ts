@@ -1,10 +1,11 @@
 import { call, put, takeLeading, debounce, select } from 'redux-saga/effects';
+import Cookies from 'js-cookie';
 
 
 import { PayloadAction } from '@reduxjs/toolkit';
 
 // Action Imports
-import { loadShoppingBag, setShoppingBag, loadShoppingBagFailed, addToShoppingBag, removeFromShoppingBag, updateQuantity, decreaseQuantity } from './shoppingBagSlice';
+import { loadShoppingBag, setShoppingBag, loadShoppingBagFailed, addToShoppingBag, removeFromShoppingBag, updateQuantity, decreaseQuantity, resetShoppingBag } from './shoppingBagSlice';
 
 // API Imports
 import { addProductToBag, getShoppingBag, updateShoppingBag } from '../../api/shoppingBagApi';
@@ -20,11 +21,25 @@ import { ApiToShoppingBagConverter, ShoppingBagToApiConverter } from '../../serv
 import { processShoppingBagProducts, combineShoppingBags } from '../../services/processShoppingBagResponse';
 import { getProduct } from '../../api/productApi';
 import { processProductResponse } from '../../services/processProductResponse';
+import { UserInterface, UserStateInterface } from '../../models/UserInterface';
+import { RootState } from '../../app/store';
 
 
 
 function* loadShoppingBagSaga(action: PayloadAction<number>) {
   try {
+      const token: string = yield Cookies.get('authToken') || '';
+      const user: UserInterface = yield select((state: RootState) => state.userState.user);
+      if(!token || !user){
+        console.log('not logged in', 'user', user, 'token', token)
+        throw new TypeError('Not logged in');
+      }
+      const localShoppingBag: ShoppingBagInterface = yield select((state: RootState) => state.shoppingBag);
+      if(localShoppingBag.id !== 0 && localShoppingBag.userId === user.id){
+        console.log('local shopping bag', localShoppingBag)
+        yield put(setShoppingBag(localShoppingBag));
+        return;
+      }
       const response: ShoppingBagApiResponseInterface[] = yield call(getShoppingBag, action.payload);
       const responseBag: ShoppingBagApiResponseInterface = combineShoppingBags(response);
       const cartProducts: ProductInterface[] = [];
@@ -92,6 +107,16 @@ function* decreaseQuantitySaga() {
   }
 }
 
+function* resetShoppingBagSaga() {
+  try {
+    yield put(resetShoppingBag());
+  } catch (e) {
+    yield put(loadShoppingBagFailed((e as TypeError).message));
+    console.log(e)
+  }
+}
+  
+
 
 
 
@@ -115,10 +140,15 @@ function* watchDecreaseQuantity() {
     yield debounce(4000, decreaseQuantity.type, decreaseQuantitySaga);
 }
 
+function* watchResetShoppingBag() {
+    yield takeLeading(resetShoppingBag.type, resetShoppingBagSaga);
+}
+
 export {
     watchLoadShoppingBag,
     watchAddToShoppingBag,
     watchRemoveFromShoppingBag,
     watchUpdateQuantity,
-    watchDecreaseQuantity
+    watchDecreaseQuantity,
+    watchResetShoppingBag,
 };

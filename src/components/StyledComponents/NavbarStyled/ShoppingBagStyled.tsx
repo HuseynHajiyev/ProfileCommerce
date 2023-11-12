@@ -1,5 +1,4 @@
-import { Card, Box, IconButton, Grid } from '@mui/material';
-import { styled } from '@mui/system';
+import { Card, Box, IconButton, Grid, styled } from '@mui/material';
 import theme from '../../../themes/theme';
 
 // Custom Components
@@ -23,11 +22,10 @@ export const ShoppingBagCheckoutButtonStyled = styled(Box)(() => ({
     backgroundColor: '#000000',
     color: '#ffffff',
     padding: '5%',
-    fontSize: '0.8rem',
     textTransform: 'none',
     fontWeight: 'bold',
     [theme.breakpoints.up('lg')]: {
-        fontSize: '0.6rem',
+        fontSize: '1rem',
         padding: '3%',
     },
 }))

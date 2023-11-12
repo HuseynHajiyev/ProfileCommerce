@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material';
 import { BodyTypographyStyled } from '../../StyledComponents/ProductCardStyled/ProductViewPageStyled';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 
-const Ellipsis = styled('div')({
+const Ellipsis = styled('span')({
   padding: '0',
   cursor: 'pointer',
   color: 'inherit',
@@ -29,15 +28,13 @@ const ShowMoreText = ({ text, maxLength }: ShowMoreTextPropsInterface) => {
   return (
     <>
       <BodyTypographyStyled fontSize={(isTablet ? '0.9rem' : (isDesktop || isLargeDesktop ? '0.9rem' : '1rem'))}>
-        {shouldTruncate && !showFullText ? `${displayText}...` : displayText}
-      </BodyTypographyStyled>
+        {shouldTruncate && !showFullText ? `${displayText}` : displayText}
         {shouldTruncate && (
-          <Box display="flex" ml={1} alignItems={'flex-start'} paddingTop={'1%'}>
-            <Ellipsis onClick={() => setShowFullText(!showFullText)}>
-              {showFullText ? 'Show Less' : 'Show More'}
-            </Ellipsis>
-          </Box>
+          <Ellipsis onClick={() => setShowFullText(!showFullText)} sx={{cursor: 'pointer'}}>
+            {showFullText ? '←' : '...'}
+          </Ellipsis>
         )}
+      </BodyTypographyStyled>
     </>
   );
 };

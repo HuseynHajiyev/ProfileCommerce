@@ -17,7 +17,7 @@ import { AiFillShopping } from "react-icons/ai";
 import { NavItemContainerRightStyled } from '../../../../StyledComponents/NavbarStyled/NavbarStyled';
 import { BadgeContainerStyled } from '../../../../StyledComponents/NavbarStyled/BadgePopoverStyled';
 import NavTypographyComponent from '../NavTypographyComponent';
-import BadgePopover from './BadgePopoverComponent';
+import BadgePopover from '../../MacroComponents/BadgePopoverComponent';
 
 // Hooks
 import { useIsMobile } from '../../../../../hooks/useIsMobile';
@@ -30,13 +30,18 @@ const BadgeComponent = () => {
   const buttonRef = useRef(null)
   const bagItemsCount = useSelector((state: RootState) => state.shoppingBag.products.length);
   const shoppingBag = useSelector((state: RootState) => state.shoppingBag);
-  const { openShoppingPopper } = useDrawerToggle();
+  const { openShoppingPopper, openLoginPopover } = useDrawerToggle();
   const navigate = useNavigate();
+  const userState = useSelector((state: RootState) => state.userState);
   const handleShoppingBagClick = () => {
-    if(!isLargeDesktop) {
-      navigate('/shopping-bag')
+    if(userState.loggedIn){
+      if(!isLargeDesktop) {
+        navigate('/shopping-bag')
+      } else {
+        openShoppingPopper();
+      }
     } else {
-      openShoppingPopper();
+      openLoginPopover();
     }
   }
   const trimedItemsCount = useCallback(() => {
