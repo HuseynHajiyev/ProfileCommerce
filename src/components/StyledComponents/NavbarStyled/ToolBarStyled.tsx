@@ -1,5 +1,4 @@
-import { Toolbar } from '@mui/material';
-import { styled } from '@mui/system';
+import { Toolbar, styled } from '@mui/material';
 
 const ToolbarStyled = styled(Toolbar)(() => (
     {

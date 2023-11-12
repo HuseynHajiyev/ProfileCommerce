@@ -34,7 +34,7 @@ const ShoppingBagContents = () => {
       <ProductsGridStyled item container spacing={1}>
       { 
           loading ? (
-            Array.from({ length: 6 }).map((item, index) => (
+            Array.from({ length: 6 }).map((_, index) => (
               <Grid container item xs={12} spacing={1} sx={{ height: '13vh' }} key={index}>
                   <Grid item xs={3}>
                       <Skeleton variant="rectangular" sx={{ height: '100%', width: '100%' }}/>

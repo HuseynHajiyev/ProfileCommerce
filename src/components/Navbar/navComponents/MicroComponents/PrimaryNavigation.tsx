@@ -1,5 +1,5 @@
 // MUI imports
-import { Stack } from '@mui/material';
+import { Grid } from '@mui/material';
 
 // Component Imports
 import NavLinkComponent from './NavLinkComponent';
@@ -7,22 +7,39 @@ import NavLinkComponent from './NavLinkComponent';
 // Hook Imports
 import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useDrawerToggle } from '../../../../hooks/useDrawerToggle';
-import { useCallback } from 'react';
 
 const PrimaryNavigation = () => {
-    const isDesktop = useIsMobile('largeDesktop');
+    const isDesktop = useIsMobile('desktop');
+    const isLargeDesktop = useIsMobile('largeDesktop')
     const { assignNavigationDrawerRef } = useDrawerToggle();
-   
+
     return (
-        <Stack direction={!isDesktop ? 'column' : 'row'} spacing={ !isDesktop ? 2 : 10 } 
-            sx={{ flex: '1 1 0px;', paddingBottom: !isDesktop ? '2%' : 'inherit', width: !isDesktop ? 'inherit' : 0, }} 
-            ref={ assignNavigationDrawerRef }       
+        <Grid 
+            container 
+            direction={!isDesktop && !isLargeDesktop ? 'column' : 'row'}
+            sx={{
+                flex: '1 1 0px',
+                paddingTop: !isDesktop && !isLargeDesktop ?  '17vh' : 'inherit',
+                paddingBottom: !isDesktop && !isLargeDesktop ? '2%' : 'inherit',
+                width: !isDesktop && !isLargeDesktop ? 'inherit' : 0
+            }}
+            ref={assignNavigationDrawerRef}
+            spacing={!isDesktop && !isLargeDesktop ? 1 : 0}
         >
-            <NavLinkComponent justify={!isDesktop ? 'center!important' : undefined} to='/new-arrivals' />
-            <NavLinkComponent justify={!isDesktop ? 'center' : undefined}to='/shop/clothing' />
-            <NavLinkComponent justify={!isDesktop ? 'center' : undefined} to='/about' />
-        </Stack>
+            <Grid item xs={12} md={4} sx={{ display: 'flex' }} justifyContent={'center'} alignItems={'center'}>
+                <NavLinkComponent to='/new-arrivals' justify={!isDesktop && !isLargeDesktop ? 'center' : 'flex-start'} />
+            </Grid>
+
+            <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} alignItems={'center'}>
+                <NavLinkComponent to='/shop/clothing' justify='center' />
+            </Grid>
+
+            <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} alignItems={'center'}>
+                <NavLinkComponent to='/about' justify='center' />
+            </Grid>
+        </Grid>
     )
 }
+
 
 export default PrimaryNavigation

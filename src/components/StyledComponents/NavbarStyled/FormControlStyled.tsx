@@ -1,5 +1,4 @@
-import { FormControl } from '@mui/material';
-import { styled } from '@mui/system';
+import { FormControl, styled } from '@mui/material';
 import theme from '../../../themes/theme';
 
 const FormControlStyled = styled(FormControl)({

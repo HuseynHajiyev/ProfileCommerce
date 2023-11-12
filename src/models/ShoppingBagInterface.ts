@@ -5,12 +5,11 @@ export interface ShoppingBagInterface {
   userId: number;
   date: string;
   products: CartItemInterface[];
-  tempProducts: TempProductSelection[];
+  tempProducts: TempProductInterface[];
   loading: boolean;
   error: string | null;
   subTotal: number;
   shipping: 0,
-  log: string[],
 }
 
 export interface TempProductSelection {
@@ -36,4 +35,9 @@ export interface UpdateShoppingBagProps {
   userId: number;
   date: string;
   products: CartItemApiResponseInterface[];
+}
+
+export interface TempProductInterface {
+  productId: number;
+  size: string;
 }

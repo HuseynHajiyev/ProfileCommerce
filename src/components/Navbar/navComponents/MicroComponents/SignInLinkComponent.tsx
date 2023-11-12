@@ -1,15 +1,24 @@
 // Components
-import { NavItemContainerLeftStyled } from '../../../StyledComponents/NavbarStyled/NavbarStyled';
+import { Box, Button } from '@mui/material';
 import NavTypographyComponent from './NavTypographyComponent';
-import { NavLinkStyled } from '../../../StyledComponents/NavbarStyled/NavbarStyled';
+import { useDrawerToggle } from '../../../../hooks/useDrawerToggle';
 
 const SignInLinkComponent = () => {
+  const { loginPopoverOpen, openLoginPopover, closeLoginPopover } = useDrawerToggle();
+  const handleClick = () => {
+    if(loginPopoverOpen) {
+      closeLoginPopover();
+    }
+    else {
+      openLoginPopover();
+    }
+  };
   return (
-    <NavItemContainerLeftStyled>
-      <NavLinkStyled to='/404-not-found'>
+    <Box display={'flex'} alignItems={'center'}>
+      <Button onClick={handleClick} variant={'text'} sx={{ textTransform: 'none' }}>
         <NavTypographyComponent>Sign In</NavTypographyComponent>
-      </NavLinkStyled>
-    </NavItemContainerLeftStyled>
+      </Button>
+    </Box>
   )
 }
 

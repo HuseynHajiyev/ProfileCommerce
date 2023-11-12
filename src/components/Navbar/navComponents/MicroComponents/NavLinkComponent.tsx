@@ -1,8 +1,8 @@
 // Components
+import { Box } from '@mui/material';
 import { useCallback } from 'react';
 import { useDrawerToggle } from '../../../../hooks/useDrawerToggle';
 import { NavLinkStyled } from '../../../StyledComponents/NavbarStyled/NavbarStyled';
-import { NavItemContainerLeftStyled } from '../../../StyledComponents/NavbarStyled/NavbarStyled';
 import NavTypographyComponent from './NavTypographyComponent';
 
 interface NavLinkComponentProps {
@@ -27,15 +27,23 @@ const NavLinkComponent = ({ to, justify }: NavLinkComponentProps): JSX.Element =
         closeAllDrawers();
     }, [closeAllDrawers])
     return (
-            <NavItemContainerLeftStyled
-                sx={{justifyContent: justify ? justify : 'inherit'}}
+            <Box
+                sx={{
+                    justifyContent: justify ? justify : 'inherit',
+                    alignItems: 'center',
+                }}
                 onClick={(e) => { e.stopPropagation(); handleClick(); }} 
-                onTouchStart={(e) => { e.stopPropagation(); }} 
+                onTouchStart={(e) => { e.stopPropagation(); }}
             >
-                <NavLinkStyled to={to} replace aria-label={`Link to ${linkText}`}>
+                <NavLinkStyled to={to} replace aria-label={`Link to ${linkText}`} 
+                    sx={{
+                        display: 'flex',
+                        justifyContent: justify ? justify : 'inherit',
+                        alignItems: 'center',
+                        }}>
                     <NavTypographyComponent>{linkText}</NavTypographyComponent>    
                 </NavLinkStyled>
-            </NavItemContainerLeftStyled>
+            </Box>
     )
     }
 

@@ -2,12 +2,12 @@
 import { RefObject, useEffect } from 'react';
 
 // Hooks
-import { useDrawerToggle } from "../../../../../hooks/useDrawerToggle";
-import { useIsMobile } from '../../../../../hooks/useIsMobile';
+import { useDrawerToggle } from "../../../../hooks/useDrawerToggle";
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 // Component imports
-import { BadgePopoverStyled } from '../../../../StyledComponents/NavbarStyled/BadgePopoverStyled';
-import ShoppingBagContents from './ShoppingBagContents';
+import { BadgePopoverStyled } from '../../../StyledComponents/NavbarStyled/BadgePopoverStyled';
+import ShoppingBagContents from '../MicroComponents/BadgePopover/ShoppingBagContents';
 
 // Popper props
 interface PopperProps {

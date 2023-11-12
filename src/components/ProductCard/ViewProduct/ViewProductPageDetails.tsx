@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from '@mui/material'
+import { Box, Grid, Link, Stack, Typography } from '@mui/material'
 import { ProductInterface } from '../../../models/ProductInterface'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { faker } from '@faker-js/faker';
@@ -118,7 +118,11 @@ useEffect(() => {
           <Grid item xs={12} paddingTop={'2%'}>
             <Grid item container display={'flex'} alignItems={'center'}>
                   <BsBoxSeam size={isMobile ? 15 : 17}/>
-                  <Typography variant='body2' paddingLeft={'1%'}>Free Shipping On All US Orders</Typography>
+                  <Typography variant='body2' component={'span'} paddingLeft={'1%'}>Free Shipping On All US Orders{' '}
+                    <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" target="_blank" rel="noopener noreferrer" sx={{ textDecoration: 'none' }} color={'inherit'}>
+                        Details...
+                    </Link>
+                  </Typography>
             </Grid>
           </Grid>
           <CommitAllSizeButton product={product} />

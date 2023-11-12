@@ -18,7 +18,7 @@ const SearchButtonComponent = memo(() => {
   const isMobile = useIsMobile('mobile');
   const isTablet = useIsMobile('tablet');
   return (
-    <NavItemContainerRightStyled sx={{ justifyContent: isMobile || isTablet ? 'space-around' : 'inherit' }}>
+    <NavItemContainerRightStyled sx={{ justifyContent: isMobile || isTablet ? 'center' : 'inherit' }}>
       <Box>
         <Button aria-label='open-search-bar' 
             sx={{ textTransform: 'none'}}

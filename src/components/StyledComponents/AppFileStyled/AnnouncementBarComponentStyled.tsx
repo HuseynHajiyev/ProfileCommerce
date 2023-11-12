@@ -1,4 +1,5 @@
-import {Box, styled} from '@mui/system'
+import { Box, styled } from '@mui/material'
+
 import theme from '../../../themes/theme'
 
 const AnnouncementBarComponentStyled = styled(Box)(() => ({
