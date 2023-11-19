@@ -1,5 +1,4 @@
-import { createContext, useState, ReactNode, useEffect, useCallback, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { createContext, useState, ReactNode, useEffect, useCallback } from 'react';
 
 
   // create a context
@@ -11,6 +10,9 @@ import { useLocation } from 'react-router-dom';
     navigationIsOpen: boolean;
     shoppingBagIsOpen: boolean;
     loginPopoverOpen: boolean;
+    accountPopoverOpen: boolean;
+    loginSuccessSnackbarOpen: boolean;
+    loginAttempted: boolean;
     openShoppingPopper: () => void;
     closeShoppingPopper: () => void;
     openSearchBarDrawer: () => void;
@@ -19,6 +21,12 @@ import { useLocation } from 'react-router-dom';
     closeNavigationDrawer: () => void;
     openLoginPopover: () => void;
     closeLoginPopover: () => void;
+    openAccountPopover: () => void;
+    closeAccountPopover: () => void;
+    openSuccessSnackbar: () => void;
+    closeSuccessSnackbar: () => void;
+    handleSuccessSnackbar: () => void;
+    handleloginAttempted: (tf: boolean) => void;
     closeAllDrawers: () => void;
     assignNavigationDrawerRef : (node: HTMLDivElement) => void;
     assignNavigationButtonRef : (node: HTMLDivElement) => void;
@@ -35,6 +43,10 @@ import { useLocation } from 'react-router-dom';
     const [navigationIsOpen, setNavigationIsOpen] = useState<boolean>(false);
     const [shoppingBagIsOpen, setShoppingBagIsOpen] = useState<boolean>(false);
     const [loginPopoverOpen, setLoginPopoverOpen] = useState<boolean>(false);
+    const [accountPopoverOpen, setAccountPopoverOpen] = useState<boolean>(false);
+    const [loginSuccessSnackbarOpen, setLoginSuccessSnackbarOpen] = useState<boolean>(false);
+    const [loginAttempted, setLoginAttempted] = useState<boolean>(false);
+
 
     // Navigation drawer
     const [drawerRef, setDrawerRef] = useState<null | HTMLDivElement>(null);
@@ -78,9 +90,11 @@ import { useLocation } from 'react-router-dom';
     }
     
     const openNavigationDrawer = ( ) => {
-      if(searchIsOpen || shoppingBagIsOpen){
+      if(searchIsOpen || shoppingBagIsOpen || navigationIsOpen || accountPopoverOpen){
         setShoppingBagIsOpen(false);
         setSearchIsOpen(false);
+        setAccountPopoverOpen(false);
+        setLoginPopoverOpen(false);
       }
       setNavigationIsOpen(true);
     };
@@ -92,18 +106,59 @@ import { useLocation } from 'react-router-dom';
 
     // Login Popover
     const openLoginPopover = useCallback(() => {
-      if(searchIsOpen || shoppingBagIsOpen || navigationIsOpen){
+      if(searchIsOpen || shoppingBagIsOpen || navigationIsOpen || accountPopoverOpen){
         setShoppingBagIsOpen(false);
         setSearchIsOpen(false);
         setNavigationIsOpen(false);
+        setAccountPopoverOpen(false);
       }
       setLoginPopoverOpen(true);
-    },[searchIsOpen, shoppingBagIsOpen, navigationIsOpen, setShoppingBagIsOpen, setSearchIsOpen, setNavigationIsOpen, setLoginPopoverOpen]);
+    },[ accountPopoverOpen ,searchIsOpen, shoppingBagIsOpen, navigationIsOpen, setShoppingBagIsOpen, setSearchIsOpen, setNavigationIsOpen, setLoginPopoverOpen, setAccountPopoverOpen]);
 
     const closeLoginPopover = useCallback(() => {
       setLoginPopoverOpen(false);
     }, [setLoginPopoverOpen]);
+    // Account Popover
 
+    const openAccountPopover = useCallback(() => {
+      if(searchIsOpen || shoppingBagIsOpen || navigationIsOpen || loginPopoverOpen){
+        setShoppingBagIsOpen(false);
+        setSearchIsOpen(false);
+        setNavigationIsOpen(false);
+        setLoginPopoverOpen(false);
+      }
+      setAccountPopoverOpen(true);
+    }, [searchIsOpen, shoppingBagIsOpen, navigationIsOpen, loginPopoverOpen, setShoppingBagIsOpen, setSearchIsOpen, setNavigationIsOpen, setLoginPopoverOpen, setAccountPopoverOpen]);
+
+    
+    const closeAccountPopover = useCallback(() => {
+      setAccountPopoverOpen(false);
+    }, [setAccountPopoverOpen]);
+   
+    // Snackbars 
+
+    const openSuccessSnackbar = useCallback(() => {
+      setLoginSuccessSnackbarOpen(true);
+    }, [setLoginSuccessSnackbarOpen]);
+
+    const closeSuccessSnackbar = useCallback(() => {
+      setLoginSuccessSnackbarOpen(false);
+    },[setLoginSuccessSnackbarOpen])
+
+    const handleSuccessSnackbar = useCallback(() => {
+      setLoginSuccessSnackbarOpen(true);
+      setTimeout(() => {
+        setLoginSuccessSnackbarOpen(false);
+      }, 3000);
+    },[])
+
+
+    // login attempt
+
+    const handleloginAttempted = useCallback((tf: boolean) => {
+      setLoginAttempted(tf);
+    },[setLoginAttempted]);
+    
     // all drawers
     
     const closeAllDrawers = useCallback(() => {
@@ -134,10 +189,11 @@ import { useLocation } from 'react-router-dom';
 
     return (
       <DrawerToggleContext.Provider value={
-        { searchIsOpen, navigationIsOpen, shoppingBagIsOpen, loginPopoverOpen,
+        { searchIsOpen, navigationIsOpen, shoppingBagIsOpen, loginPopoverOpen,accountPopoverOpen,loginSuccessSnackbarOpen,
+          loginAttempted,
           openShoppingPopper, closeShoppingPopper, openSearchBarDrawer, closeSearchBarDrawer, 
-          openLoginPopover, closeLoginPopover,
-          closeAllDrawers,
+          openLoginPopover, closeLoginPopover, openAccountPopover, closeAccountPopover, openSuccessSnackbar, closeSuccessSnackbar,
+          handleloginAttempted, handleSuccessSnackbar, closeAllDrawers,
           openNavigationDrawer, closeNavigationDrawer, assignNavigationDrawerRef, assignNavigationButtonRef,
         }}>
         {children}

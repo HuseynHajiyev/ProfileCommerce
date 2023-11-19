@@ -26,6 +26,7 @@ import { RootState } from '../../../../../app/store';
 
 const BadgeComponent = () => {
   const isLargeDesktop = useIsMobile('largeDesktop');
+  const isDesktop = useIsMobile('desktop');
   const isTablet = useIsMobile('tablet');
   const buttonRef = useRef(null)
   const bagItemsCount = useSelector((state: RootState) => state.shoppingBag.products.length);
@@ -69,10 +70,12 @@ const BadgeComponent = () => {
               {
                 shoppingBag.loading ? (
                   <CircularProgress size={!isLargeDesktop ? 25 : 30} color="inherit" />
-                ) : shoppingBag.products.length === 0 ?( 
-                  <NavTypographyComponent>
-                    {!isLargeDesktop ? 'Bag' : 'Your Bag'}
-                  </NavTypographyComponent>
+                ) : shoppingBag.products.length === 0 ?(
+                  isLargeDesktop && isDesktop? (
+                    <NavTypographyComponent>
+                      Your Bag
+                    </NavTypographyComponent>
+                  ) : (<AiFillShopping size={!isLargeDesktop || isTablet ? 20 : 30} color="black" id='shopping-cart-icon'/>)                  
                 ) : (
                   <>
                       <NavTypographyComponent>

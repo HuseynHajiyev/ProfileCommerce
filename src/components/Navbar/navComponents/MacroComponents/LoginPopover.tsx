@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Grid, IconButton, Popover, Typography } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
+import { Grid, IconButton, Typography } from '@mui/material';
 import { useDrawerToggle } from '../../../../hooks/useDrawerToggle';
 import PopoverHeader from '../MicroComponents/LoginPopover/PopoverHeader';
 import PopoverFooter from '../MicroComponents/LoginPopover/PopoverFooter';
@@ -10,18 +10,20 @@ import { Close } from '@mui/icons-material';
 import { useLogin } from '../../../../hooks/useLogin';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../app/store';
+import { LoginPopoverStyled } from '../../../StyledComponents/LoginPopoverStyled/LoginPopoverStyled';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 const LoginPopover = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const { loginPopoverOpen, closeLoginPopover } = useDrawerToggle();
+    const { loginPopoverOpen, loginAttempted, closeLoginPopover } = useDrawerToggle();
     const { loading, error, loggedIn } = useSelector((state: RootState) => state.userState);
     const [wrongCredentials, setWrongCredentials] = useState<boolean>(false);
+    const isTablet = useIsMobile('tablet');
     const {
         login,
         password,
         loginValid,
         passwordValid,
-        loginAttempted,
         checkLoginIsValid,
         loginInputHandler,
         checkPasswordIsValid,
@@ -33,10 +35,16 @@ const LoginPopover = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         emptyValues();
         closeLoginPopover();
-    }
+    }, [closeLoginPopover, emptyValues]);
+
+    useEffect(()=>{
+        if(loggedIn) {
+            handleClose();
+        }
+    },[loggedIn, handleClose]);
 
     useEffect(() => {
         if(!loading && error && !loggedIn && loginAttempted) {
@@ -47,7 +55,7 @@ const LoginPopover = () => {
     }, [loading, error, loggedIn, loginAttempted]);
 
     return (
-        <Popover
+        <LoginPopoverStyled
             open={loginPopoverOpen}
             anchorEl={null} // No anchoring element
             onClose={handleClose}
@@ -59,17 +67,7 @@ const LoginPopover = () => {
             }}
             sx={{
                 '& .MuiPopover-paper': {
-                    width: '35vw',
-                    height: 'auto',
-                    borderRadius: '0px',
-                    boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.25)',
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    paddingX: '5%',
-                    paddingY: '5%',
-                    overflow: 'hidden',
+                    width: isTablet? '60vw' : '35vw',
                 },
             }}
         >
@@ -107,7 +105,7 @@ const LoginPopover = () => {
                 </Grid>
 
             </Grid>
-        </Popover>
+        </LoginPopoverStyled>
     );
 }
 

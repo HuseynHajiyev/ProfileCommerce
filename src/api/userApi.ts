@@ -6,7 +6,6 @@ const { LOGIN_USER, GET_USERS } = ENDPOINTS
 
 export const loginUser = async (credentials: LoginCredentialsInterface) => {
     const response = await axios.post(`${LOGIN_USER}`, credentials);
-    console.log('logging in with response', response);
     return response.data;
 }
 

@@ -1,7 +1,9 @@
 import Cookies from 'js-cookie';
 
 // MUI components
-import { Stack, useTheme } from '@mui/material';
+import { Alert, Snackbar, Stack, useTheme } from '@mui/material';
+import { FaRegCheckCircle } from "react-icons/fa";
+
 
 
 // Component Imports
@@ -20,6 +22,7 @@ import SearchBarDrawer from './navComponents/MacroComponents/SearchBarDrawer';
 import LoginPopover from './navComponents/MacroComponents/LoginPopover';
 import { RootState } from '../../app/store';
 import { loginRequest, logoutUser } from '../../features/userReducer/userSlice';
+import { useDrawerToggle } from '../../hooks/useDrawerToggle';
 
 
 
@@ -29,6 +32,8 @@ const Navbar = () => {
     const userState = useSelector((state: RootState) => state.userState);
     const shoppingBagState = useSelector((state: RootState) => state.shoppingBag);
     const [initialLoginAttempted, setInitialLoginAttempted] = useState(false);
+    const [successSnackbarShown, setSuccessSnackbarShown] = useState(false);
+    const { loginSuccessSnackbarOpen, loginAttempted, handleSuccessSnackbar } = useDrawerToggle();
 
     useEffect(() => {
         if (!initialLoginAttempted) {
@@ -54,6 +59,18 @@ const Navbar = () => {
     useEffect(() => {
         dispatch(loadProducts(0));
     }, [dispatch]);
+
+    useEffect(() => {
+        if (!userState.loading && userState.loggedIn && loginAttempted && !loginSuccessSnackbarOpen && !successSnackbarShown) {
+          handleSuccessSnackbar();
+          setSuccessSnackbarShown(true);
+        }
+      
+        if (!userState.loggedIn || !loginAttempted) {
+          setSuccessSnackbarShown(false);
+        }
+      }, [userState.loading, userState.loggedIn, loginAttempted, loginSuccessSnackbarOpen, successSnackbarShown, handleSuccessSnackbar]);
+      
     return (
         <>
             <NavbarStyled sx={{ zIndex: theme.zIndex.drawer + 1 }}>
@@ -65,6 +82,15 @@ const Navbar = () => {
             <SearchBarDrawer />
             <NavigationDrawer />
             <LoginPopover />
+            <Snackbar 
+                open={loginSuccessSnackbarOpen}
+                message={'Login successful'}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            >
+                <Alert icon={<FaRegCheckCircle />} sx={{width: '100%'}} severity='success'>
+                    Login successful
+                </Alert>
+            </Snackbar>
         </>
     )
 };

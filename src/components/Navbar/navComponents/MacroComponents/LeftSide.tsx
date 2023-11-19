@@ -16,7 +16,7 @@ const LeftSide = () => {
     return (
         !isLargeDesktop  ? (
             <Box 
-            sx={{p: 0, flex: 1}}>
+            sx={{display: 'flex', alignItems: 'center', p: 0, flex: 1}}>
                 <IconButton
                     aria-label="large"
                     sx={{ order: -1}}

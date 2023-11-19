@@ -4,7 +4,7 @@ import { DrawerToggleContext } from '../context/navbarContext/DrawerToggleContex
 export function useDrawerToggle() {
     const context = useContext(DrawerToggleContext);
     if (context === undefined) {
-      throw new Error('useDrawerToggle must be used within a SearchDrawerProvider');
+      throw new Error('useDrawerToggle must be used within a DrawerToggleProvider');
     }
     return context;
   }

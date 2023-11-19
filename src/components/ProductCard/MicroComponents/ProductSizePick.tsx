@@ -26,8 +26,7 @@ const ProductSizePick = memo(({ size, product }: ProductSizePickProps ) => {
       addASelectedSize(size, product.id);
       setSizeSelected(true);
     }
-    console.log(sizeAvailability)
-  },[sizeSelected, addASelectedSize, removeASelectedSize, sizeAvailability]);
+  },[sizeSelected, addASelectedSize, removeASelectedSize]);
 
 
   useEffect(() => {

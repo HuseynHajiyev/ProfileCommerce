@@ -8,3 +8,7 @@ export const regexCheckUsername = (username: string): boolean => {
 
   return alphaNumericWithUnderscoreRegex.test(username) && containsLetterRegex.test(username);
 }
+
+export const capitalizeEachWord = (string: string): string => {
+  return string.split(' ').map(word => capitalizeString(word)).join(' ');
+}

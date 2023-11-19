@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest, logoutUser as logoutUserAction } from "../features/userReducer/userSlice";
-import { loadShoppingBag as laodShoppingBagAction, resetShoppingBag } from "../features/shoppingBagReducer/shoppingBagSlice";
+import { resetShoppingBag } from "../features/shoppingBagReducer/shoppingBagSlice";
 import { LoginCredentials } from "../models/UserInterface";
 import Cookies from "js-cookie";
 import { RootState } from "../app/store";
@@ -13,7 +13,6 @@ export const useLogin = () => {
   const [password, setPassword] = useState<string>('');
   const [loginValid, setLoginValid] = useState<boolean>(false);
   const [passwordValid, setPasswordValid] = useState<boolean>(false);
-  const [loginAttempted, setLoginAttempted] = useState<boolean>(false);
   const userState = useSelector((state: RootState) => state.userState);
   
 
@@ -55,7 +54,6 @@ export const useLogin = () => {
         username: login,
         password
       }
-      setLoginAttempted(true);
       dispatch(loginRequest(credentials));
     }
   }
@@ -73,7 +71,6 @@ export const useLogin = () => {
   }
   const logoutUser = () => {
     if(userState.loggedIn) {
-      console.log('logoutUser');
       dispatch(logoutUserAction());
     }
     emptyValues();
@@ -84,7 +81,6 @@ export const useLogin = () => {
     password,
     loginValid,
     passwordValid,
-    loginAttempted,
     setLogin,
     setPassword,
     setLoginValid,

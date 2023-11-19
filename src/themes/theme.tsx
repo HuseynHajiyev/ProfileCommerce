@@ -7,7 +7,7 @@ import { createTheme } from '@mui/material';
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#fff',
+      main: '#black',
     },
     secondary: {
       main: '#fff',

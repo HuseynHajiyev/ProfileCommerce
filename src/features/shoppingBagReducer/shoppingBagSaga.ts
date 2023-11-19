@@ -21,7 +21,7 @@ import { ApiToShoppingBagConverter, ShoppingBagToApiConverter } from '../../serv
 import { processShoppingBagProducts, combineShoppingBags } from '../../services/processShoppingBagResponse';
 import { getProduct } from '../../api/productApi';
 import { processProductResponse } from '../../services/processProductResponse';
-import { UserInterface, UserStateInterface } from '../../models/UserInterface';
+import { UserInterface } from '../../models/UserInterface';
 import { RootState } from '../../app/store';
 
 
@@ -36,7 +36,6 @@ function* loadShoppingBagSaga(action: PayloadAction<number>) {
       }
       const localShoppingBag: ShoppingBagInterface = yield select((state: RootState) => state.shoppingBag);
       if(localShoppingBag.id !== 0 && localShoppingBag.userId === user.id){
-        console.log('local shopping bag', localShoppingBag)
         yield put(setShoppingBag(localShoppingBag));
         return;
       }
