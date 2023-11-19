@@ -16,7 +16,6 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({cartItem}: {cartItem: CartItemInterface}) => { 
     if (!cartItem || !cartItem.product) {
-        console.log('cartItem or cartItem.product is undefined!', cartItem);
         return null; 
     }
     return (

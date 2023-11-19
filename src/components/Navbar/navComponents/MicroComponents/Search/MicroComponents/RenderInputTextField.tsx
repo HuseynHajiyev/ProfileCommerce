@@ -13,7 +13,6 @@ const RenderInputTextField = memo(({ loading, ...params }: RenderInputProps) => 
   return(
     <TextField
       {...params}
-      label=""
       placeholder='Search..'
       InputProps={{ 
         ...params.InputProps,

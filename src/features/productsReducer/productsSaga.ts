@@ -9,12 +9,12 @@ import { RootState } from '../../app/store';
 
 function* loadProductsSaga(action: PayloadAction<number>): Generator<any, void, ProductApiResponseInterface[]> {
     try {
+        const stateProduct: ProductInterface | null = yield select((state: RootState): ProductInterface | null => state.product.product);
         const productsResponse: ProductApiResponseInterface[] = yield call(getProducts, action.payload);
         if(productsResponse.length === 0 || productsResponse === null || productsResponse === undefined) { 
             yield put(loadProductsFailed("No products found"));
             return;
         }
-        const stateProduct: ProductInterface | null = yield select((state: RootState): ProductInterface | null => state.product.product);
         let processedProducts: ProductInterface[] = productsResponse.map((product: ProductApiResponseInterface) => processProductResponse(product));
         if(stateProduct) {
             const index = processedProducts.findIndex((product) => product.id === stateProduct?.id);

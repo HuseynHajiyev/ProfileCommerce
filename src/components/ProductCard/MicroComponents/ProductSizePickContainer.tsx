@@ -1,4 +1,4 @@
-import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+import Grid from '@mui/material/Unstable_Grid2';
 import ProductSizePick from './ProductSizePick';
 import { ProductInterface } from '../../../models/ProductInterface';
 
