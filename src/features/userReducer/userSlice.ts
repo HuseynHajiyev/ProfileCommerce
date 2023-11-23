@@ -1,19 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { LoginCredentials, UserInterface, UserStateInterface } from '../../models/UserInterface';
+import { LoginCredentials, OrderInterface, UserInterface, UserStateInterface } from '../../models/UserInterface';
 import { ProductInterface } from '../../models/ProductInterface';
 
 
 const initialState: UserStateInterface = {
     user: null,
     userFavourites: [],
+    userOrders: [],
     token: null,
     loading: false,
     loggedIn: false,
     error: null,
-    loginCredentials: {
-      username: '',
-      password: '',
-    },
 };
 
 export const userSlice = createSlice({
@@ -22,7 +19,6 @@ export const userSlice = createSlice({
   reducers: {
     loginRequest: (state, action: PayloadAction<LoginCredentials>) => {
       state.loading = true;
-      state.loginCredentials = action.payload;
     },
     loginSuccess: (state, action) => {
       state.loggedIn = true;
@@ -39,16 +35,11 @@ export const userSlice = createSlice({
       state.error = action.payload.error;
       state.loading = false;
     },
-    logoutUser: (state) => {
-      state.token = null;
-      state.user = null;
-      state.loggedIn = false;
-      state.loading = false;
-      state.error = null;
-      state.loginCredentials = {
-        username: '',
-        password: '',
+    logoutUser: () => {
+      return {
+        ...initialState,
       }
+
     },
     addFavourite: (state, action: PayloadAction<ProductInterface>) => {
       const product = state.userFavourites?.find((product) => product.id === action.payload.id);
@@ -60,9 +51,37 @@ export const userSlice = createSlice({
       if (!state.userFavourites || !favourite) return;
       state.userFavourites = state.userFavourites?.filter((product) => product.id !== action.payload.id);
     },
+    addOrder: (state, action: PayloadAction<OrderInterface>) => {
+      let lastOrderId = -1;
+      if(state.userOrders && state.userOrders.length > 0) {
+        lastOrderId = state.userOrders[state.userOrders.length - 1].id;
+      }
+      if (lastOrderId === -1){
+        const order = {
+          ...action.payload,
+          id: 0,
+        };
+        state.userOrders?.push(order);
+        return;
+      } else {
+        const order = {
+          ...action.payload,
+          id: lastOrderId + 1,
+        };
+        state.userOrders?.push(order);
+      }
+    },
+    removeOrder: (state, action: PayloadAction<OrderInterface>) => {
+      const order = state.userOrders?.find((order) => order.id === action.payload.id);
+      if (!state.userOrders || !order) return;
+      state.userOrders = state.userOrders?.filter((order) => order.id !== action.payload.id);
+      state.userOrders?.forEach((order, index) => {
+        order.id = index;
+      });
+    },
   },
 });
 
-export const { loginRequest, loginSuccess, setUser, loginFailure, logoutUser } = userSlice.actions;
+export const { loginRequest, loginSuccess, setUser, loginFailure, logoutUser, addFavourite, removeFavourite, addOrder, removeOrder } = userSlice.actions;
 
 export default userSlice.reducer;

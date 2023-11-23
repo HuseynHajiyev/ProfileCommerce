@@ -17,12 +17,12 @@ interface RouteParams {
 const ViewProduct = () => {
   const dispatch = useDispatch();
   const { productId } = useParams<RouteParams>();
-  const productState = useSelector((state: RootState) => state.product);
-  const products: ProductInterface[] = useSelector((state: RootState) => state.products.products);
+  const productState = useSelector((state: RootState) => state.productState);
+  const products: ProductInterface[] = useSelector((state: RootState) => state.productsState.products);
   const foundProduct: ProductInterface | undefined = products.find((product) => product.id.toString() === productId);
   
   useEffect(() => {
-    if (!foundProduct && (!productState.product || productId !== productState.product.id.toString())) {
+    if (!foundProduct && (!productState.product || productId !== productState.product?.id.toString())) {
       dispatch(loadProduct(Number(productId)));
     }
   }, [dispatch, productId, productState.product, foundProduct]);

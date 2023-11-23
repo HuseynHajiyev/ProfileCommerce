@@ -6,11 +6,13 @@ import AccountPageSwitch from '../../components/AccountPage/microComponents/Acco
 import AccountPageNeedHelp from '../../components/AccountPage/microComponents/AccountPageNeedHelp';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { useMainScroll } from '../../hooks/useMainScroll';
 
 const Account = () => {
-  const [activePage, setActivePage] = useState('account_dashboards');
+  const [activePage, setActivePage] = useState<string>('account_dashboards');
+  const { handleScrollSection } = useMainScroll();
   const userState = useSelector((state: RootState) => state.userState);
-  const handleActivePage = (pageNumber: number) => {
+  const handleActivePage = (pageNumber: number, scrollTo?: string) => {
     switch(pageNumber) {
       case 0:
       case 1:
@@ -32,6 +34,9 @@ const Account = () => {
         setActivePage('account_dashboards');
         break;
     }
+    if(scrollTo) {
+      handleScrollSection(scrollTo);
+    }
   }
 
   return (
@@ -39,12 +44,12 @@ const Account = () => {
         <Grid container width={'100%'}>
           <Grid item xs={3}>
             <Stack spacing={2}>
-              <AccountPageAccordion handleActivePage={handleActivePage}  />
+              <AccountPageAccordion activePage={activePage} handleActivePage={handleActivePage}  />
               <AccountPageNeedHelp />
             </Stack>
           </Grid>
           <Grid item xs={9}>
-            <AccountPageSwitch activePage={activePage} user={userState.user} loggedIn={userState.loggedIn} />
+            <AccountPageSwitch activePage={activePage} user={userState.user} loggedIn={userState.loggedIn} handleActivePage={handleActivePage}/>
           </Grid>
         </Grid>
     </Box>

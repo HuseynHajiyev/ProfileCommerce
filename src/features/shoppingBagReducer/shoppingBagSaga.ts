@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 // Action Imports
-import { loadShoppingBag, setShoppingBag, loadShoppingBagFailed, addToShoppingBag, removeFromShoppingBag, updateQuantity, decreaseQuantity, resetShoppingBag } from './shoppingBagSlice';
+import { loadShoppingBag, setShoppingBag, loadShoppingBagFailed, addToShoppingBag, removeFromShoppingBag, updateQuantity, decreaseQuantity, resetShoppingBag, loadShoppingBagSuccess } from './shoppingBagSlice';
 
 // API Imports
 import { addProductToBag, getShoppingBag, updateShoppingBag } from '../../api/shoppingBagApi';
@@ -31,12 +31,12 @@ function* loadShoppingBagSaga(action: PayloadAction<number>) {
       const token: string = yield Cookies.get('authToken') || '';
       const user: UserInterface = yield select((state: RootState) => state.userState.user);
       if(!token || !user){
-        console.log('not logged in', 'user', user, 'token', token)
         throw new TypeError('Not logged in');
       }
       const localShoppingBag: ShoppingBagInterface = yield select((state: RootState) => state.shoppingBag);
       if(localShoppingBag.id !== 0 && localShoppingBag.userId === user.id){
         yield put(setShoppingBag(localShoppingBag));
+        yield call(loadShoppingBagSuccess);
         return;
       }
       const response: ShoppingBagApiResponseInterface[] = yield call(getShoppingBag, action.payload);
@@ -50,6 +50,7 @@ function* loadShoppingBagSaga(action: PayloadAction<number>) {
       const  convertedCartItems: CartItemInterface[]= processShoppingBagProducts(cartProducts, responseBag.products);
       const loadedShoppingBag: ShoppingBagInterface = ApiToShoppingBagConverter(responseBag, convertedCartItems).bag;
       yield put(setShoppingBag(loadedShoppingBag));
+      yield call(loadShoppingBagSuccess);
   } catch (error) {
       yield put(loadShoppingBagFailed((error as TypeError).message));
   }
@@ -64,6 +65,7 @@ function* addToShoppingBagSaga() {
     const apiShoppingBag = ShoppingBagToApiConverter(currentShoppingBag, 0).apiShoppingBag;
     const addProductProps: AddProductToBagProps = {userId: apiShoppingBag.userId, date: apiShoppingBag.date, products: apiShoppingBag.products};
     yield call(addProductToBag, addProductProps);
+    yield call(loadShoppingBagSuccess);
   } catch (error) {
     yield put(loadShoppingBagFailed((error as TypeError).message));
   }
@@ -77,6 +79,7 @@ function* removeFromShoppingBagSaga() {
     const updateProductProps: UpdateShoppingBagProps = {cartId: apiShoppingBag.id, userId: apiShoppingBag.userId, date: apiShoppingBag.date, products: apiShoppingBag.products};
 
     yield call(updateShoppingBag, updateProductProps);
+    yield call(loadShoppingBagSuccess);
   } catch (error) {
     yield put(loadShoppingBagFailed((error as TypeError).message));
   }
@@ -89,6 +92,7 @@ function* updateQuantitySaga() {
     const apiShoppingBag = ShoppingBagToApiConverter(currentShoppingBag, 0).apiShoppingBag;
     const updateProductProps: UpdateShoppingBagProps = {cartId: apiShoppingBag.id, userId: apiShoppingBag.userId, date: apiShoppingBag.date, products: apiShoppingBag.products};
     yield call(updateShoppingBag, updateProductProps);
+    yield call(loadShoppingBagSuccess);
   } catch (error) {
     yield put(loadShoppingBagFailed((error as TypeError).message));
   }
@@ -100,6 +104,7 @@ function* decreaseQuantitySaga() {
     const apiShoppingBag = ShoppingBagToApiConverter(currentShoppingBag, 0).apiShoppingBag;
     const updateProductProps: UpdateShoppingBagProps = {cartId: apiShoppingBag.id, userId: apiShoppingBag.userId, date: apiShoppingBag.date, products: apiShoppingBag.products};
     yield call(updateShoppingBag, updateProductProps);
+    yield call(loadShoppingBagSuccess);
   } catch (e) {
     yield put(loadShoppingBagFailed((e as TypeError).message));
     console.log(e)
@@ -109,6 +114,7 @@ function* decreaseQuantitySaga() {
 function* resetShoppingBagSaga() {
   try {
     yield put(resetShoppingBag());
+    yield call(loadShoppingBagSuccess);
   } catch (e) {
     yield put(loadShoppingBagFailed((e as TypeError).message));
     console.log(e)

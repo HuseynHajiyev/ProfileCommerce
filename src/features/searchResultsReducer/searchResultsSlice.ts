@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SearchResutProduct } from "../../models/ProductInterface";
+import { SearchResutProductInterface } from "../../models/ProductInterface";
 
 interface searchResultsState {
-    searchResults: SearchResutProduct[];
+    searchResults: SearchResutProductInterface[];
     searchCategories: string[];
     loading: boolean;
     error: string | null;
@@ -26,7 +26,7 @@ const searchResultsSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
-        setSearchResults: (state, action: PayloadAction<SearchResutProduct[]>) => {
+        setSearchResults: (state, action: PayloadAction<SearchResutProductInterface[]>) => {
             if (action.payload.length === 0) {
                 state.error = 'no results';
                 state.loading = false;

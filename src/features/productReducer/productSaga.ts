@@ -5,10 +5,11 @@ import { ProductInterface } from '../../models/ProductInterface';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { processProductResponse } from '../../services/processProductResponse';
 import { addProduct } from '../productsReducer/productsSlice';
+import { RootState } from '../../app/store';
 
 function* loadProductSaga(action: PayloadAction<number>) {
     try {
-        const products: ProductInterface[] = yield select((state): ProductInterface[] => state.products.products);
+        const products: ProductInterface[] = yield select((state: RootState): ProductInterface[] => state.productsState.products);
         const storeProduct: ProductInterface | undefined = products.find((product) => product.id === action.payload);
         if(storeProduct) {
             yield put(setProduct(storeProduct));
@@ -26,5 +27,5 @@ function* loadProductSaga(action: PayloadAction<number>) {
 
 
 export function* watchLoadProductSaga() {
-    yield takeLatest('product/loadProduct', loadProductSaga);
+    yield takeLatest('productState/loadProduct', loadProductSaga);
 }

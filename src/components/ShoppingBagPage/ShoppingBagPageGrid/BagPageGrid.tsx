@@ -19,7 +19,7 @@ const BagPageGrid = () => {
             <BagPageGridHeader />
             {
                 shoppingBag.loading ? (
-                    Array.from({ length: 4 }).map((item, index) => (
+                    Array.from({ length: 4 }).map((_, index) => (
                         <ShoppingBagRowSkeleton key={index} />
                      ))
                 ) : shoppingBag.products.length == 0 ? (

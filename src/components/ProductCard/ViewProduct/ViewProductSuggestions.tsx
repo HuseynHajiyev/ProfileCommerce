@@ -14,13 +14,13 @@ const ViewProductSuggestions = memo(({product}: SuggestionProps) => {
   
 
   useEffect(()=> {
-    const recommendations = productsStore.products.filter((item) => item.category === product.category)
-    const filteredRecommendations = recommendations.filter((item) => item.id !== product.id);
+    const recommendations = productsStore.products.filter((item: ProductInterface) => item.category === product.category)
+    const filteredRecommendations = recommendations.filter((item: ProductInterface) => item.id !== product.id);
     setCompleteOutfit(filteredRecommendations.length > 3 ? filteredRecommendations.slice(0,3) : filteredRecommendations);
   }, [product.category, productsStore.products, product.id])
 
   return (
-      <Stack width={'100%'}>
+      <Stack width={'100%'} paddingY={5}>
         <Box>
           <Typography textAlign={'center'} fontSize={'1.2rem'}> COMPLETE YOUR OUTFIT </Typography>
         </Box>

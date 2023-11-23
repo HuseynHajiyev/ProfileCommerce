@@ -1,6 +1,8 @@
+import Header from "./microComponents/Header"
+
 const MyOrders = () => {
   return (
-    <div>MyOrders</div>
+    <Header headerText="My Orders" />
   )
 }
 

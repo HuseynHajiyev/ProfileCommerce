@@ -11,15 +11,16 @@ interface AccountPageSwitchProps {
   activePage: string;
   user: UserInterface | null;
   loggedIn: boolean;
+  handleActivePage: (pageNumber: number, scrollTo?: string) => void;
 }
-const AccountPageSwitch = ({ activePage, user, loggedIn }: AccountPageSwitchProps) => {
+const AccountPageSwitch = ({ activePage, user, loggedIn, handleActivePage }: AccountPageSwitchProps) => {
   const renderPage = () => {
     if(loggedIn) {
       switch (activePage) {
         case 'account_dashboards':
-          return <AccountInformation />;
+          return <AccountInformation handleActivePage={handleActivePage} />;
         case 'address_bank':
-          return <AddressBank user={user}/>;
+          return <AddressBank user={user} />;
         case 'newsletter_subscriptions':
           return <NewsletterSubscriptions />;
         case 'my_orders':
@@ -27,7 +28,7 @@ const AccountPageSwitch = ({ activePage, user, loggedIn }: AccountPageSwitchProp
         case 'my_favourites':
           return <MyFavourites />;
         default:
-          return <AccountInformation />;
+          return <AccountInformation handleActivePage={handleActivePage} />;
       }
     } else {
       return <NotLoggedIn />

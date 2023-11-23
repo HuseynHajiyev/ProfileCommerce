@@ -9,12 +9,18 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../app/store';
 import { useDrawerToggle } from '../../../../../hooks/useDrawerToggle';
 import theme from '../../../../../themes/theme';
+import { useNavigate } from 'react-router-dom';
 
 const SubtotalComponent = () => {
     const subTotal = useSelector((state: RootState) => state.shoppingBag.subTotal);
     const shipping = 0
+    const navigate = useNavigate();
     // Number((subTotal*0.05).toFixed(2))
     const { closeShoppingPopper } = useDrawerToggle();
+    const handleCheckout = () => {
+        navigate('/shopping-bag')
+        closeShoppingPopper();
+    }
     return (
         <ShoppingBagSubtotalStyled>
             <Box display='flex' justifyContent='space-between'>
@@ -52,7 +58,7 @@ const SubtotalComponent = () => {
                 </ViewBagLinkStyled>
             </Box>
             <Box>
-                <ShoppingBagCheckoutButtonStyled onClick={() => closeShoppingPopper()}>
+                <ShoppingBagCheckoutButtonStyled onClick={handleCheckout}>
                     <Typography variant='h6'>
                         Go To Checkout 
                     </Typography>

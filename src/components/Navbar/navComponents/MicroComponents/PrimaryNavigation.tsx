@@ -26,16 +26,16 @@ const PrimaryNavigation = () => {
             ref={assignNavigationDrawerRef}
             spacing={!isDesktop && !isLargeDesktop ? 1 : 0}
         >
-            <Grid item xs={12} md={4} sx={{ display: 'flex' }} justifyContent={'center'} alignItems={'center'}>
-                <NavLinkComponent to='/new-arrivals' justify={!isDesktop && !isLargeDesktop ? 'center' : 'flex-start'} />
+            <Grid item xs={12} md={4} sx={{ display: 'flex' }} justifyContent={'flex-start'} alignItems={'center'}>
+                <NavLinkComponent to='/new-arrivals' justify={!isDesktop && !isLargeDesktop ? 'flex-start' : 'flex-start'} />
             </Grid>
 
             <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} alignItems={'center'}>
                 <NavLinkComponent to='/shop/clothing' justify='center' />
             </Grid>
 
-            <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} alignItems={'center'}>
-                <NavLinkComponent to='/about' justify='center' />
+            <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'flex-end' }} alignItems={'center'}>
+                <NavLinkComponent to='/about' justify='flex-end' />
             </Grid>
         </Grid>
     )

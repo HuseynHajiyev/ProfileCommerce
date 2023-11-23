@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
-import { SearchResutProduct } from '../models/ProductInterface';  
+import { SearchResutProductInterface } from '../models/ProductInterface';  
 
 
 export const useSearchResults = () => {
   const products = useSelector((state: RootState) => state.search.searchResults);
   const [query, setQuery] = useState('');
-  const [productOptions, setProductOptions] = useState<SearchResutProduct[]>([]);
+  const [productOptions, setProductOptions] = useState<SearchResutProductInterface[]>([]);
   const [open, setOpen] = useState(false);
   const loading = open && productOptions.length === 0;
   useEffect(() => {

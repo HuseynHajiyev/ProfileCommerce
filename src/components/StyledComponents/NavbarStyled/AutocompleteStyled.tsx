@@ -6,7 +6,7 @@ export const AutocompleteStyled = styled(Autocomplete)({
   '& .MuiAutocomplete-listbox': {
     overflow: 'auto',
     '&::-webkit-scrollbar-track': {
-      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.3)',
+      WebkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
       borderRadius: '10px',
       backgroundColor: '#F5F5F5',
     },

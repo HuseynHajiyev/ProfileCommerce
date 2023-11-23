@@ -16,11 +16,10 @@ const PopoverAccountPageLink = () => {
   const handleClick = () => {
     if(loginPopoverOpen) {
       closeLoginPopover();
-      closeAccountPopover();
     }
     if(isLoggedIn) {
+      closeAccountPopover();
       navigate('/account');
-      
     }
   };
   return (

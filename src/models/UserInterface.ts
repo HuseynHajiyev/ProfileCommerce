@@ -1,3 +1,4 @@
+import { CartItemInterface } from "./CartiItemInterface";
 import { ProductInterface } from "./ProductInterface";
 
 export interface UserInterface {
@@ -42,8 +43,18 @@ export interface UserStateInterface {
     token: string | null,
     user: UserInterface | null,
     userFavourites: ProductInterface[] | null,
+    userOrders: OrderInterface[] | null,
     loading: boolean,
     loggedIn: boolean,
     error: string | null,
-    loginCredentials: LoginCredentials,
+}
+
+export interface OrderInterface {
+    id: number,
+    products: CartItemInterface[],
+    userId: number,
+    total: number,
+    shipping: number,
+    status: string,
+    date: string,
 }

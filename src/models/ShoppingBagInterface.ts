@@ -7,6 +7,7 @@ export interface ShoppingBagInterface {
   products: CartItemInterface[];
   tempProducts: TempProductInterface[];
   loading: boolean;
+  loaded: boolean;
   error: string | null;
   subTotal: number;
   shipping: 0,

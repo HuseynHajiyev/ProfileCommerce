@@ -2,29 +2,39 @@ import { Box, Grid, Stack, Typography } from '@mui/material'
 import { UserInterface } from '../../../models/UserInterface'
 import { useRef } from 'react';
 import { capitalizeEachWord } from '../../../utilities/stringManipulation';
+import { useMainScroll } from '../../../hooks/useMainScroll';
 
 interface AccountInformationAddressProps {
   user: UserInterface | null;
+  handleActivePage: (pageNumber: number, scrollTo?: string) => void;
 }
 
-const AccountInformationAddress = ({user}: AccountInformationAddressProps) => {
+const AccountInformationAddress = ({user, handleActivePage}: AccountInformationAddressProps) => {
   const capitalizedCity = useRef<string>('');
   const capitalizedStreet = useRef<string>('');
+  const {handleLinkScrolled} = useMainScroll();
   if(user) {
     capitalizedCity.current = capitalizeEachWord(user?.address.city);
     capitalizedStreet.current = capitalizeEachWord(user?.address.street);
+  }
+
+  const changeToEdit = (activePage: number, scrollTo: string) => {
+    handleLinkScrolled(false);
+    handleActivePage(activePage, scrollTo);
   }
   return (
   <Stack spacing={2}>
     <Stack spacing={4}>
       <Stack spacing={1}>
-        <Box borderBottom={'2px solid #D9D9D9'} paddingBottom={1} display={'flex'} justifyContent={'space-between'}>
+        <Box borderBottom={'2px solid #D9D9D9'} paddingY={2} display={'flex'} justifyContent={'space-between'}>
           <Typography variant={'h6'} fontFamily={'Mulish'}>
             Address Book
           </Typography>
-          <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'} sx={{cursor: 'pointer'}}>
-            Manage Addresses
-          </Typography>
+          <Box onClick={() => handleActivePage(2, 'billing-address')} sx={{ cursor: 'pointer' }}>
+            <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'}>
+              Manage Addresses
+            </Typography>
+          </Box>
         </Box>
         <Grid container paddingY={2} display={'flex'} justifyContent={'space-between'}>
           <Grid item xs={6} width={'100%'} paddingRight={'1%'}>
@@ -34,9 +44,11 @@ const AccountInformationAddress = ({user}: AccountInformationAddressProps) => {
                   <Typography variant={'h6'} fontFamily={'Mulish'}>
                     Default billing address
                   </Typography>
-                  <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'} sx={{cursor: 'pointer'}}>
-                    Edit
-                  </Typography>
+                  <Box onClick={() => changeToEdit(2, 'billing-address')} sx={{ cursor: 'pointer' }}>
+                    <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'} sx={{cursor: 'pointer'}}>
+                      Edit
+                    </Typography>
+                  </Box>
                 </Box>
                 <Box paddingRight={'20%'}>
                   <Stack spacing={1} paddingTop={'3%'}>
@@ -57,9 +69,11 @@ const AccountInformationAddress = ({user}: AccountInformationAddressProps) => {
                 </Box>
               </Stack>
               <Box padding={2}>
-                <Typography variant={'body2'} fontFamily={'Mulish'} fontSize={'0.95rem'} color={'blue'} sx={{textDecoration: 'underline', cursor: 'pointer'}}>
-                  Edit Address
-                </Typography>
+                  <Box onClick={() => changeToEdit(2, 'billing-address')} sx={{ cursor: 'pointer' }}>
+                    <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'} sx={{cursor: 'pointer'}}>
+                      Edit
+                    </Typography>
+                  </Box>
               </Box>
             </Box>
           </Grid>
@@ -70,9 +84,11 @@ const AccountInformationAddress = ({user}: AccountInformationAddressProps) => {
                   <Typography variant={'h6'} fontFamily={'Mulish'}>
                     Default shipping address
                   </Typography>
-                  <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'} sx={{cursor: 'pointer'}}>
-                    Edit
-                  </Typography>
+                  <Box onClick={() => changeToEdit(2, 'shipping-address')} sx={{ cursor: 'pointer' }}>
+                    <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'} sx={{cursor: 'pointer'}}>
+                      Edit
+                    </Typography>
+                  </Box>
                 </Box>
                 <Box paddingRight={'20%'}>
                   <Typography variant={'body2'} fontFamily={'Mulish'} fontSize={'0.95rem'} color={'#9C9C9C'}>
@@ -81,9 +97,11 @@ const AccountInformationAddress = ({user}: AccountInformationAddressProps) => {
                 </Box>
               </Stack>
               <Box padding={2}>
-                <Typography variant={'body2'} fontFamily={'Mulish'} fontSize={'0.95rem'} color={'blue'} sx={{textDecoration: 'underline', cursor: 'pointer'}}>
-                  Edit Address
-                </Typography>
+                <Box onClick={() => changeToEdit(2, 'shipping-address')} sx={{ cursor: 'pointer' }}>
+                  <Typography variant={'h6'} fontFamily={'Mulish'} color={'blue'} sx={{cursor: 'pointer'}}>
+                    Edit
+                  </Typography>
+                </Box>
               </Box>
             </Box>
           </Grid>

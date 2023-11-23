@@ -9,7 +9,7 @@ import MemorizedPaper from './MicroComponents/MemorizedPaper';
 
 // Hooks 
 import { useSearchResults } from '../../../../../hooks/useSearchResults';
-import { SearchResutProduct } from '../../../../../models/ProductInterface';
+import { SearchResutProductInterface } from '../../../../../models/ProductInterface';
 import { HTMLAttributes, useRef } from 'react';
 import { useDrawerToggle } from '../../../../../hooks/useDrawerToggle';
 
@@ -36,7 +36,7 @@ const SearchInputComponent = () => {
             isOptionEqualToValue={(
               option: unknown,
               value: unknown,
-            ) => (option as SearchResutProduct).title === (value as SearchResutProduct).title}
+            ) => (option as SearchResutProductInterface).title === (value as SearchResutProductInterface).title}
             PaperComponent={({ children }) => (
               <MemorizedPaper>{children}</MemorizedPaper>
             )}
@@ -45,15 +45,15 @@ const SearchInputComponent = () => {
               setQuery(value);
             }}
             getOptionLabel={(option: unknown) =>
-              typeof option === "string" ? option : (option as SearchResutProduct).title
+              typeof option === "string" ? option : (option as SearchResutProductInterface).title
             }
-            groupBy={(option: unknown) => (option as SearchResutProduct).category}
+            groupBy={(option: unknown) => (option as SearchResutProductInterface).category}
             options={productOptions}
             loading={loading}
             placeholder="Search.."
             renderInput={(params) => <RenderInputTextField {...params} loading={loading} />}
             renderOption={(params: HTMLAttributes<HTMLLIElement>, option) => {
-              const typedOption = option as SearchResutProduct;
+              const typedOption = option as SearchResutProductInterface;
               return (
                   <NavSearchLinkStyled to={`/shop/view-all/${typedOption.id}`} onClick={() => { autocompleteRef.current?.blur(); }} key={typedOption.id}>
                     <li {...params} onClick={() => closeSearchBarDrawer()}>

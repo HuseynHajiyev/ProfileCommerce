@@ -22,22 +22,23 @@ export interface ProductApiResponseInterface {
   }
 }
 
-export interface SearchResutProduct {
+export interface SearchResutProductInterface {
   id: number;
   title: string;
   category: string;
   img: string;
 }
 
-export interface ProductsState {
+export interface ProductsStateInterface {
   products: ProductInterface[];
   categories: string[];
   loading: boolean;
+  loaded: boolean;
   error: string | null;
   log: string[];
 }
 
-export interface ProductState {
+export interface ProductStateInterface {
   product: ProductInterface | null;
   loading: boolean;
   error: string | null;

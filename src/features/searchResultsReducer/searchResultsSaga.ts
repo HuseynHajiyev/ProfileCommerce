@@ -1,6 +1,6 @@
 import {call, put, takeLatest } from 'redux-saga/effects';
 import { loadSearchResultsFailed, setSearchCategories, setSearchResults } from './searchResultsSlice';
-import { ProductApiResponseInterface, ProductInterface, SearchResutProduct } from '../../models/ProductInterface';
+import { ProductApiResponseInterface, ProductInterface, SearchResutProductInterface } from '../../models/ProductInterface';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { findSearchProducts, findSearchProductsByCategory, isCategory } from '../../services/searchHelpers';
 import { getProducts } from '../../api/productsApi';
@@ -19,10 +19,10 @@ function* loadSearchResultsSaga(action: PayloadAction<string>) {
         }
         const categories: string[] = yield call(getCategories);
         yield put(setSearchCategories(categories));
-        const serializedResponse: SearchResutProduct[] = serializeProductsForSearch(productsResponse);
+        const serializedResponse: SearchResutProductInterface[] = serializeProductsForSearch(productsResponse);
         const query = action.payload;
-        const searchableProducts: SearchResutProduct[] = findSearchProducts(query, serializedResponse);
-        let searchCategory: SearchResutProduct[];
+        const searchableProducts: SearchResutProductInterface[] = findSearchProducts(query, serializedResponse);
+        let searchCategory: SearchResutProductInterface[];
         if(isCategory(query, categories)) {
             searchCategory = findSearchProductsByCategory(query, searchableProducts);
         } else {

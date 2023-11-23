@@ -7,7 +7,11 @@ import AccountInformationBody from "./microComponents/AccountInformationBody";
 import AccountInformationAddress from "./microComponents/AccountInformationAddress";
 import { capitalizeEachWord } from "../../utilities/stringManipulation";
 
-const AccountInformation = () => {
+interface AccountInformationProps { 
+  handleActivePage: (pageNumber: number, scrollTo?: string) => void;
+}
+
+const AccountInformation = ({handleActivePage} : AccountInformationProps) => {
   const user = useSelector((state: RootState) => state.userState.user);
   const nameAndSurnameCapitalized = useRef<string>('');
   if(user){
@@ -17,7 +21,7 @@ const AccountInformation = () => {
     <Box paddingBottom={'10%'}>
       <AccountInformationHeader nameAndSurnameCapitalized={nameAndSurnameCapitalized.current} />
       <AccountInformationBody nameAndSurnameCapitalized={nameAndSurnameCapitalized.current} user={user} />
-      <AccountInformationAddress user={user} />
+      <AccountInformationAddress handleActivePage={handleActivePage} user={user} />
     </Box>
   )
 }

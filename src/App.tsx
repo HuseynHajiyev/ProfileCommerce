@@ -4,8 +4,8 @@ import { CssBaseline ,ThemeProvider } from '@mui/material'
 // React imports
 import { Routes, Route } from 'react-router-dom';
 // Redux imports
-
-
+import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Pages
 import Shop from './pages/Shop/Shop';
@@ -24,9 +24,6 @@ import AnnouncementBarComponent from './components/Navbar/navComponents/MicroCom
 import NavbarPlaceholder from './components/Placeholders/NavbarPlaceholder';
 import ProductsOverview from './pages/Shop/ProductsOverview/ProductsOverview';
 
-// Styled components
-import PageContainerStyled from './components/StyledComponents/AppFileStyled/PagesContainerStyled';
-
 // Context
 import { IsMobileProvider } from './context/IsMobileContext';
 
@@ -36,34 +33,80 @@ import theme from './themes/theme';
 // Context
 import { DrawerToggleProvider } from './context/navbarContext/DrawerToggleContext';
 import ViewProduct from './pages/Shop/ViewAll/ViewProduct';
+import PagesContainer from './pages/PagesContainer';
+import { MainScrollProvider } from './context/scrollContext/MainScrollContext';
+import { useEffect } from 'react';
+import { RootState } from './app/store';
+import { logoutUser, setUser } from './features/userReducer/userSlice';
+import { loadShoppingBag, resetShoppingBag, setShoppingBag } from './features/shoppingBagReducer/shoppingBagSlice';
+import { loadProducts, setProducts } from './features/productsReducer/productsSlice';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const userState = useSelector((state: RootState) => state.userState);
+  const shoppingBagState = useSelector((state: RootState) => state.shoppingBag);
+  const productsState = useSelector((state: RootState) => state.productsState);
+  
+  useEffect(() => {
+    if(!productsState.loaded && productsState.products.length === 0) {
+      dispatch(loadProducts(0));
+    } else {
+      dispatch(setProducts(productsState.products));
+    }
+  }, [dispatch, productsState.loaded, productsState.products]);
+
+  useEffect(() => {
+    const token = Cookies.get('authToken');
+    if (token && userState.user) {
+      if (!userState.loggedIn) {
+        dispatch(setUser(userState.user));
+      }
+    } else if (!token && userState.user) {
+      dispatch(logoutUser());
+    }
+  }, [dispatch, userState.user, userState.loggedIn]);
+
+  
+  useEffect(() => {
+    if (userState.loggedIn && userState.user) {
+      if (shoppingBagState && shoppingBagState.userId === userState.user.id) {
+        dispatch(setShoppingBag(shoppingBagState));
+      } else {
+        dispatch(loadShoppingBag(userState.user.id));
+      }
+    } else if (userState.loggedIn === false && shoppingBagState.loaded) {
+      dispatch(resetShoppingBag());
+    }
+  }, [dispatch, userState.loggedIn, userState.user]);
+  
   return (
     <IsMobileProvider>
       <DrawerToggleProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AnnouncementBarComponent />
-            <NavbarPlaceholder />
-            <SearchBarDrawer />
-            <NavigationDrawer />
-            <PageContainerStyled>
-              <Navbar />
-              <Routes>
-                <Route path="/" element={ <Home />} />
-                <Route path="/new-arrivals" element={ <NewArrivals/>} />
-                <Route path="/shop" element={<Shop />}>
-                  <Route path="shop/clothing" element={<ProductsOverview />} />
-                  <Route path="view-all/:productId" element={<ViewProduct />} />
-                  <Route path=":category" element={<ProductsOverview />} />
-                </Route>
-                <Route path="/about" element={ <About />} />
-                <Route path="/account" element={ <Account />} />
-                <Route path="/shopping-bag" element={ <ShoppingBag />} />
-                <Route path="/404-not-found" element={ <NotFound404 />} />
-              </Routes>
-            </PageContainerStyled>
-        </ThemeProvider>
+        <MainScrollProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AnnouncementBarComponent />
+              <NavbarPlaceholder />
+              <SearchBarDrawer />
+              <NavigationDrawer />
+              <PagesContainer>
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={ <Home />} />
+                  <Route path="/new-arrivals" element={ <NewArrivals/>} />
+                  <Route path="/shop" element={<Shop />}>
+                    <Route path="shop/clothing" element={<ProductsOverview />} />
+                    <Route path="view-all/:productId" element={<ViewProduct />} />
+                    <Route path=":category" element={<ProductsOverview />} />
+                  </Route>
+                  <Route path="/about" element={ <About />} />
+                  <Route path="/account" element={ <Account />} />
+                  <Route path="/shopping-bag" element={ <ShoppingBag />} />
+                  <Route path="/404-not-found" element={ <NotFound404 />} />
+                </Routes>
+              </PagesContainer>
+          </ThemeProvider>
+        </MainScrollProvider>
       </DrawerToggleProvider>
     </IsMobileProvider>
   )
