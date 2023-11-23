@@ -22,7 +22,7 @@ const AccountLinkComponent = () => {
     }
   };
   return (
-    <Box position={'relative'} display={'flex'} alignItems={'center'} justifyContent={'center'} ref={anchorRef}>
+    <Box position={'relative'} display={'flex'} alignItems={'center'} justifyContent={'flex-start'} ref={anchorRef}>
       <Box display={'flex'} alignItems={'center'}>
         <Button onClick={handleClick} variant={'text'} sx={{ textTransform: 'none' }}>
           <NavTypographyComponent>Account</NavTypographyComponent>

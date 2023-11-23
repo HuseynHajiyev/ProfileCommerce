@@ -9,8 +9,34 @@ import ZipPostalRadio from './MicroComponents/ZipPostalRadio';
 import SubtotalSummary from './MicroComponents/SubtotalSummary';
 import DiscountCodeInput from './MicroComponents/DiscountCodeInput';
 import { ShoppingBagCheckoutButtonStyled } from '../../StyledComponents/NavbarStyled/ShoppingBagStyled';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
+import { useDrawerToggle } from '../../../hooks/useDrawerToggle';
+import { addOrder } from '../../../features/userReducer/userSlice';
+import { OrderInterface } from '../../../models/UserInterface';
 
 const BagPageSummaryAccordion = () => {
+  const dispatch = useDispatch();
+  const {openLoginPopover} = useDrawerToggle();
+  const userState = useSelector((state: RootState) => state.userState);
+  const shoppingBagState = useSelector((state: RootState) => state.shoppingBag);
+  const handleAddOrder = () => {
+
+    if(userState && userState.loggedIn && userState.userOrders && userState.user) {
+      const order: OrderInterface =  {
+        id: -1,
+        products: shoppingBagState.products,
+        userId: userState.user.id,
+        total: shoppingBagState.subTotal,
+        shipping: 0,
+        status: 'pending',
+        date: new Date().toISOString()
+      }
+      dispatch(addOrder(order));
+    } else {
+      openLoginPopover();
+    }
+  }
   return (
     <SummaryContainerBoxStyled>
       <Box paddingY={'5%'} borderBottom={'2px solid #ECECEC'}>
@@ -46,7 +72,7 @@ const BagPageSummaryAccordion = () => {
           <DiscountCodeInput />
         </AccordDetailsStyled>
       </BagSummaryAccordionStyled>
-      <ShoppingBagCheckoutButtonStyled>
+      <ShoppingBagCheckoutButtonStyled onClick={handleAddOrder}>
         Proceed to Checkout
       </ShoppingBagCheckoutButtonStyled>
     </SummaryContainerBoxStyled>

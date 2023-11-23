@@ -7,7 +7,7 @@ import { CartItemInterface } from "../models/CartiItemInterface";
 import { useCallback } from "react";
 
 export const useProductQuantity = () => {
-  const productsStore = useSelector((state: RootState) => state.products);
+  const productsStore = useSelector((state: RootState) => state.productsState);
   const shoppingBagStore = useSelector((state: RootState) => state.shoppingBag);
   const dispatch = useDispatch();
 

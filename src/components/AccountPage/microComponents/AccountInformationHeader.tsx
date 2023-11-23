@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material'
+import Header from './Header';
 
 interface AccountInformationHeaderProps {
   nameAndSurnameCapitalized: string;
@@ -7,11 +8,7 @@ interface AccountInformationHeaderProps {
 const AccountInformationHeader = ({nameAndSurnameCapitalized}: AccountInformationHeaderProps) => {
   return (
     <Box paddingRight={'20%'} paddingBottom={'3%'}>
-      <Box paddingBottom={'2%'}>
-        <Typography variant={'h5'} fontFamily={'Mulish'} fontWeight={500} fontSize={'1.5rem'}>
-          My Dashboard
-        </Typography>
-      </Box>
+      <Header headerText='Account Information' />
       <Stack spacing={2}>
         <Box>
           <Typography variant={'h6'} fontFamily={'Mulish'} fontWeight={600}>

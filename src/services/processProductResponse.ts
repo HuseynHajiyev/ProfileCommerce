@@ -1,4 +1,4 @@
-import { ProductInterface, ProductApiResponseInterface, sizesDict, SearchResutProduct } from "../models/ProductInterface";
+import { ProductInterface, ProductApiResponseInterface, sizesDict, SearchResutProductInterface } from "../models/ProductInterface";
 
 const setRandomSizes = (): sizesDict => {
   const minSize = 22;
@@ -48,10 +48,10 @@ export const processProductResponse = (productApi: ProductApiResponseInterface):
   return product;
 };
 
-export const serializeProductsForSearch = (products: ProductApiResponseInterface[] | ProductInterface[]): SearchResutProduct[] => {
-  const searchableProducts: SearchResutProduct[] = [];
+export const serializeProductsForSearch = (products: ProductApiResponseInterface[] | ProductInterface[]): SearchResutProductInterface[] => {
+  const searchableProducts: SearchResutProductInterface[] = [];
   products.forEach((product) => {
-    const resultProduct: SearchResutProduct = {
+    const resultProduct: SearchResutProductInterface = {
       id: product.id,
       title: product.title,
       category: product.category,
@@ -62,7 +62,7 @@ export const serializeProductsForSearch = (products: ProductApiResponseInterface
   return searchableProducts;
 }
 
-export const getProductCategories = (products: ProductInterface[] | ProductApiResponseInterface[] | SearchResutProduct[]): string[] => {
+export const getProductCategories = (products: ProductInterface[] | ProductApiResponseInterface[] | SearchResutProductInterface[]): string[] => {
   const categories: string[] = [];
   products.forEach((product) => {
     if(!categories.includes(product.category)) {

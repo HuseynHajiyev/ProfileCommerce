@@ -1,4 +1,4 @@
-import { Card, Box, IconButton, Grid, styled } from '@mui/material';
+import { Card, Box, IconButton, Grid, styled, Button } from '@mui/material';
 import theme from '../../../themes/theme';
 
 // Custom Components
@@ -14,7 +14,7 @@ export const ShoppingBagProductCardStyled = styled(Card)(() => ({
     padding: '0',
 }))
 
-export const ShoppingBagCheckoutButtonStyled = styled(Box)(() => ({
+export const ShoppingBagCheckoutButtonStyled = styled(Button)(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

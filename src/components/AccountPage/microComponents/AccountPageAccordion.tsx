@@ -6,44 +6,28 @@ import { FaRegUser } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 
 
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 interface AccountPageAccordionProps {
-  handleActivePage: (pageNumber: number) => void;    
+  activePage: string;
+  handleActivePage: (pageNumber: number, scrollTo?: string) => void;    
 }
 
-const AccountPageAccordion = ({handleActivePage} : AccountPageAccordionProps) => {
-  const [primaryExpanded, setPrimaryExpanded] = useState<boolean[]>(Array(3).fill(false));
-  const [secondaryExpanded, setSecondaryExpanded] = useState<boolean[]>(Array(3).fill(false));
-  const secondaryActiveIndex = useRef<number>(0);
+const AccountPageAccordion = ({activePage, handleActivePage} : AccountPageAccordionProps) => {
+  const [primaryExpanded, setPrimaryExpanded] = useState<boolean>(false);
 
-  const handlePrimaryClick = (index: number) => {
-      let newArray = Array(3).fill(false);
-      newArray[index] = !newArray[index];
-      setPrimaryExpanded(newArray);
-      if(index === 0) {
-        secondaryActiveIndex.current = 1;
-        newArray = Array(3).fill(false);
-        newArray[0] = true;
-        setSecondaryExpanded(newArray);
-        handleActivePage(index + secondaryActiveIndex.current);
-      } else {
-        if(secondaryActiveIndex.current !== -1)
-          secondaryActiveIndex.current = -1;
-        newArray = Array(3).fill(false);
-        setSecondaryExpanded(newArray);
-        handleActivePage(index + 3);
-      }
-    };
-
-    const handleSecondaryClick = (index: number) => {
-      secondaryActiveIndex.current = index;
-      const newArray = Array(3).fill(false);
-      newArray[index] = !newArray[index];
-      setSecondaryExpanded(newArray);
-      handleActivePage(index + 1);
+    const handleClick = (index: number) => {
+      handleActivePage(index);
     }
+
+    useEffect(() => {
+      if( activePage === 'account_information' || activePage === 'address_bank' || activePage === 'newsletter_subscriptions') {
+        setPrimaryExpanded(true);
+      } else {
+        setPrimaryExpanded(false);
+      }
+    },[activePage])
 
   return (
     <Stack spacing={2}>
@@ -51,8 +35,8 @@ const AccountPageAccordion = ({handleActivePage} : AccountPageAccordionProps) =>
         <Accordion sx={{background: 'inherit', boxShadow: 'none'}}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            sx={{background: primaryExpanded[0] ? '#EDECEC' : 'inherit',  px: '7%', py: '3%'}}
-            onClick={() => handlePrimaryClick(0)}
+            sx={{background: primaryExpanded ? '#EDECEC' : 'inherit',  px: '7%', py: '3%'}}
+            onClick={() => handleClick(0)}
           >
             <Grid container spacing={2}>
               <Grid item>
@@ -66,9 +50,9 @@ const AccountPageAccordion = ({handleActivePage} : AccountPageAccordionProps) =>
             </Grid>
           </AccordionSummary>
           <AccordionDetails sx={{ px: '7%', py: '3%'}} >
-            <AccordionSummary onClick={()=> handleSecondaryClick(0)}>
+            <AccordionSummary onClick={()=> handleClick(1)}>
               <Typography variant='body2' fontFamily='Mulish' fontSize={'1rem'} sx={{
-                borderBottom: secondaryExpanded[0]? '1px solid' : 'none',
+                borderBottom: activePage === 'account_information' ? '1px solid' : 'none',
                 paddingBottom: '3px',
                 display: 'inline-block',
                 lineHeight: '1.2',
@@ -76,9 +60,9 @@ const AccountPageAccordion = ({handleActivePage} : AccountPageAccordionProps) =>
                 Account Information
               </Typography>
             </AccordionSummary>
-            <AccordionSummary onClick={()=> handleSecondaryClick(1)}>
+            <AccordionSummary onClick={()=> handleClick(2)}>
               <Typography variant='body2' fontFamily='Mulish' fontSize={'1rem'} sx={{
-                borderBottom: secondaryExpanded[1]? '1px solid' : 'none',
+                borderBottom: activePage === 'address_bank' ? '1px solid' : 'none',
                 paddingBottom: '3px',
                 display: 'inline-block',
                 lineHeight: '1.2',
@@ -86,9 +70,9 @@ const AccountPageAccordion = ({handleActivePage} : AccountPageAccordionProps) =>
                 Address Bank
               </Typography>
             </AccordionSummary>
-            <AccordionSummary onClick={()=> handleSecondaryClick(2)}>
+            <AccordionSummary onClick={()=> handleClick(3)}>
               <Typography variant='body2' fontFamily='Mulish' fontSize={'1rem'} sx={{
-                borderBottom: secondaryExpanded[2]? '1px solid' : 'none',
+                borderBottom: activePage === 'newsletter_subscriptions' ? '1px solid' : 'none',
                 paddingBottom: '3px',
                 display: 'inline-block',
                 lineHeight: '1.2',
@@ -99,8 +83,8 @@ const AccountPageAccordion = ({handleActivePage} : AccountPageAccordionProps) =>
           </AccordionDetails>
         </Accordion>
         <AccordionSummary 
-          sx={{background: primaryExpanded[1] ? '#EDECEC' : 'inherit',  px: '7%', py: '3%'}}
-          onClick={() => handlePrimaryClick(1)}
+          sx={{background: activePage === 'my_orders' ? '#EDECEC' : 'inherit',  px: '7%', py: '3%'}}
+          onClick={() => handleClick(4)}
         >
           <Grid container spacing={2}>
             <Grid item>
@@ -114,8 +98,8 @@ const AccountPageAccordion = ({handleActivePage} : AccountPageAccordionProps) =>
           </Grid>
         </AccordionSummary>
         <AccordionSummary 
-          sx={{background: primaryExpanded[2] ? '#EDECEC' : 'inherit',  px: '7%', py: '3%'}}
-          onClick={() => handlePrimaryClick(2)}
+          sx={{background: activePage === 'my_favourites' ? '#EDECEC' : 'inherit',  px: '7%', py: '3%'}}
+          onClick={() => handleClick(5)}
         >
           <Grid container spacing={2}>
             <Grid item>

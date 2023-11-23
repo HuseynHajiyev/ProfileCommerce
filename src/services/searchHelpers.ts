@@ -1,17 +1,17 @@
-import { SearchResutProduct } from "../models/ProductInterface";
+import { SearchResutProductInterface } from "../models/ProductInterface";
 
 
-export const findSearchProductsById = (id: number, products: SearchResutProduct[]): SearchResutProduct[] => {
+export const findSearchProductsById = (id: number, products: SearchResutProductInterface[]): SearchResutProductInterface[] => {
   if(!products || products.length === 0) return [];
   return products.filter((product) => product.id === id);
 }
 
-export const findSearchProductsByTitle = (title: string, products: SearchResutProduct[]): SearchResutProduct[] => {
+export const findSearchProductsByTitle = (title: string, products: SearchResutProductInterface[]): SearchResutProductInterface[] => {
   if(!products || products.length == 0) return [];
   return products.filter((product) => product.title.toLowerCase().includes(title.toLowerCase()));
 }
 
-export const findSearchProductsByCategory = (category: string, products: SearchResutProduct[]): SearchResutProduct[] => {
+export const findSearchProductsByCategory = (category: string, products: SearchResutProductInterface[]): SearchResutProductInterface[] => {
   if(!products || products.length == 0) return [];
   if(category === "all") return products;
   return products.filter((product) => product.category.toLowerCase().includes(category.toLowerCase()));
@@ -41,7 +41,7 @@ export const isCategory = (category: string, categories: string[]): boolean => {
 }
 
 
-export const findSearchProducts = (query: string, products: SearchResutProduct[]): SearchResutProduct[] => {
+export const findSearchProducts = (query: string, products: SearchResutProductInterface[]): SearchResutProductInterface[] => {
   if(!products || products.length === 0) return [];
   const productsByTitle = findSearchProductsByTitle(query, products);    
   if(productsByTitle.length > 0) return productsByTitle;
@@ -50,14 +50,14 @@ export const findSearchProducts = (query: string, products: SearchResutProduct[]
   return [];
 }
 
-export const searchProductsAreEqual = (product1: SearchResutProduct, product2: SearchResutProduct): boolean => {
+export const searchProductsAreEqual = (product1: SearchResutProductInterface, product2: SearchResutProductInterface): boolean => {
   if(product1.id !== product2.id) return false;
   if(product1.title !== product2.title) return false;
   return true;
 }
 
-export const filterSearchDuplicates = (products: SearchResutProduct[]): SearchResutProduct[] => {
-  const filteredProducts: SearchResutProduct[] = [];
+export const filterSearchDuplicates = (products: SearchResutProductInterface[]): SearchResutProductInterface[] => {
+  const filteredProducts: SearchResutProductInterface[] = [];
   products.forEach((product) => {
     if(!filteredProducts.find((filteredProduct) => !searchProductsAreEqual(product, filteredProduct))) {
       filteredProducts.push(product);

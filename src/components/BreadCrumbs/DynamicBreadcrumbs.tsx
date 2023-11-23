@@ -15,7 +15,7 @@ const DynamicBreadcrumbs = () => {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x) => x);
   const isProductPage = pathnames[0] === 'shop' && pathnames[1] === 'view-all';
-  const products: ProductInterface[] = useSelector((state: RootState) => state.products.products);
+  const products: ProductInterface[] = useSelector((state: RootState) => state.productsState.products);
   const product = products.find((product) => product.id === Number(pathnames[2]));
 
   return (
@@ -27,11 +27,9 @@ const DynamicBreadcrumbs = () => {
 
         return isLast ? isProductPage ? ( 
           <Tooltip title={product?.title} placement='top-start' aria-label="full-title" key={index}>
-            <Link component={RouterLink} to={to} key={to}>
               <Typography fontSize={'1.05rem'}color="gray" key={to}>
                 {capitalize(findProductTitle(value, products))}
               </Typography>
-            </Link>
           </Tooltip>
         ) : (
           <Typography fontSize={'1.05rem'}color="gray" key={to}>

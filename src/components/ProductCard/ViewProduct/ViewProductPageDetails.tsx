@@ -1,41 +1,84 @@
-import { Box, Grid, Link, Stack, Typography } from '@mui/material'
+import { Box, Button, Grid, Link, Stack, Typography } from '@mui/material'
 import { ProductInterface } from '../../../models/ProductInterface'
-import { AiOutlineHeart } from 'react-icons/ai'
+import { AiOutlineHeart, AiFillHeart  } from 'react-icons/ai'
 import { faker } from '@faker-js/faker';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { memo, useEffect, useState } from 'react';
 import { BsBoxSeam } from 'react-icons/bs';
 import CommitAllSizeButton from '../MicroComponents/CommitAllSizeButton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app/store';
 import ShowMoreText from '../MicroComponents/ShowMoreText';
 import ProductSizePicks from '../MicroComponents/ProductSizePickContainer';
 import { BodyTypographyStyled } from '../../StyledComponents/ProductCardStyled/ProductViewPageStyled';
+import { addFavourite, removeFavourite } from '../../../features/userReducer/userSlice';
+import { useDrawerToggle } from '../../../hooks/useDrawerToggle';
 
 
 const ViewProductPageDetails = memo(({product} : {product: ProductInterface}) => {
+
+  // hooks
+  const dispatch = useDispatch();
+  const userState = useSelector((state: RootState) => state.userState);
   const isMobile = useIsMobile();
   const isTablet = useIsMobile('tablet');
   const isDesktop = useIsMobile('desktop');
   const isLargeDesktop = useIsMobile('largeDesktop');
-  const productsStore = useSelector((store: RootState) => store.products);
+  const {openLoginPopover} = useDrawerToggle();
+
+  // state and variables
+  const productsStore = useSelector((store: RootState) => store.productsState);
+  const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [foundProduct, setFoundProduct] = useState<ProductInterface | null>(null)
   const [adjectives] = useState<string[]>(() =>  Array.from({ length: 3 }).map(() => faker.commerce.productAdjective()));
   const [feel] = useState<string>(() => `${faker.commerce.productDescription().split('.')[0]}.`);
-useEffect(() => {
-  const productFromStore = productsStore.products.find((productFromStore) => productFromStore.id === product.id);
-  if(productFromStore) {
-    setFoundProduct(productFromStore);
-  } else {
-    setFoundProduct(product)
+
+  const handleFavourite = () => {
+    if(userState && userState.loggedIn && userState.userFavourites) {
+      if(isFavourite) {
+        dispatch(removeFavourite(product));
+      } else {
+        dispatch(addFavourite(product));
+      }
+    } else {
+      openLoginPopover();
+    }
   }
-},[productsStore.products, product, product.id]);
+
+  useEffect(() => {
+    if(userState && userState.loggedIn && userState.userFavourites) {
+      if(userState.userFavourites.find((favourite) => favourite.id === product.id)) {
+        setIsFavourite(true);
+      } else {
+        setIsFavourite(false);
+      }
+    } else {
+      setIsFavourite(false);
+    }
+  }, [userState, product.id]);
+
+  useEffect(() => {
+    const productFromStore = productsStore.products.find((productFromStore) => productFromStore.id === product.id);
+    if(productFromStore) {
+      setFoundProduct(productFromStore);
+    } else {
+      setFoundProduct(product)
+    }
+  },[productsStore.products, product, product.id]);
   return (
     <Grid container item direction={'column'} paddingTop={'1%'}>
       <Grid container item pb={'3%'} display={'flex'} justifyContent={'space-between'} sx={{borderBottom: '2px solid #E8E8E8'}}>
         <Grid item container xs={8}>
           <Grid item xs={2}>
-              <AiOutlineHeart size={isMobile ? 25 : 30} />
+            <Button onClick={handleFavourite} sx={{
+                display: 'inherit', 
+                minWidth: 'inherit',
+                width: 'inherit',
+                height: 'inherit',
+                p: '0'
+              }}>
+                { isFavourite ? <AiFillHeart color={'red'} size={isMobile ? 25 : 30} /> : <AiOutlineHeart color={'black'} size={isMobile ? 25 : 30} />}
+            </Button>
           </Grid>
           <Grid item xs={10}>
               <Typography variant='body1' sx={{fontSize: (isTablet ? '0.7 rem' : (isDesktop || isLargeDesktop ? '1.1rem' :'0.9rem')),  whiteSpace: 'pre-wrap'}}>

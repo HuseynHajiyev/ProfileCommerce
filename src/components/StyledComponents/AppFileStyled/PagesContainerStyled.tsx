@@ -8,6 +8,7 @@ const PagesContainerStyled = styled(Box)(() => ({
     overflowY: 'scroll',
     maxHeight: '100vh',
     minHeight: '100vh',
+    paddingBottom: '50vh',
     [theme.breakpoints.up('lg')]: {
         paddingLeft: '5%',
         paddingRight: '5%',

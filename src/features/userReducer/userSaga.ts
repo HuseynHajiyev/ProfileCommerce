@@ -1,13 +1,14 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { loginSuccess, loginFailure, loginRequest, setUser, logoutUser } from './userSlice';
+import { loginSuccess, loginFailure, loginRequest, setUser, logoutUser, addOrder, removeOrder } from './userSlice';
 import { AuthResultInterface, LoginCredentialsInterface } from '../../models/LoginCredentials';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { getUsers, loginUser } from '../../api/userApi';
-import { UserInterface } from '../../models/UserInterface';
+import { OrderInterface, UserInterface } from '../../models/UserInterface';
 import Cookies from 'js-cookie';
 
 
 import { findUserByEmailAndPassword } from '../../services/processUserResponse';
+import { resetShoppingBag } from '../shoppingBagReducer/shoppingBagSlice';
 
 function* loginSaga(action: PayloadAction<LoginCredentialsInterface>) {
   try {
@@ -38,6 +39,18 @@ function* logoutSaga() {
   yield Cookies.remove('authToken');
 }
 
+function* addOrderSaga() {
+  const token = Cookies.get('authToken');
+  if (!token) return;
+  yield put(resetShoppingBag());
+}
+
+function* removeOrderSaga(action: PayloadAction<OrderInterface>) {
+  const token = Cookies.get('authToken');
+  if (!token) return;
+  yield put(removeOrder(action.payload));
+}
+
 
 
 
@@ -47,4 +60,12 @@ export function* watchLoginSaga() {
 
 export function* watchLogoutSaga() {
   yield takeLatest(logoutUser.type, logoutSaga);
+}
+
+export function* watchAddOrderSaga() {
+  yield takeLatest(addOrder.type, addOrderSaga);
+}
+
+export function* watchRemoveOrderSaga() {
+  yield takeLatest(removeOrder.type, removeOrderSaga);
 }

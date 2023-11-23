@@ -14,7 +14,7 @@ interface ProductSizePickProps {
 const ProductSizePick = memo(({ size, product }: ProductSizePickProps ) => {
   const {selectedSizes, addASelectedSize, removeASelectedSize ,getSizeAvailability, sizeIsSelected} = useProductQuantity();
   const sizeAvailability = useSelector((state: RootState) => {
-   return state.products.products.find((productFromStore) => productFromStore.id === product.id)?.sizes[size]
+   return state.productsState.products.find((productFromStore) => productFromStore.id === product.id)?.sizes[size]
   });
   const [sizeSelected, setSizeSelected] = useState(false);
 

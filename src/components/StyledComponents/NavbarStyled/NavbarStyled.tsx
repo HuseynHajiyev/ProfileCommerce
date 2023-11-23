@@ -49,13 +49,15 @@ export const NavigationDrawerStyled = styled(Drawer)(() => ({
 export const NavItemContainerRightStyled = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
     flex: '1 1 0px;',
     '&:first-of-type': {
         justifyContent: 'center',
     },
     '&:nth-of-type(2)': {
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+    },
+    '&:last-of-type': {
+        justifyContent: 'flex-end',
     },
     [theme.breakpoints.down('lg')]: {
         '&:last-of-type': {

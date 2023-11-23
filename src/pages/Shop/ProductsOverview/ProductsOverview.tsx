@@ -5,7 +5,7 @@ import ShopGrid from '../../../components/Shop/ShopGrid';
 import ShopSkeletonGrid from '../../../components/Shop/ShopSkeletonGrid';
 
 const ProductsOverview = () => {
-    const products = useSelector((state: RootState) => state.products);
+    const products = useSelector((state: RootState) => state.productsState);
     return (
       <>
         <Box display={'flex'} flexDirection={'column'} paddingTop={'1%'}>

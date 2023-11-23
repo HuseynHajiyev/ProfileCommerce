@@ -1,6 +1,6 @@
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { UserInterface } from '../../../models/UserInterface'
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { capitalizeEachWord } from '../../../utilities/stringManipulation';
 import { countries } from 'countries-list';
 
@@ -18,8 +18,8 @@ interface AddressInformation {
 }
 
 const DefaultShippingAddress = ({user}: DefaultShippingAddressProps) => {
-  const capitalizedCity = useRef<string>('');
-  const capitalizedStreet = useRef<string>('');
+  const [capitalizedCity, setCapitalizedCity] = useState<string>('');
+  const [capitalizedStreet, setCapitalizedStreet] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [addressInformation, setAddressInformation]= useState<AddressInformation>({
     country: '',
@@ -45,19 +45,18 @@ const DefaultShippingAddress = ({user}: DefaultShippingAddressProps) => {
 
   useEffect(() => {
     if(user) {
-      capitalizedCity.current = capitalizeEachWord(user?.address.city);
-      capitalizedStreet.current = capitalizeEachWord(user?.address.street);
+      setCapitalizedCity(capitalizeEachWord(user?.address.city));
+      setCapitalizedStreet(capitalizeEachWord(user?.address.street));
        const newInfo: AddressInformation = {
         ...addressInformation,
-        city: capitalizedCity.current,
-        street: capitalizedStreet.current,
+        city: capitalizedCity,
+        street: capitalizedStreet,
         number: user?.address.number,
         zipcode: user?.address.zipcode
       }
       setAddressInformation(newInfo);
-  
     }
-  },[user, addressInformation])
+  },[user, capitalizedCity, capitalizedStreet])
 
   return (
     <Box component="form" onSubmit={handleSubmit} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} borderBottom={'2px solid #D9D9D9'} paddingY={2}>
@@ -99,11 +98,12 @@ const DefaultShippingAddress = ({user}: DefaultShippingAddressProps) => {
             fullWidth
             id="outlined-multiline-static"
             label="city"
-            defaultValue={capitalizedCity.current}
+            value={addressInformation.city}
             multiline
             maxRows={2}
             onChange={(e) => handleInput(e, 'city')}
             helperText="Please select a city"
+            autoComplete='off'
           />
         </Grid>
         <Grid item xs={6} paddingX={5}>
@@ -111,9 +111,10 @@ const DefaultShippingAddress = ({user}: DefaultShippingAddressProps) => {
             fullWidth
             id="outlined-multiline-static"
             label="street"
-            defaultValue={capitalizedStreet.current}
+            value={addressInformation.street}
             onChange={(e) => handleInput(e, 'street')}
             helperText="preferred street"
+            autoComplete='off'
           />
         </Grid>
         <Grid item xs={6} paddingX={5}>
@@ -121,9 +122,10 @@ const DefaultShippingAddress = ({user}: DefaultShippingAddressProps) => {
             fullWidth
             id="outlined-multiline-static"
             label="number"
-            defaultValue={user?.address.number}
+            value={user?.address.number}
             onChange={(e) => handleInput(e, 'number')}
             helperText="the house or apartment number"
+            autoComplete='off'
           />
         </Grid>
         <Grid item xs={6} paddingX={5}>
@@ -131,9 +133,10 @@ const DefaultShippingAddress = ({user}: DefaultShippingAddressProps) => {
             fullWidth
             id="outlined-multiline-static"
             label="zipcode"
-            defaultValue={user?.address.zipcode}
+            value={user?.address.zipcode}
             onChange={(e) => handleInput(e, 'zipcode')}
             helperText="preferred zipcode"
+            autoComplete='off'
           />
         </Grid>
       </Grid>

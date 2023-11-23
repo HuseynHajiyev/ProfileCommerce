@@ -4,7 +4,7 @@ import ShopPageProductSkeleton from '../ProductCard/ShopPageProduct/ShopPageProd
 const ShopSkeletonGrid = () => {
   return (
     <Grid container spacing={6} maxHeight={'100vh'}>
-    {Array.from({length: 20}).map((value, index) => {
+    {Array.from({length: 20}).map((_, index) => {
     return (
         <Grid item xs={12} sm={6} md={3} key={index}>
            <ShopPageProductSkeleton />

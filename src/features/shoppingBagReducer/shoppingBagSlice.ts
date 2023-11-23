@@ -7,6 +7,7 @@ const initialState: ShoppingBagInterface = {
     userId: 0,
     date: "",
     loading: false,
+    loaded: false,
     products:[],
     tempProducts: [],
     error: null,
@@ -30,12 +31,19 @@ const shoppingBagSlice = createSlice({
             state.products = products;
             state.error = null;
             state.loading = false;
+            state.loaded = true;
             state.subTotal = Number(subTotal.toFixed(2));
             state.shipping = 0;
         },
         loadShoppingBagFailed: (state, action: PayloadAction<string>) =>{
             state.loading = false;
             state.error = action.payload;
+            state.loaded = false;
+        },
+        loadShoppingBagSuccess: (state) => {
+            state.loading = false;
+            state.loaded = true;
+            state.error = null;
         },
         addToShoppingBag: (state, action: PayloadAction<CartItemInterface>) => {
             const index = state.products.findIndex((item) => item.product.id === action.payload.product.id && item.sizeSelected === action.payload.sizeSelected);
@@ -112,6 +120,7 @@ export const {
     loadShoppingBag,
     setShoppingBag,
     loadShoppingBagFailed,
+    loadShoppingBagSuccess,
     addToShoppingBag,
     removeFromShoppingBag,
     updateQuantity, 

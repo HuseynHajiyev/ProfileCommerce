@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProductInterface, ProductsState } from "../../models/ProductInterface";
+import { ProductInterface, ProductsStateInterface } from "../../models/ProductInterface";
 import { getProductCategories } from "../../services/processProductResponse";
 
-const initialState: ProductsState = {
+const initialState: ProductsStateInterface = {
     products: [],
     categories: [],
+    loaded: false,
     loading: false,
     error: null,
     log: [],
 };
 
 const productsSlice = createSlice({
-    name: "products",
+    name: "productsState",
     initialState,
     reducers: {
         loadProducts: (state, actions: PayloadAction<number>) => {
@@ -25,9 +26,15 @@ const productsSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
+        loadProductsSuccess: (state) => {
+            state.loaded = true;
+            state.loading = false;
+            state.error = null;
+        },
         loadProductsFailed: (state, actions: PayloadAction<string>) => {
             state.loading = false;
             state.error = actions.payload;
+            state.loaded = false;
         },
         addProduct: (state, actions: PayloadAction<ProductInterface>) => {
             if(state.products.find((product) => product.id === actions.payload.id)) {
@@ -92,6 +99,7 @@ const productsSlice = createSlice({
 export const { 
     loadProducts,
     setProducts,
+    loadProductsSuccess,
     addProduct,
     increaseProductInSize,
     decreaseProductInSize,

@@ -14,23 +14,30 @@ const sagaMiddleware = createSagaMiddleware();
 export const shoppingBagPersistConfig = {
     key: 'shoppingBag',
     storage: storage,
-    whitelist: ['shoppingBag']
+    blacklist: ['loading', 'error', 'loaded', 'log'],
 };
 
 export const userPersistConfig = {
-    key: 'user',
+    key: 'userState',
     storage: storage,
-    whitelist: ['user']
+    blacklist: ['loading', 'error', 'loginCredentials'],
+};
+
+export const productsPersistConfig = {
+    key: 'productsState',
+    storage: storage,
+    blacklist: ['loading', 'error', 'loaded'],
 };
 
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 const persistedShoppingBagReducer = persistReducer(shoppingBagPersistConfig, shoppingBagReducer);
+const persistedProductsReducer = persistReducer(productsPersistConfig, productsReducer);
 
 export const store = configureStore({
     reducer: {
         shoppingBag: persistedShoppingBagReducer,
-        products: productsReducer,
-        product: productReducer,
+        productsState: persistedProductsReducer,
+        productState: productReducer,
         search: searchResultsReducer,
         userState: persistedUserReducer,
     },
