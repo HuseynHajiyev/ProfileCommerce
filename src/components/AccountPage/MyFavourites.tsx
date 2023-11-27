@@ -57,7 +57,7 @@ const MyFavourites = () => {
   return (
     <Box>
 
-      <Box position={'relative'} borderBottom={'2px solid #D9D9D9'}>
+      <Box position={'relative'} borderBottom={showMore ? 'none' : '2px solid #D9D9D9'}>
         <Header headerText='My Favourites' />
         <Grid container ref={gridRef} spacing={2} paddingY={5} paddingX={1} sx={{
           maxHeight: `${maxHeight}px`, 
@@ -91,7 +91,7 @@ const MyFavourites = () => {
               width: '100%',
               height: 'fit-content',
               backgroundColor: 'rgb(230,230,230,0.3)', 
-              backdropFilter: 'blur(5px)', 
+              backdropFilter: 'blur(3px)', 
             }}>
                 <MdOutlineExpandMore size={40} />
             </Button>  

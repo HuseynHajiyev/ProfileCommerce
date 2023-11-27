@@ -37,9 +37,10 @@ import PagesContainer from './pages/PagesContainer';
 import { MainScrollProvider } from './context/scrollContext/MainScrollContext';
 import { useEffect } from 'react';
 import { RootState } from './app/store';
-import { logoutUser, setUser } from './features/userReducer/userSlice';
+import { logoutUser, setFavorites, setUser } from './features/userReducer/userSlice';
 import { loadShoppingBag, resetShoppingBag, setShoppingBag } from './features/shoppingBagReducer/shoppingBagSlice';
 import { loadProducts, setProducts } from './features/productsReducer/productsSlice';
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const App = () => {
     } else {
       dispatch(setProducts(productsState.products));
     }
-  }, [dispatch, productsState.loaded, productsState.products]);
+  }, [dispatch, productsState.loaded, productsState.products, userState.loggedIn, userState.loading, userState.user]);
 
   useEffect(() => {
     const token = Cookies.get('authToken');
@@ -64,14 +65,14 @@ const App = () => {
     } else if (!token && userState.user) {
       dispatch(logoutUser());
     }
-  }, [dispatch, userState.user, userState.loggedIn]);
+  }, [dispatch, userState.user, userState.loggedIn, productsState.products]);
 
   
   useEffect(() => {
     if (userState.loggedIn && userState.user) {
       if (shoppingBagState && shoppingBagState.userId === userState.user.id) {
         dispatch(setShoppingBag(shoppingBagState));
-      } else {
+      } else if(!shoppingBagState.loaded) {
         dispatch(loadShoppingBag(userState.user.id));
       }
     } else if (userState.loggedIn === false && shoppingBagState.loaded) {

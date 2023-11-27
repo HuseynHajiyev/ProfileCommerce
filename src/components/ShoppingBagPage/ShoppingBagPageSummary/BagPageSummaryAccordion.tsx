@@ -22,7 +22,7 @@ const BagPageSummaryAccordion = () => {
   const shoppingBagState = useSelector((state: RootState) => state.shoppingBag);
   const handleAddOrder = () => {
 
-    if(userState && userState.loggedIn && userState.userOrders && userState.user) {
+    if(userState && userState.loggedIn && userState.userOrders && userState.user && shoppingBagState.products.length > 0) {
       const order: OrderInterface =  {
         id: -1,
         products: shoppingBagState.products,
@@ -30,7 +30,7 @@ const BagPageSummaryAccordion = () => {
         total: shoppingBagState.subTotal,
         shipping: 0,
         status: 'pending',
-        date: new Date().toISOString()
+        date: new Date().toISOString().split('T')[0]
       }
       dispatch(addOrder(order));
     } else {

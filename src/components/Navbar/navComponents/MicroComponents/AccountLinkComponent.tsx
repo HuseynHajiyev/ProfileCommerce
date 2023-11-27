@@ -10,6 +10,7 @@ import { useRef } from 'react';
 const AccountLinkComponent = () => {
   const { loginPopoverOpen, accountPopoverOpen, closeLoginPopover, openAccountPopover, closeAccountPopover } = useDrawerToggle();
   const isLoggedIn = useSelector((state: RootState) => state.userState.loggedIn);
+  const newOrdersLength = useSelector((state: RootState) => state.userState.newOrdersLength);
   const anchorRef = useRef<HTMLElement>(null);
   const handleClick = () => {
     if(loginPopoverOpen) {
@@ -24,9 +25,23 @@ const AccountLinkComponent = () => {
   return (
     <Box position={'relative'} display={'flex'} alignItems={'center'} justifyContent={'flex-start'} ref={anchorRef}>
       <Box display={'flex'} alignItems={'center'}>
-        <Button onClick={handleClick} variant={'text'} sx={{ textTransform: 'none' }}>
-          <NavTypographyComponent>Account</NavTypographyComponent>
-        </Button>
+        <Box position={'relative'}>
+          {newOrdersLength <= 0 ? null : (
+              <Box component={'span'} sx={{
+                position: 'absolute',
+                top: '-0.3rem',
+                right: '-0.5rem',
+                padding: '0px 4px',
+                borderRadius: '100%',
+                background: 'red',
+                color: 'white',
+                fontSize: '10px',
+              }}>{newOrdersLength > 100 ? `99+` : newOrdersLength}</Box>
+            )}
+            <Button onClick={handleClick} variant={'text'} sx={{ textTransform: 'none' }}>
+              <NavTypographyComponent>Account</NavTypographyComponent>
+            </Button>
+        </Box>
       </Box>
       <AccountPopover anchorRef={anchorRef}/>
 

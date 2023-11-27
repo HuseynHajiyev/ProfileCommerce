@@ -4,12 +4,14 @@ import { useState } from 'react';
 import AccountPageAccordion from '../../components/AccountPage/microComponents/AccountPageAccordion';
 import AccountPageSwitch from '../../components/AccountPage/microComponents/AccountPageSwitch';
 import AccountPageNeedHelp from '../../components/AccountPage/microComponents/AccountPageNeedHelp';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { useMainScroll } from '../../hooks/useMainScroll';
+import { setNewFavouritesLength, setNewOrdersLength } from '../../features/userReducer/userSlice';
 
 const Account = () => {
   const [activePage, setActivePage] = useState<string>('account_dashboards');
+  const dispatch = useDispatch();
   const { handleScrollSection } = useMainScroll();
   const userState = useSelector((state: RootState) => state.userState);
   const handleActivePage = (pageNumber: number, scrollTo?: string) => {
@@ -26,9 +28,11 @@ const Account = () => {
         break;
       case 4:
         setActivePage('my_orders');
+        dispatch(setNewOrdersLength(0));
         break;
       case 5:
         setActivePage('my_favourites');
+        dispatch(setNewFavouritesLength(0));
         break;
       default:
         setActivePage('account_dashboards');
