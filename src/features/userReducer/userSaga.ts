@@ -45,11 +45,6 @@ function* addOrderSaga() {
   yield put(resetShoppingBag());
 }
 
-function* removeOrderSaga(action: PayloadAction<OrderInterface>) {
-  const token = Cookies.get('authToken');
-  if (!token) return;
-  yield put(removeOrder(action.payload));
-}
 
 
 
@@ -66,6 +61,3 @@ export function* watchAddOrderSaga() {
   yield takeLatest(addOrder.type, addOrderSaga);
 }
 
-export function* watchRemoveOrderSaga() {
-  yield takeLatest(removeOrder.type, removeOrderSaga);
-}

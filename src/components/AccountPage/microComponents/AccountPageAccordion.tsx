@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Grid, Stack, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, Stack, Typography } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BsBag } from "react-icons/bs";
@@ -7,6 +7,8 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
 
 
 interface AccountPageAccordionProps {
@@ -16,6 +18,7 @@ interface AccountPageAccordionProps {
 
 const AccountPageAccordion = ({activePage, handleActivePage} : AccountPageAccordionProps) => {
   const [primaryExpanded, setPrimaryExpanded] = useState<boolean>(false);
+  const newOrdersLength = useSelector((state: RootState) => state.userState.newOrdersLength);
 
     const handleClick = (index: number) => {
       handleActivePage(index);
@@ -88,7 +91,21 @@ const AccountPageAccordion = ({activePage, handleActivePage} : AccountPageAccord
         >
           <Grid container spacing={2}>
             <Grid item>
-              <BsBag size={20}/>
+              <Box position={'relative'}>
+              {newOrdersLength <= 0 ? null : (
+                  <Box component={'span'} sx={{
+                    position: 'absolute',
+                    top: '-0.3rem',
+                    right: '-0.5rem',
+                    padding: '0px 4px',
+                    borderRadius: '100%',
+                    background: 'red',
+                    color: 'white',
+                    fontSize: '10px',
+                  }}>{newOrdersLength > 100 ? `99+` : newOrdersLength}</Box>
+                )}
+                  <BsBag size={20}/>
+              </Box>
             </Grid>
             <Grid item>  
               <Typography variant='body2' fontFamily='Mulish' fontSize={'1rem'} fontWeight={'bold'}>

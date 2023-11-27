@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { ProductInterface } from '../../../models/ProductInterface'
 import { memo } from 'react'
 import { useIsMobile } from '../../../hooks/useIsMobile'
+import { useDispatch } from 'react-redux'
+import { removeFavourite } from '../../../features/userReducer/userSlice'
 
 interface FavouritesProductCardProps {
   product: ProductInterface
@@ -10,6 +12,13 @@ interface FavouritesProductCardProps {
 
 const FavouritesProductCard = memo(({product} : FavouritesProductCardProps) => {
   const isMobile = useIsMobile('mobile');
+  const dispatch = useDispatch();
+
+
+  const handleRemoveClick = () => {
+    dispatch(removeFavourite(product));
+  }
+
   return (
     <Card sx={{ 
       maxWidth: '100%',
@@ -42,13 +51,18 @@ const FavouritesProductCard = memo(({product} : FavouritesProductCardProps) => {
               <Grid item xs={12} display={'flex'} justifyContent={'center'}>
                 <Tooltip title={product.title} placement='top-start' aria-label="full-title">
                   <Typography variant='body1' sx={{fontSize: isMobile ? '2rem' :'inherit'}}>
-                    {product.title.length > 30 ? product.title.slice(0,33) + '...': product.title}
+                    {product.title.length > 30 ? product.title.slice(0,27) + '...': product.title}
                   </Typography>
                 </Tooltip>
               </Grid>
               <Grid item xs={12} display={'flex'} justifyContent={'center'}>
                   <Typography variant='body1' sx={{fontSize: isMobile ? '2rem' :'inherit'}} zIndex={'500'}>
                       {`$${product.price}`}
+                  </Typography>
+              </Grid>
+              <Grid item xs={12} display={'flex'} justifyContent={'center'} onClick={handleRemoveClick}>
+                  <Typography variant='body1' sx={{fontSize: isMobile ? '2rem' :'inherit', textDecoration: 'underline', cursor: 'pointer'}}>
+                      {`Remove`}
                   </Typography>
               </Grid>
             </Grid>

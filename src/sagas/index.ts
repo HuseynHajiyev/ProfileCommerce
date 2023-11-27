@@ -3,7 +3,7 @@ import { watchLoadProductsSaga, watchSetProductsSaga } from '../features/product
 import { watchAddToShoppingBag, watchDecreaseQuantity, watchLoadShoppingBag, watchRemoveFromShoppingBag, watchUpdateQuantity, watchResetShoppingBag } from '../features/shoppingBagReducer/shoppingBagSaga';
 import { watchLoadProductSaga } from '../features/productReducer/productSaga';
 import { watchLoadSearchResultsSaga } from '../features/searchResultsReducer/searchResultsSaga';
-import { watchLoginSaga, watchLogoutSaga, watchAddOrderSaga, watchRemoveOrderSaga } from '../features/userReducer/userSaga';
+import { watchLoginSaga, watchLogoutSaga, watchAddOrderSaga, } from '../features/userReducer/userSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -12,7 +12,6 @@ export default function* rootSaga() {
         watchLoadSearchResultsSaga(),
         watchResetShoppingBag(),
         watchAddOrderSaga(),
-        watchRemoveOrderSaga(),
         fork(watchLoadProductsSaga),
         fork(watchLogoutSaga),
         fork(watchLoginSaga),
