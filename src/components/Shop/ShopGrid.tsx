@@ -16,7 +16,7 @@ const ShopGrid = ({products, view} : ShopGridProps) => {
     const [hasMore, setHasMore] = useState<boolean>(true);
     const loader = useRef(null);
 
-    const handleObserver = useCallback((entities: any) => {
+    const handleObserver = useCallback((entities: IntersectionObserverEntry[]) => {
         const target = entities[0];
         if (target.isIntersecting) {
             setLoadMore(true); // Start loading
@@ -25,7 +25,7 @@ const ShopGrid = ({products, view} : ShopGridProps) => {
           setTimeout(() => {
             setLoadMore(false);
             setHasMore(false);
-          }, 3000);
+          }, 1300);
         }
       },[]);
 
