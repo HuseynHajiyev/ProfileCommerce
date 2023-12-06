@@ -16,6 +16,7 @@ const AccountPopover = ({anchorRef} : AccountPopoverProps) => {
       open={accountPopoverOpen}
       onClose={closeAccountPopover}
       anchorEl={anchorRef.current}
+      disableScrollLock={ true }
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center',
@@ -25,7 +26,10 @@ const AccountPopover = ({anchorRef} : AccountPopoverProps) => {
         horizontal: 'center',
     }}
     sx={{
-      top: '1.5%'
+      top: '1.5%',
+      '& .MuiBackdrop-root': {
+        maxWidth: '100vw',
+      },
     }}
     >
       <Stack padding={'5%'}>

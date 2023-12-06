@@ -7,11 +7,8 @@ export const NavbarStyled = styled(AppBar)({
     boxShadow: 'none',
     borderBottom: 'none',
     position: 'sticky',
+    top: 0,
     zIndex: theme.zIndex.drawer + 5,
-    paddingRight: '0',
-    '&.MuiPaper-root .MuiPaper-elevation': {
-        paddingRight: '0',
-    },
 });
 
 export const NavigationDrawerStyled = styled(Drawer)(() => ({
@@ -19,7 +16,6 @@ export const NavigationDrawerStyled = styled(Drawer)(() => ({
     justifyContent: 'center',
     maxWidth: '100%',
     width: '100%',
-    zIndex: theme.zIndex.drawer - 2,
     '& .MuiDrawerPaper': {
             display: 'flex',
             alignItems: 'center',

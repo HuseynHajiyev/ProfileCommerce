@@ -6,7 +6,6 @@ const ShippingAndTaxInput = () => {
       <FormControl fullWidth>
         <Box></Box>
           <BagSummaryTextFieldStyled 
-              id="outlined-basic" 
               label="Enter you destination to get a shipping estimate" 
               variant="standard"
               fullWidth

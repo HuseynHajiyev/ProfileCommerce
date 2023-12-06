@@ -11,7 +11,7 @@ import ToolbarStyled from '../../../StyledComponents/NavbarStyled/ToolBarStyled'
 const ToolbarComponent = () => {
     const theme = useTheme();
     return (
-        <ToolbarStyled sx={{zIndex: theme.zIndex.drawer+1}}>
+        <ToolbarStyled>
             <Stack direction="row" justifyContent='space-between' sx={{width:'100%'}}>
                 <LeftSide />
                 <Center />

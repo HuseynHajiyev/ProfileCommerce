@@ -54,9 +54,11 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
 
 
     const openShoppingPopper = () => {
-      if(navigationIsOpen || searchIsOpen){
+      if(navigationIsOpen || searchIsOpen || accountPopoverOpen || loginPopoverOpen){
         setSearchIsOpen(false);
         setNavigationIsOpen(false);
+        setAccountPopoverOpen(false);
+        setLoginPopoverOpen(false);
       }
       setShoppingBagIsOpen(prevState => !prevState);
     };

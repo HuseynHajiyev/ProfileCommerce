@@ -30,8 +30,8 @@ const ViewProduct = () => {
   const productToShow = foundProduct || productState.product;
   
   return productToShow && productToShow.id.toString() === productId ? (
-    <Stack>
-      <Grid container style={{ paddingTop: '2%' }} display={'flex'} justifyContent={'space-between'}>
+    <Stack height={'100%'} spacing={3}>
+      <Grid container display={'flex'} justifyContent={'space-between'}>
         <Grid item xs={12} sm={12} md={12} lg={7} xl={7}>
           <ViewProductPageImages imageUrl={productToShow.image} repeatCount={6} />
         </Grid>
@@ -39,7 +39,7 @@ const ViewProduct = () => {
           <ViewProductPageDetails product={productToShow}/>
         </Grid>
       </Grid>
-      <Grid item container xs={12}>
+      <Grid item container xs={12} height={'100%'}>
         <ViewProductSuggestions product={productToShow}/>
       </Grid>
     </Stack>

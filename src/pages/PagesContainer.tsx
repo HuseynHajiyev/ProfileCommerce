@@ -11,10 +11,8 @@ const PagesContainer = ({children} : PagesContainerProps) => {
   const { mainRef } = useMainScroll();
   const location = useLocation();
   useEffect(() => {
-    if (mainRef.current) {
-      mainRef.current.scrollTop = 0
-    }
-  }, [mainRef, location]);
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
     <PagesContainerStyled ref={mainRef}>
         {children}

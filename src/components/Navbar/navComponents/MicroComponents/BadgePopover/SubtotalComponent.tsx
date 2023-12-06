@@ -8,7 +8,6 @@ import { ShoppingBagCheckoutButtonStyled, ShoppingBagSubtotalStyled } from '../.
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../../app/store';
 import { useDrawerToggle } from '../../../../../hooks/useDrawerToggle';
-import theme from '../../../../../themes/theme';
 import { useNavigate } from 'react-router-dom';
 
 const SubtotalComponent = () => {
@@ -23,7 +22,7 @@ const SubtotalComponent = () => {
     }
     return (
         <ShoppingBagSubtotalStyled>
-            <Box display='flex' justifyContent='space-between'>
+            <Box display='flex' justifyContent='space-between' >
                 <Box>
                     <TotalStyled>
                         Total: 
@@ -46,10 +45,7 @@ const SubtotalComponent = () => {
                 </Box>
             </Box>
             <Box display='flex' justifyContent='center' sx={{
-                padding: '5%',
-                [theme.breakpoints.up('lg')]: {
-                    padding: '3%',
-                }   
+                padding: '1%',  
             }}>
                 <ViewBagLinkStyled to='/shopping-bag' style={{textDecoration: 'none'}} onClick={()=> closeShoppingPopper()}>
                     <ViewBagStyled>

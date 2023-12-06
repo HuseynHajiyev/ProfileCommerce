@@ -9,7 +9,6 @@ const StateProvinceInput = () => {
               State/Province
           </BagAccordionHeaderStyled>
           <BagSummaryTextFieldStyled 
-              id="outlined-basic" 
               label="State/Province" 
               variant="standard"
               type='text'

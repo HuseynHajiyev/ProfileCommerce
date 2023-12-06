@@ -21,10 +21,21 @@ let theme = createTheme({
       styleOverrides: {
         body: {
           color: '#011627', // text color
-          backgroundColor: '#fff', // background color
+          backgroundColor: '#ffffff', // background color
           display: 'block', // display property
-          margin: "0, auto", // margin property
-          fontFamily: '"Palanquin Dark" sans-serif', // font family
+          margin: "0 auto", // margin property
+          fontFamily: '"Palanquin Dark", sans-serif', // font family
+          overflowY: 'scroll', // overflowY property
+        },
+      },
+    },
+    MuiMobileStepper: {
+      styleOverrides: {
+        dot: {
+          backgroundColor: 'gray', // Inactive dot color
+        },
+        dotActive: {
+          backgroundColor: 'black', // Active dot color
         },
       },
     },

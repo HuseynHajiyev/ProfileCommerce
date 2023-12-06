@@ -1,6 +1,6 @@
 // Desc: Main App component
 // MUI imports
-import { CssBaseline ,ThemeProvider } from '@mui/material'
+import { Box, CssBaseline ,ThemeProvider } from '@mui/material'
 // React imports
 import { Routes, Route } from 'react-router-dom';
 // Redux imports
@@ -21,8 +21,7 @@ import Navbar from './components/Navbar/Navbar';
 import SearchBarDrawer from './components/Navbar/navComponents/MacroComponents/SearchBarDrawer';
 import NavigationDrawer from './components/Navbar/navComponents/MacroComponents/NavigationDrawer';
 import AnnouncementBarComponent from './components/Navbar/navComponents/MicroComponents/AnnouncementBarComponent';
-import NavbarPlaceholder from './components/Placeholders/NavbarPlaceholder';
-import ProductsOverview from './pages/Shop/ProductsOverview/ProductsOverview';
+import ShopClothing from './pages/Shop/Clothing/ShopClothing';
 
 // Context
 import { IsMobileProvider } from './context/IsMobileContext';
@@ -37,7 +36,7 @@ import PagesContainer from './pages/PagesContainer';
 import { MainScrollProvider } from './context/scrollContext/MainScrollContext';
 import { useEffect } from 'react';
 import { RootState } from './app/store';
-import { logoutUser, setFavorites, setUser } from './features/userReducer/userSlice';
+import { logoutUser, setUser } from './features/userReducer/userSlice';
 import { loadShoppingBag, resetShoppingBag, setShoppingBag } from './features/shoppingBagReducer/shoppingBagSlice';
 import { loadProducts, setProducts } from './features/productsReducer/productsSlice';
 
@@ -78,7 +77,7 @@ const App = () => {
     } else if (userState.loggedIn === false && shoppingBagState.loaded) {
       dispatch(resetShoppingBag());
     }
-  }, [dispatch, userState.loggedIn, userState.user]);
+  }, [dispatch, userState.loggedIn, userState.user, shoppingBagState.loaded, shoppingBagState.userId, shoppingBagState]);
   
   return (
     <IsMobileProvider>
@@ -86,26 +85,28 @@ const App = () => {
         <MainScrollProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <AnnouncementBarComponent />
-              <NavbarPlaceholder />
+            <Box position={'sticky'} top={0} zIndex={'2000'}>
+              <AnnouncementBarComponent />
               <SearchBarDrawer />
-              <NavigationDrawer />
-              <PagesContainer>
-                <Navbar />
-                <Routes>
-                  <Route path="/" element={ <Home />} />
-                  <Route path="/new-arrivals" element={ <NewArrivals/>} />
-                  <Route path="/shop" element={<Shop />}>
-                    <Route path="shop/clothing" element={<ProductsOverview />} />
-                    <Route path="view-all/:productId" element={<ViewProduct />} />
-                    <Route path=":category" element={<ProductsOverview />} />
+              <Navbar />
+            </Box>
+            <NavigationDrawer />
+            <PagesContainer>
+              <Routes>
+                <Route path="/" element={ <Home />} />
+                <Route path="/new-arrivals" element={ <NewArrivals/>} />
+                <Route path="/shop" element={<Shop />}>
+                  <Route path="clothing" element={<ShopClothing />}>
+                   <Route path=":category" element={<ShopClothing />} />
                   </Route>
-                  <Route path="/about" element={ <About />} />
-                  <Route path="/account" element={ <Account />} />
-                  <Route path="/shopping-bag" element={ <ShoppingBag />} />
-                  <Route path="/404-not-found" element={ <NotFound404 />} />
-                </Routes>
-              </PagesContainer>
+                  <Route path="view-all/:productId" element={<ViewProduct />} />
+                </Route>
+                <Route path="/about" element={ <About />} />
+                <Route path="/account" element={ <Account />} />
+                <Route path="/shopping-bag" element={ <ShoppingBag />} />
+                <Route path="*" element={ <NotFound404 />} />
+              </Routes>
+            </PagesContainer>
           </ThemeProvider>
         </MainScrollProvider>
       </DrawerToggleProvider>
