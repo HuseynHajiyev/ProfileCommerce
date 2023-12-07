@@ -4,7 +4,7 @@ import theme from '../../../themes/theme'
 const PagesContainerStyled = styled(Box)(() => ({
     paddingLeft: '5%',
     paddingRight: '5%',
-    paddingBottom: '10vh',
+    paddingBottom: '5vh',
     [theme.breakpoints.up('lg')]: {
         paddingLeft: '5%',
         paddingRight: '5%',
