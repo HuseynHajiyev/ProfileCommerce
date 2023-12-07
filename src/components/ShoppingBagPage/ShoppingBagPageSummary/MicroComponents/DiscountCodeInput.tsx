@@ -8,7 +8,6 @@ const DiscountCodeInput = () => {
             Enter discount code
         </BagAccordionHeaderStyled>
         <BagSummaryTextFieldStyled 
-            id="outlined-basic" 
             label="Enter discount code" 
             variant="standard"
             fullWidth

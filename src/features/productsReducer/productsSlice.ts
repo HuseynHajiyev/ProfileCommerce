@@ -84,7 +84,7 @@ const productsSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
-        setCategories: (state, actions: PayloadAction<string[]>) => {
+        setProductsCategories: (state, actions: PayloadAction<string[]>) => {
             state.categories = actions.payload;
             state.loading = false;
             state.error = null;
@@ -106,7 +106,7 @@ export const {
     updateProductInSize,
     loadProductsFailed,
     loadCategories,
-    setCategories,
+    setProductsCategories,
     loadCategoriesFailed, 
 } = productsSlice.actions;
 

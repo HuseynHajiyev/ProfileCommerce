@@ -1,5 +1,5 @@
 // MUI components
-import { Alert, Snackbar, Stack, useTheme } from '@mui/material';
+import { Alert, Snackbar, Stack } from '@mui/material';
 import { FaRegCheckCircle } from "react-icons/fa";
 
 
@@ -22,7 +22,6 @@ import { useDrawerToggle } from '../../hooks/useDrawerToggle';
 
 
 const Navbar = () => {
-    const theme = useTheme();
     const userState = useSelector((state: RootState) => state.userState);
     const [successSnackbarShown, setSuccessSnackbarShown] = useState(false);
     const { loginSuccessSnackbarOpen, loginAttempted, handleSuccessSnackbar } = useDrawerToggle();
@@ -40,11 +39,11 @@ const Navbar = () => {
       
     return (
         <>
-            <NavbarStyled sx={{ zIndex: theme.zIndex.drawer + 1 }}>
-                    <Stack direction='column'>
-                        <ToolbarComponent />
-                        <NavigationDrawer />    
-                    </Stack>
+            <NavbarStyled>
+                <Stack direction='column'>
+                    <ToolbarComponent />
+                    <NavigationDrawer />    
+                </Stack>
             </NavbarStyled>
             <SearchBarDrawer />
             <NavigationDrawer />

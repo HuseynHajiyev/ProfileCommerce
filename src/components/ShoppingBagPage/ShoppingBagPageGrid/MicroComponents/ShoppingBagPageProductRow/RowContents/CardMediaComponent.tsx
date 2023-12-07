@@ -17,6 +17,7 @@ const CardMediaComponent = ({product} : {product: ProductInterface}) => {
                   left: 0,
                   height: '100%',
                   objectFit: 'contain',
+                  maxWidth: '75%',
                 }
               }
             image={product.image}

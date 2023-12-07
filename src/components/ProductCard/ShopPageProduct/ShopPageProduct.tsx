@@ -10,7 +10,7 @@ interface ProductProps {
 
 const ShopPageProduct = ({ product }:ProductProps) => {
   return (
-    <Card sx={{ maxWidth: '100%', position: 'relative', maxHeight: '100%', minHeight:'100%'}}>
+    <Card sx={{ maxWidth: '100%', position: 'relative', maxHeight: '100%'}}>
       <Grid container direction={'column'}>
         <Grid item xs={9} position={'relative'} minHeight={'100%'} minWidth={'100%'}>
           <Link to={`/shop/view-all/${product.id}`} aria-label={`link-to-${product.title}`}>

@@ -59,6 +59,7 @@ const LoginPopover = () => {
             open={loginPopoverOpen}
             anchorEl={null} // No anchoring element
             onClose={handleClose}
+            disableScrollLock={true}
             anchorReference="anchorPosition" // Use anchorPosition for positioning
             anchorPosition={{ top: window.innerHeight / 2, left: window.innerWidth / 2 }} // Center of viewport
             transformOrigin={{
@@ -66,8 +67,10 @@ const LoginPopover = () => {
                 horizontal: 'center',
             }}
             sx={{
+                zIndex: 2000,
                 '& .MuiPopover-paper': {
                     width: isTablet? '60vw' : '35vw',
+                    zIndex: 2000,
                 },
             }}
         >

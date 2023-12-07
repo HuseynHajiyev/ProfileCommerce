@@ -1,6 +1,6 @@
 import {call, put, select, takeLatest } from 'redux-saga/effects';
 import { getProducts } from '../../api/productsApi';
-import { loadProducts, loadProductsFailed, loadProductsSuccess, setCategories, setProducts } from './productsSlice';
+import { loadProducts, loadProductsFailed, loadProductsSuccess, setProductsCategories, setProducts } from './productsSlice';
 import { setSearchCategories, setSearchResults } from '../searchResultsReducer/searchResultsSlice';
 import { ProductApiResponseInterface, ProductInterface } from '../../models/ProductInterface';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -25,7 +25,7 @@ function* loadProductsSaga(action: PayloadAction<number>) {
         const searchableProducts = serializeProductsForSearch(productsResponse);
         const categories = getProductCategories(processedProducts);
         yield put(setProducts(processedProducts));
-        yield put(setCategories(categories));
+        yield put(setProductsCategories(categories));
         yield put(loadProductsSuccess());
 
         // Is here for simplicity purposes and to reduce unnecessary requests
@@ -43,6 +43,7 @@ function* setProductsSaga(action: PayloadAction<ProductInterface[]>) {
         const categories = getProductCategories(action.payload);
         yield put(setSearchResults(searchableProducts));
         yield put(setSearchCategories(categories));
+        yield put(setProductsCategories(categories));
     } catch(e) {
         console.log(e)
     }

@@ -20,14 +20,14 @@ const ViewProductSuggestions = memo(({product}: SuggestionProps) => {
   }, [product.category, productsStore.products, product.id])
 
   return (
-      <Stack width={'100%'} paddingY={5}>
+      <Stack width={'100%'} spacing={1}>
         <Box>
           <Typography textAlign={'center'} fontSize={'1.2rem'}> COMPLETE YOUR OUTFIT </Typography>
         </Box>
-        <Grid container paddingTop={'3%'} spacing={2}>
+        <Grid container spacing={2}>
           {
             completeOutfit.map((item) => (
-              <Grid item xs={12} sm={6} md={3} lg={4} key={item.id} position={'relative'} height={'40vh'}>
+              <Grid item xs={4} key={item.id} position={'relative'}>
                 <SuggestionImageCard product={item} />
               </Grid>
             ))

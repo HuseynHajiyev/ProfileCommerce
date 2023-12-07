@@ -9,9 +9,8 @@ const ToolbarStyled = styled(Toolbar)(() => (
         backgroundColor: '#fff',
         padding: '0',
         '&.MuiToolbar-root': {
-            paddingLeft: '0',
-            paddingRight: '0',
-            paddingTop: '0.5rem',
+            paddingLeft: '10%',
+            paddingRight: '10%',
             paddingBottom: '0.5rem',
         },
         '&::after': {
@@ -20,7 +19,7 @@ const ToolbarStyled = styled(Toolbar)(() => (
             bottom: 0,
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '100%',
+            width: '90%',
             borderBottom: '1px solid rgba(0, 0, 0, 0.3 )',
         },
     }

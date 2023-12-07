@@ -17,7 +17,6 @@ const AddressBank = ({user}: AddressBankProps) => {
 
   useEffect(() => {
     if (scrollSection) {
-      console.log('scrollSection', scrollSection, 'linkScrolled', linkScrolled);
      if(scrollSection === 'billing-address' && !linkScrolled){
        handleLinkScrolled(true);
       billingAddress.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });

@@ -15,7 +15,6 @@ const SuggestionImageCard = memo(({product} : SuggestionImageCardProps) => {
       maxWidth: '100%',
       position: 'relative',
       minHeight:'100%', 
-      marginBottom: '10vh',
       borderRadius: '0px',
       border: 'none',
     }}>

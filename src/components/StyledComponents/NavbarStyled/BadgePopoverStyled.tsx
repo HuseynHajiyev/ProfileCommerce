@@ -1,4 +1,4 @@
-import { Popover, styled, Box, Grid } from "@mui/material";
+import { Popover, styled, Box, Stack } from "@mui/material";
 import theme from "../../../themes/theme";
 
 export const BadgePopoverStyled = styled(Popover)(() => ({
@@ -27,7 +27,6 @@ export const BadgePopoverStyled = styled(Popover)(() => ({
         borderWidth: '7px',
         borderStyle: 'solid',
         borderColor: 'transparent transparent black transparent',
-        zIndex: theme.zIndex.drawer + 400,
     }
 }));
 
@@ -59,12 +58,17 @@ export const BadgeContainerStyled = styled(Box)(() => ({
     },
 }));
     
-export const BadgePopoverContentGridStyled = styled(Grid)(() => ({
-    display:"flex",
-    flexDirection:'column',
-    flexWrap: 'wrap',
-    maxHeight: '100%',
-    [theme.breakpoints.up('lg')]: {
-        minHeight:'inherit',
-    },
+export const BadgePopoverContentGridStyled = styled(Stack)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  width: '100%',
+  borderRadius: '0px',
+  boxShadow: 'none',
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  height: '100%',
+  padding: '0',
+  '&:last-child': {
+      borderBottom: 'none', // Removes the border for the last item
+  },
 }));

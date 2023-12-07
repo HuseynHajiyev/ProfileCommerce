@@ -1,4 +1,4 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Box, Button, Rating, Typography, styled } from "@mui/material";
 
 
 export const ProductSizePickStyled = styled(Button)({
@@ -52,3 +52,12 @@ export const SquareButtonContainer = styled(Box)({
 export const BodyTypographyStyled = styled(Typography)({
   color: '#A3A3A3',
 })
+
+export const StyledRating = styled(Rating)({
+  '& .MuiRating-iconFilled': {
+    color: '#ff6d75',
+  },
+  '& .MuiRating-iconHover': {
+    color: '#ff3d47',
+  },
+});
