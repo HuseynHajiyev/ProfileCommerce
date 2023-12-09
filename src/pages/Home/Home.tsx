@@ -38,10 +38,10 @@ const Home = () => {
   const renderChoiceSection = () => (
     <Grid container spacing={7} paddingBottom={5}>
       <Grid item xs={6}>
-        <Choice product={mainProducts.cottonJacket} imageUrl={'../../../assets/images/mainPageChoiceOne.png'} placeholder={'../../../assets/placeholders/mainPageChoiceOne-small.jpg'} />
+        <Choice product={mainProducts.cottonJacket} imageUrl={'https://drive.google.com/uc?id=1Ir6ShI1HChuj2blKZkYcaIhNpNZTFRVU'} />
       </Grid>
       <Grid item xs={6}>
-        <Choice product={mainProducts.slimFit} imageUrl={'../../../assets/images/mainPageChoiceTwo.png'} placeholder={'../../../assets/placeholders/mainPageChoiceTwo-small.jpg'} />
+        <Choice product={mainProducts.slimFit} imageUrl={'https://drive.google.com/uc?id=1Oefhffi9k4oRo4ipw-GaPsS4V9NDph-s'} />
       </Grid>
     </Grid>
   );
@@ -55,16 +55,16 @@ const Home = () => {
       </Box>
       <Grid container spacing={3}>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.biylaclesen} imageUrl={'../../../assets/images/suggestionOne.png'} placeholder={'../../../assets/placeholders/suggestionOne-small.jpg'} />
+          <Suggestion product={mainProducts.biylaclesen} imageUrl={'https://drive.google.com/uc?id=19M_wLKs8zSBRVAZwwZqYJNRkmGXWWa5S'} />
         </Grid>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.opna} imageUrl={'../../../assets/images/suggestionTwo.png'} placeholder={'../../../assets/placeholders/suggestionTwo-small.jpg'} />
+          <Suggestion product={mainProducts.opna} imageUrl={'https://drive.google.com/uc?id=1zQ6q7ynDDX0WeB80r5AQOTjdHMFCJrMZ'} />
         </Grid>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.danvouy} imageUrl={'../../../assets/images/suggestionThree.png'} placeholder={'../../../assets/placeholders/suggestionThree-small.jpg'} />
+          <Suggestion product={mainProducts.danvouy} imageUrl={'https://drive.google.com/uc?id=17zUUZbnFOgDwkNTI8A6g6nwCnVxCCdo_'} />
         </Grid>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.rainJacket} imageUrl={'../../../assets/images/suggestionFour.png'} placeholder={'../../../assets/placeholders/suggestionFour-small.jpg'} />
+          <Suggestion product={mainProducts.rainJacket} imageUrl={'https://drive.google.com/uc?id=1U9xErIoeBLnLB1JaPG6ecO8ngDi_2bvL'} />
         </Grid>
       </Grid>
     </Box>

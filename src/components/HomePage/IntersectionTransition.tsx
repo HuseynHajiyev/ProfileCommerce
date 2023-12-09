@@ -36,10 +36,10 @@ const IntersectionTransition: FC<IntersectionTransitionProps> = ({ children }) =
         observer.unobserve(sectionRefCurrent);
       }
     };
-  }, [hasAnimated]);
+  }, [hasAnimated, sectionRef]);
 
   return (
-    <Box ref={sectionRef} height={isVisible ? '100%' : '100vh'} sx={{ transition: 'height 100ms ease-out' }}>
+    <Box ref={sectionRef} height={isVisible ? '100%' : '100vh'} position={'relative'}>
       <Slide direction="up" in={isVisible} mountOnEnter unmountOnExit easing={{enter: theme.transitions.easing.easeIn }} timeout={{ enter: 1000, exit: 500 }}>
         <Box
           sx={{

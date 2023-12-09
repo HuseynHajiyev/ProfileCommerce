@@ -6,15 +6,14 @@ import { ProductInterface } from '../../models/ProductInterface'
 interface SuggestionsProps {
   product?: ProductInterface | undefined
   imageUrl: string
-  placeholder: string
 }
 
-const Suggestion = ({product, imageUrl, placeholder} : SuggestionsProps) => {
+const Suggestion = ({product, imageUrl} : SuggestionsProps) => {
  
   return (
     <>
       <Box height={'50vh'}>
-        <BannerImage currentSlide={imageUrl} placeholder={placeholder}/>
+        <BannerImage currentSlide={imageUrl}/>
       </Box>
       <Box textAlign={'center'} paddingTop={3}>
         <Link to={`/shop/view-all/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>

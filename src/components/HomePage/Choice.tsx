@@ -6,14 +6,13 @@ import { Link } from 'react-router-dom'
 interface ChoiceProps {
   product?: ProductInterface | undefined
   imageUrl: string
-  placeholder: string
 }
 
-const Choice = ({product, imageUrl, placeholder} : ChoiceProps) => {
+const Choice = ({product, imageUrl} : ChoiceProps) => {
   return (
     <>
       <Box height={'85vh'}>
-        <BannerImage currentSlide={imageUrl} placeholder={placeholder} />
+        <BannerImage currentSlide={imageUrl} />
       </Box>
       <Box textAlign={'center'} paddingTop={3}>
         <Typography variant={'h5'} fontFamily={'Mulish'}>LEANING IN</Typography>

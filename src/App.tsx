@@ -40,6 +40,7 @@ import { logoutUser, setUser } from './features/userReducer/userSlice';
 import { loadShoppingBag, resetShoppingBag, setShoppingBag } from './features/shoppingBagReducer/shoppingBagSlice';
 import { loadProducts, setProducts } from './features/productsReducer/productsSlice';
 import MainSplash from './components/SplashScreens/MainSplash';
+import { ImageLoadingProvider } from './context/imagesContext/ImagesContext';
 
 
 const App = () => {
@@ -101,37 +102,40 @@ const App = () => {
     <IsMobileProvider>
       <DrawerToggleProvider>
         <MainScrollProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            {showResponsiveSplash ? (
-                <MainSplash />
-              ) : (
-              <>
-                <Box position={'sticky'} top={0} zIndex={'2000'}>
-                  <AnnouncementBarComponent />
-                  <SearchBarDrawer />
-                  <Navbar />
-                </Box>
-                <NavigationDrawer />
-                <PagesContainer>
-                  <Routes>
-                    <Route path="/" element={ <Home />} />
-                    <Route path="/new-arrivals" element={ <NewArrivals/>} />
-                    <Route path="/shop" element={<Shop />}>
-                      <Route path="clothing" element={<ShopClothing />}>
-                      <Route path=":category" element={<ShopClothing />} />
+          <ImageLoadingProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              {showResponsiveSplash ? (
+                  <MainSplash />
+                ) : (
+                <>
+                  <Box position={'sticky'} top={0} zIndex={'2000'}>
+                    <AnnouncementBarComponent />
+                    <SearchBarDrawer />
+                    <Navbar />
+                  </Box>
+                  <NavigationDrawer />
+
+                  <PagesContainer>
+                    <Routes>
+                      <Route path="/" element={ <Home />} />
+                      <Route path="/new-arrivals" element={ <NewArrivals/>} />
+                      <Route path="/shop" element={<Shop />}>
+                        <Route path="clothing" element={<ShopClothing />}>
+                        <Route path=":category" element={<ShopClothing />} />
+                        </Route>
+                        <Route path="view-all/:productId" element={<ViewProduct />} />
                       </Route>
-                      <Route path="view-all/:productId" element={<ViewProduct />} />
-                    </Route>
-                    <Route path="/about" element={ <About />} />
-                    <Route path="/account" element={ <Account />} />
-                    <Route path="/shopping-bag" element={ <ShoppingBag />} />
-                    <Route path="*" element={ <NotFound404 />} />
-                  </Routes>
-                </PagesContainer>
-              </>
-            )}
-          </ThemeProvider>
+                      <Route path="/about" element={ <About />} />
+                      <Route path="/account" element={ <Account />} />
+                      <Route path="/shopping-bag" element={ <ShoppingBag />} />
+                      <Route path="*" element={ <NotFound404 />} />
+                    </Routes>
+                  </PagesContainer>
+                </>
+              )}
+            </ThemeProvider>
+          </ImageLoadingProvider>
         </MainScrollProvider>
       </DrawerToggleProvider>
     </IsMobileProvider>
