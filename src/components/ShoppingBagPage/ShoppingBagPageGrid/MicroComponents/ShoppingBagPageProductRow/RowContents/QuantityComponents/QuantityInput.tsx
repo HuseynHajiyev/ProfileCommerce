@@ -1,5 +1,4 @@
 import { ChangeEvent, useState, useEffect, useRef, useCallback } from 'react';
-import { updateQuantity } from '../../../../../../../features/shoppingBagReducer/shoppingBagSlice';
 
 // Interface imports
 import { CartItemInterface } from '../../../../../../../models/CartiItemInterface';

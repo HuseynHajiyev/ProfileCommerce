@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Header from "./microComponents/Header"
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridRenderCellParams } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from "react-redux";
 import { removeOrder } from "../../features/userReducer/userSlice";
 import { VscTrash } from "react-icons/vsc";
@@ -33,12 +33,12 @@ const MyOrders = () => {
     dispatch(removeOrder(orderId));
   };
   const columns = [
-    { field: 'id', headerName: 'Order ID', width: 114},
-    { field: 'total', headerName: 'Total', width: 114},
-    { field: 'number_of_items', headerName: '№ of Items', width: 114},
-    { field: 'date', headerName: 'Date', width: 114},
-    { field: 'shipping', headerName: 'Shipping', width: 114},
-    { field: 'status', headerName: 'Status', width: 114},
+    { field: 'id', headerName: 'Order ID', flex: 1},
+    { field: 'total', headerName: 'Total', flex: 1},
+    { field: 'number_of_items', headerName: '№ of Items', flex: 1},
+    { field: 'date', headerName: 'Date', flex: 1},
+    { field: 'shipping', headerName: 'Shipping', flex: 1},
+    { field: 'status', headerName: 'Status', flex: 1},
     { 
       field: 'cancel', 
       headerName: 'Cancel Order',
@@ -46,7 +46,7 @@ const MyOrders = () => {
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
-      renderCell: (params: any) => (
+      renderCell: (params: GridRenderCellParams) => (
         <strong>
           {params.value}
           <Button
@@ -54,7 +54,7 @@ const MyOrders = () => {
             color="primary"
             size="small"
             sx={{ marginLeft: 1 }}
-            onClick={() => handleCancelOrder(params.id)}
+            onClick={() => handleCancelOrder(Number(params.id))}
           >
             <VscTrash size={20} />
           </Button>
@@ -103,6 +103,9 @@ const MyOrders = () => {
         pagination
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
+        localeText={{
+          noRowsLabel: 'No orders yet',
+        }}
         sx={{
           '& .MuiDataGrid-columnHeader': {
             justifyContent: 'center',

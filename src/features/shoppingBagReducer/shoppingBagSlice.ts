@@ -2,7 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItemInterface } from "../../models/CartiItemInterface";
 import { ShoppingBagInterface } from "../../models/ShoppingBagInterface";
 
-const initialState: ShoppingBagInterface = {
+
+interface InitialStateInterface extends ShoppingBagInterface {
+    actionLog: string | null;
+}
+
+const initialState: InitialStateInterface = {
     id: 0,
     userId: 0,
     date: "",
@@ -13,6 +18,7 @@ const initialState: ShoppingBagInterface = {
     error: null,
     subTotal: 0,
     shipping: 0,
+    actionLog: null,
 };
 
 const shoppingBagSlice = createSlice({
@@ -22,6 +28,7 @@ const shoppingBagSlice = createSlice({
         loadShoppingBag: (state, action: PayloadAction<number>) => {
             state.loading = true;
             state.error = null;
+            state.actionLog = action.type;
         },
         setShoppingBag: (state, action: PayloadAction<ShoppingBagInterface>) => {
             const { id, userId, date, products, subTotal } = action.payload;

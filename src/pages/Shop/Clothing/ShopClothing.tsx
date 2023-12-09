@@ -26,7 +26,6 @@ const ShopClothing = () => {
     
     const handleCategoryChange = (e: SelectChangeEvent) => {
       setSelectedCategory(e.target.value);
-      console.log(e.target.value);
       if(e.target.value === 'All') {
         navigate('/shop/clothing');
       } else {

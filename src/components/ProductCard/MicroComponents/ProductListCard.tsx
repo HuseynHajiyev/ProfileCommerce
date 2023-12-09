@@ -12,7 +12,7 @@ interface ProductListCardImageProps {
 
 const ProductListCardImage = ({product} : ProductListCardImageProps) => {
   return (
-    <Card sx={{ display: 'flex', maxWidth: '60%', m: 'auto', p: '3%',minHeight: '350px',  maxHeight: '350px', overflow: 'hidden' }}>
+    <Card sx={{ display: 'flex', maxWidth: '60%', m: 'auto', p: '3%',minHeight: '350px'}}>
       <Grid container spacing={5}>
         <Grid item xs={12} sm={6}>
           <CardActionArea component={Link} to={`/shop/view-all/${product.id}`}>

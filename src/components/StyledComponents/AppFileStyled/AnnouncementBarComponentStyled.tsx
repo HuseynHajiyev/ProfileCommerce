@@ -1,7 +1,5 @@
 import { Box, styled } from '@mui/material'
 
-import theme from '../../../themes/theme'
-
 const AnnouncementBarComponentStyled = styled(Box)(() => ({
     display: 'flex', 
     width: '100%', 
