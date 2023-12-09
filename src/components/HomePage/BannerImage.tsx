@@ -1,12 +1,23 @@
 import { Box } from '@mui/material'
+import { useImageLoading } from '../../hooks/useImageLoading'
+import { useEffect, useState } from 'react'
 
 interface BannerImageProps {
   currentSlide: string
   objectPosition?: string
-  placeholder?: string
 }
 
-const BannerImage = ({currentSlide, objectPosition, placeholder} : BannerImageProps) => {
+const BannerImage = ({currentSlide, objectPosition} : BannerImageProps) => {
+  const { markImageAsLoaded, checkIfAnImageIsLoaded } = useImageLoading();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const handleImageLoaded = () => {
+    markImageAsLoaded(currentSlide);
+  };
+  useEffect(() => {
+    if (checkIfAnImageIsLoaded(currentSlide)) {
+      setIsLoaded(true);
+    }
+  }, [currentSlide, checkIfAnImageIsLoaded]);
   return (
     <Box 
       sx={{ 
@@ -14,9 +25,10 @@ const BannerImage = ({currentSlide, objectPosition, placeholder} : BannerImagePr
         height: '100%', 
         overflow: 'hidden', 
         position: 'relative',
-        backgroundImage: `url(${placeholder})`,
+        backgroundImage: `linear-gradient(45deg, #f3e5ab, #e1c17a)`,
         backgroundSize: 'cover',
         backgroundPosition: objectPosition || 'top',
+        animation: isLoaded ? 'pulse 1s infinite' : 'none',
       }}
     >
       <img
@@ -31,10 +43,10 @@ const BannerImage = ({currentSlide, objectPosition, placeholder} : BannerImagePr
           position: 'absolute',
           top: 0,
           left: 0,
-          opacity: 0,
+          opacity: isLoaded ? 1 : 0,
           transition: 'opacity 0.5s ease-in-out',
         }}
-        onLoad={(e) => e.currentTarget.style.opacity = '1'}
+        onLoad={handleImageLoaded}
       />
     </Box>
   )

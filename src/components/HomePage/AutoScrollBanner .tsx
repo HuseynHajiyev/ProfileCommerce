@@ -12,22 +12,19 @@ const AutoScrollBanner  = () => {
       title: 'STEP INTO STYLE',
       description: 'Discover Our Latest Collection',
       label: 'Slide 1',
-      image: '../../../assets/images/bannerOne.png',
-      placeholder: '../../../assets/placeholders/bannerOne-small.jpg'
+      image: 'https://drive.google.com/uc?id=1svvwhSWazJomYnBM3_fVYKhkOnZusdlh',
     },
     {
       title: 'ELEVATE YOUR WARDOBE',
       description: 'Shop Our Trendy Fashion',
       label: 'Slide 2',
-      image: '../../../assets/images/bannerTwo.png',
-      placeholder: '../../../assets/placeholders/bannerTwo-small.jpg'
+      image: 'https://drive.google.com/uc?id=1mKuXP9jX8rJbKKlhT7Nc1UkG6CmViHi4',
     },
     {
       title: 'UNLEASH ELEGANCE',
       description: 'Find Your Signature Look',
       label: 'Slide 3',
-      image: '../../../assets/images/bannerThree.png',
-      placeholder: '../../../assets/placeholders/bannerThree-small.jpg'
+      image: 'https://drive.google.com/uc?id=1l0i_9HRdWIbBrjecZeNn23vIdeRw9QU9',
     },
   ];
 
@@ -59,7 +56,7 @@ const AutoScrollBanner  = () => {
               transform: `translateX(${index - activeStep}00%)`, // Create sliding effect
             }}
           >
-            <BannerImage currentSlide={content.image} placeholder={content.placeholder} />
+            <BannerImage currentSlide={content.image} />
           </Box>
         ))}
           <Typography variant="h3">{bannerContent[activeStep].label}</Typography>
