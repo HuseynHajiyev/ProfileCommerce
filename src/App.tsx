@@ -34,11 +34,12 @@ import { DrawerToggleProvider } from './context/navbarContext/DrawerToggleContex
 import ViewProduct from './pages/Shop/ViewAll/ViewProduct';
 import PagesContainer from './pages/PagesContainer';
 import { MainScrollProvider } from './context/scrollContext/MainScrollContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { RootState } from './app/store';
 import { logoutUser, setUser } from './features/userReducer/userSlice';
 import { loadShoppingBag, resetShoppingBag, setShoppingBag } from './features/shoppingBagReducer/shoppingBagSlice';
 import { loadProducts, setProducts } from './features/productsReducer/productsSlice';
+import MainSplash from './components/SplashScreens/MainSplash';
 
 
 const App = () => {
@@ -46,6 +47,23 @@ const App = () => {
   const userState = useSelector((state: RootState) => state.userState);
   const shoppingBagState = useSelector((state: RootState) => state.shoppingBag);
   const productsState = useSelector((state: RootState) => state.productsState);
+  const [showResponsiveSplash, setShowResponsiveSplash] = useState(true);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isDesktop = window.innerWidth >= 1024;
+      setShowResponsiveSplash(!isDesktop);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   
   useEffect(() => {
     if(!productsState.loaded && productsState.products.length === 0) {
@@ -85,28 +103,34 @@ const App = () => {
         <MainScrollProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Box position={'sticky'} top={0} zIndex={'2000'}>
-              <AnnouncementBarComponent />
-              <SearchBarDrawer />
-              <Navbar />
-            </Box>
-            <NavigationDrawer />
-            <PagesContainer>
-              <Routes>
-                <Route path="/" element={ <Home />} />
-                <Route path="/new-arrivals" element={ <NewArrivals/>} />
-                <Route path="/shop" element={<Shop />}>
-                  <Route path="clothing" element={<ShopClothing />}>
-                   <Route path=":category" element={<ShopClothing />} />
-                  </Route>
-                  <Route path="view-all/:productId" element={<ViewProduct />} />
-                </Route>
-                <Route path="/about" element={ <About />} />
-                <Route path="/account" element={ <Account />} />
-                <Route path="/shopping-bag" element={ <ShoppingBag />} />
-                <Route path="*" element={ <NotFound404 />} />
-              </Routes>
-            </PagesContainer>
+            {showResponsiveSplash ? (
+                <MainSplash />
+              ) : (
+              <>
+                <Box position={'sticky'} top={0} zIndex={'2000'}>
+                  <AnnouncementBarComponent />
+                  <SearchBarDrawer />
+                  <Navbar />
+                </Box>
+                <NavigationDrawer />
+                <PagesContainer>
+                  <Routes>
+                    <Route path="/" element={ <Home />} />
+                    <Route path="/new-arrivals" element={ <NewArrivals/>} />
+                    <Route path="/shop" element={<Shop />}>
+                      <Route path="clothing" element={<ShopClothing />}>
+                      <Route path=":category" element={<ShopClothing />} />
+                      </Route>
+                      <Route path="view-all/:productId" element={<ViewProduct />} />
+                    </Route>
+                    <Route path="/about" element={ <About />} />
+                    <Route path="/account" element={ <Account />} />
+                    <Route path="/shopping-bag" element={ <ShoppingBag />} />
+                    <Route path="*" element={ <NotFound404 />} />
+                  </Routes>
+                </PagesContainer>
+              </>
+            )}
           </ThemeProvider>
         </MainScrollProvider>
       </DrawerToggleProvider>

@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { Box, CardMedia, Button, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import { ProductAvatarBoxStyled } from '../../StyledComponents/ShowProductStyled/ShowProductStyled';
 import { useIsMobile } from '../../../hooks/useIsMobile';
+import { ProductInterface } from '../../../models/ProductInterface';
+import MainImage from './MainImage';
 
-const ViewProductPageImages = ({ imageUrl, repeatCount } : {imageUrl: string, repeatCount: number}) => {
+const ViewProductPageImages = ({ product, repeatCount } : {product: ProductInterface, repeatCount: number}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isDesktop = useIsMobile('desktop');
   const isLargeDesktop = useIsMobile('largeDesktop');
 
   // create a new array with the same URL repeated 'repeatCount' times
   const imageUrls = Array(repeatCount)
-  .fill(imageUrl)
-  .map((url, index) => (index % 2 === 1 ? 'https://picsum.photos/150' : url));
+  .fill(product.image)
 
 
   return (
@@ -53,6 +54,7 @@ const ViewProductPageImages = ({ imageUrl, repeatCount } : {imageUrl: string, re
                                   position: 'absolute',
                                   height: `calc(50vh/${Math.min(repeatCount, 6)})`, 
                                   width: 'auto',
+                                  transform: (index % 2) === 1? 'scaleX(-1)' : 'none',
                               }
                           }}
                       />
@@ -62,18 +64,7 @@ const ViewProductPageImages = ({ imageUrl, repeatCount } : {imageUrl: string, re
       </Grid>
       <Grid item container xs={7} marginLeft={'2%'}>
         <Grid item position={'relative'} xs={12}>
-          <CardMedia
-            component="img" 
-            image={imageUrls[activeIndex]}
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              height: '100%',
-              width: '100%',
-              objectFit: 'scale-down',
-            }}
-          />
+          <MainImage image={imageUrls[activeIndex]} product={product} reverse={activeIndex % 2 === 1} />
         </Grid>
       </Grid>
     </Grid>
@@ -85,19 +76,7 @@ const ViewProductPageImages = ({ imageUrl, repeatCount } : {imageUrl: string, re
 
           </Grid>
           <Grid item xs={7} marginLeft={'2%'} position={'relative'}>
-            <CardMedia
-              component="img" 
-              image={imageUrl}
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                height: '100%',
-                width: '100%',
-                objectFit: 'scale-down',
-                transform: 'scaleX(-1)',
-              }}
-            />
+            <MainImage image={imageUrls[activeIndex]} product={product} reverse={true} />
           </Grid>
         </Grid>
       ) : (null)

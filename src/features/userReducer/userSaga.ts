@@ -1,9 +1,9 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { loginSuccess, loginFailure, loginRequest, setUser, logoutUser, addOrder, removeOrder } from './userSlice';
+import { loginSuccess, loginFailure, loginRequest, setUser, logoutUser, addOrder } from './userSlice';
 import { AuthResultInterface, LoginCredentialsInterface } from '../../models/LoginCredentials';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { getUsers, loginUser } from '../../api/userApi';
-import { OrderInterface, UserInterface } from '../../models/UserInterface';
+import { UserInterface } from '../../models/UserInterface';
 import Cookies from 'js-cookie';
 
 

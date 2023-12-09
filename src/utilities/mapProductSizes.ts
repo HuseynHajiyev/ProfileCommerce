@@ -1,5 +1,3 @@
-import { sizesDict } from "../models/ProductInterface";
-
 export const mapAlphabeticToNumericSizes = (size: string) => {
   switch(size) {
     case "XXS":

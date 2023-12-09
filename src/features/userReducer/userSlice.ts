@@ -3,7 +3,12 @@ import { LoginCredentials, OrderInterface, UserInterface, UserStateInterface } f
 import { ProductInterface } from '../../models/ProductInterface';
 
 
-const initialState: UserStateInterface = {
+interface initialStateInterface extends UserStateInterface {
+  actionLog: string | null;
+}
+
+
+const initialState: initialStateInterface = {
     user: null,
     userFavourites: [],
     newFavouritesLength: 0,
@@ -13,6 +18,7 @@ const initialState: UserStateInterface = {
     loading: false,
     loggedIn: false,
     error: null,
+    actionLog: null,
 };
 
 export const userSlice = createSlice({
@@ -21,6 +27,7 @@ export const userSlice = createSlice({
   reducers: {
     loginRequest: (state, action: PayloadAction<LoginCredentials>) => {
       state.loading = true;
+      state.actionLog = action.type;
     },
     loginSuccess: (state, action) => {
       state.loggedIn = true;

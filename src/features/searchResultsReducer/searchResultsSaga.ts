@@ -1,6 +1,6 @@
 import {call, put, takeLatest } from 'redux-saga/effects';
 import { loadSearchResultsFailed, setSearchCategories, setSearchResults } from './searchResultsSlice';
-import { ProductApiResponseInterface, ProductInterface, SearchResutProductInterface } from '../../models/ProductInterface';
+import { ProductApiResponseInterface, SearchResutProductInterface } from '../../models/ProductInterface';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { findSearchProducts, findSearchProductsByCategory, isCategory } from '../../services/searchHelpers';
 import { getProducts } from '../../api/productsApi';

@@ -6,21 +6,24 @@ interface searchResultsState {
     searchCategories: string[];
     loading: boolean;
     error: string | null;
+    logAction: string | null;
 }
 
 const searchResultsSlice = createSlice({
     name: "searchResults",
     initialState: {
-      searchResults: [],
-      searchCategories: [],
-      loading: false,
-      error: null,
+        searchResults: [],
+        searchCategories: [],
+        loading: false,
+        error: null,
+        logAction: null,
     } as searchResultsState,
 
     reducers: {
         loadSearchResults: (state, action: PayloadAction<string>) => {
             state.loading = true;
             state.error = null;
+            state.logAction = action.type;
         },
         loadSearchResultsFailed: (state, action: PayloadAction<string>) => {
             state.loading = false;

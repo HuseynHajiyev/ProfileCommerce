@@ -20,22 +20,23 @@ let theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          color: '#011627', // text color
-          backgroundColor: '#ffffff', // background color
-          display: 'block', // display property
-          margin: "0 auto", // margin property
-          fontFamily: '"Palanquin Dark", sans-serif', // font family
-          overflowY: 'scroll', // overflowY property
+          color: '#011627',
+          backgroundColor: '#ffffff',
+          display: 'block',
+          margin: "0 auto",
+          fontFamily: '"Palanquin Dark", sans-serif',
+          overflowY: 'scroll',
+          scrollBehavior: 'smooth',
         },
       },
     },
     MuiMobileStepper: {
       styleOverrides: {
         dot: {
-          backgroundColor: 'gray', // Inactive dot color
+          backgroundColor: 'gray',
         },
         dotActive: {
-          backgroundColor: 'black', // Active dot color
+          backgroundColor: 'black', 
         },
       },
     },

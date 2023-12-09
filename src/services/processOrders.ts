@@ -7,10 +7,11 @@ export const convertCartToOrder = (cart: ShoppingBagInterface): OrderInterface =
   const order: OrderInterface = {
     id: cart.id,
     products: cart.products,
-    user: cart.userId,
+    userId: cart.userId,
     total: cart.subTotal,
     shipping: cart.shipping,
-    date: new Date(),
+    date: (new Date()).toString(),
+    status: 'pending',
   };
   return order;
 };

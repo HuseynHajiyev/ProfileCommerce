@@ -11,7 +11,8 @@ export const ApiToShoppingBagConverter = (response: ShoppingBagApiResponseInterf
     const loadedShoppingBag: ShoppingBagInterface = {
         ...restOfResponse, 
         products: loadedProducts, 
-        loading: false, 
+        loading: false,
+        loaded: true,
         error: null, 
         tempProducts: [],
         shipping: 0,

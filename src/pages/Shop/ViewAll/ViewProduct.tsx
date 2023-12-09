@@ -33,7 +33,7 @@ const ViewProduct = () => {
     <Stack height={'100%'} spacing={3}>
       <Grid container display={'flex'} justifyContent={'space-between'}>
         <Grid item xs={12} sm={12} md={12} lg={7} xl={7}>
-          <ViewProductPageImages imageUrl={productToShow.image} repeatCount={6} />
+          <ViewProductPageImages product={productToShow} repeatCount={6} />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
           <ViewProductPageDetails product={productToShow}/>

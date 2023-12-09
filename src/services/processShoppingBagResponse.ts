@@ -1,7 +1,7 @@
 // Type Imports
 import { CartItemInterface, CartItemApiResponseInterface } from '../models/CartiItemInterface';
 import { ProductInterface } from '../models/ProductInterface';
-import { ShoppingBagApiResponseInterface, ShoppingBagInterface } from '../models/ShoppingBagInterface';
+import { ShoppingBagApiResponseInterface } from '../models/ShoppingBagInterface';
 import { pickRandomAvailableSize } from './processProductResponse';
 
 
