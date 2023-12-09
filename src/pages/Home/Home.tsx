@@ -19,7 +19,7 @@ const Home = () => {
     rainJacket: products.find((product: ProductInterface) => product.title.includes('Rain Jacket')),
   };
 
-  const renderBannerSection = (isVisible: boolean) => (
+  const renderBannerSection = () => (
     <>
       <AutoScrollBanner />
       <Box py={7} textAlign={'center'}>
@@ -35,7 +35,7 @@ const Home = () => {
     </>
   );
 
-  const renderChoiceSection = (isVisible: boolean) => (
+  const renderChoiceSection = () => (
     <Grid container spacing={7} paddingBottom={5}>
       <Grid item xs={6}>
         <Choice product={mainProducts.cottonJacket} imageUrl={'../../../assets/images/mainPageChoiceOne.png'} placeholder={'../../../assets/placeholders/mainPageChoiceOne-small.jpg'} />
@@ -46,7 +46,7 @@ const Home = () => {
     </Grid>
   );
 
-  const renderSuggestionSection = (isVisible: boolean) => (
+  const renderSuggestionSection = () => (
     <Box borderTop={'1px solid lightgray'}>
       <Box textAlign={'center'} paddingY={5}>
         <Typography variant={'h5'} fontFamily={'Mulish'}>
