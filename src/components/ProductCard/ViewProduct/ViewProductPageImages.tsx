@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
-import { ProductAvatarBoxStyled } from '../../StyledComponents/ShowProductStyled/ShowProductStyled';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { ProductInterface } from '../../../models/ProductInterface';
 import MainImage from './MainImage';
@@ -41,23 +40,34 @@ const ViewProductPageImages = ({ product, repeatCount } : {product: ProductInter
                           position: 'absolute',
                       }}
                   >
-                      <ProductAvatarBoxStyled
+                    <Box 
+                      sx={{ 
+                        height: `calc(50vh/${Math.min(repeatCount, 6)})`,
+                        width: `calc(50vh/${Math.min(repeatCount, 6)})`,
+                        overflow: 'hidden', 
+                        position: 'relative',
+                        backgroundImage: `linear-gradient(45deg, #fffff, #ffff1)`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'top',
+                        animation: 'pulse 1s infinite',
+                      }}
+                    >
+                      <img
                           key={index}
                           src={imageUrl}
-                          sx={{
-                              height: `calc(50vh/${Math.min(repeatCount, 6)})`,
-                              width: `calc(50vh/${Math.min(repeatCount, 6)})`,
-                              borderRadius: '0',
-                              cursor: 'pointer',
-                              '& img': {
-                                  objectFit: 'contain',
-                                  position: 'absolute',
-                                  height: `calc(50vh/${Math.min(repeatCount, 6)})`, 
-                                  width: 'auto',
-                                  transform: (index % 2) === 1? 'scaleX(-1)' : 'none',
-                              }
+                          loading="lazy"
+                          style={{
+                            width: '100%', 
+                            height: '100%', 
+                            objectFit: 'contain', 
+                            objectPosition: 'center',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            transition: 'opacity 0.5s ease-in-out',
                           }}
                       />
+                    </Box>
                   </Button>
               </Box>
           ))}

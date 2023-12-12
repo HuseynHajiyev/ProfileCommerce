@@ -130,19 +130,19 @@ function* watchLoadShoppingBag() {
 }
 
 function* watchAddToShoppingBag() {
-    yield debounce(4000 ,addToShoppingBag.type, addToShoppingBagSaga);
+    yield debounce(1800000 ,addToShoppingBag.type, addToShoppingBagSaga);
 }
 
 function* watchRemoveFromShoppingBag() {
-    yield debounce(4000 ,removeFromShoppingBag.type, removeFromShoppingBagSaga);
+    yield debounce(1800000 ,removeFromShoppingBag.type, removeFromShoppingBagSaga);
 }
 
 function* watchUpdateQuantity() {
-    yield debounce(4000,updateQuantity.type, updateQuantitySaga);
+    yield debounce(1800000,updateQuantity.type, updateQuantitySaga);
 }
 
 function* watchDecreaseQuantity() {
-    yield debounce(4000, decreaseQuantity.type, decreaseQuantitySaga);
+    yield debounce(1800000, decreaseQuantity.type, decreaseQuantitySaga);
 }
 
 function* watchResetShoppingBag() {

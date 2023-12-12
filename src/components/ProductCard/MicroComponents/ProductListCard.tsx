@@ -46,7 +46,7 @@ const ProductListCardImage = ({product} : ProductListCardImageProps) => {
                     Price: {` `}
                   </Typography>
                   <Typography variant="body1" color="text.primary" fontWeight={'600'} component={'span'}>
-                    {product.price}
+                    ${product.price}
                   </Typography>
                 </Box>
                 <Box>

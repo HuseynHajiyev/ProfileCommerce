@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, throttle } from 'redux-saga/effects';
 import { loginSuccess, loginFailure, loginRequest, setUser, logoutUser, addOrder } from './userSlice';
 import { AuthResultInterface, LoginCredentialsInterface } from '../../models/LoginCredentials';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -50,7 +50,7 @@ function* addOrderSaga() {
 
 
 export function* watchLoginSaga() {
-  yield takeLatest(loginRequest.type, loginSaga);
+  yield throttle(1500, loginRequest.type, loginSaga);
 }
 
 export function* watchLogoutSaga() {

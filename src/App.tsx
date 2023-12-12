@@ -74,12 +74,11 @@ const App = () => {
     }
   }, [dispatch, productsState.loaded, productsState.products, userState.loggedIn, userState.loading, userState.user]);
 
+
   useEffect(() => {
     const token = Cookies.get('authToken');
     if (token && userState.user) {
-      if (!userState.loggedIn) {
-        dispatch(setUser(userState.user));
-      }
+      dispatch(setUser(userState.user));
     } else if (!token && userState.user) {
       dispatch(logoutUser());
     }

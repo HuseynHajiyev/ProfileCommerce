@@ -60,3 +60,11 @@ export interface OrderInterface {
     status: string,
     date: string,
 }
+
+export interface LocalUserInterface {
+    localUser: string,
+    loginAttempts: number,
+    maxLoginAttempts: 3 | 5,
+    locked: boolean,
+    timetoUnlock: number,
+}

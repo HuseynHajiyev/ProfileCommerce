@@ -4,6 +4,7 @@ import { watchAddToShoppingBag, watchDecreaseQuantity, watchLoadShoppingBag, wat
 import { watchLoadProductSaga } from '../features/productReducer/productSaga';
 import { watchLoadSearchResultsSaga } from '../features/searchResultsReducer/searchResultsSaga';
 import { watchLoginSaga, watchLogoutSaga, watchAddOrderSaga, } from '../features/userReducer/userSaga';
+import { watchIncrementLoginAttemptsSaga } from '../features/localUserReducer/localUserSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -20,5 +21,6 @@ export default function* rootSaga() {
         fork(watchUpdateQuantity),
         fork(watchDecreaseQuantity),
         fork(watchLoadProductSaga),
+        fork(watchIncrementLoginAttemptsSaga),
     ])
 }
