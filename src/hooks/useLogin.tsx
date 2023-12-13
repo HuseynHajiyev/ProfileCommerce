@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react"
+import { useState, ChangeEvent, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequest, logoutUser as logoutUserAction } from "../features/userReducer/userSlice";
 import { resetShoppingBag } from "../features/shoppingBagReducer/shoppingBagSlice";
@@ -14,6 +14,7 @@ export const useLogin = () => {
   const [loginValid, setLoginValid] = useState<boolean>(false);
   const [passwordValid, setPasswordValid] = useState<boolean>(false);
   const userState = useSelector((state: RootState) => state.userState);
+  const localUserState = useSelector((state: RootState) => state.localUserState);
   
 
   const dispatch = useDispatch();
@@ -48,15 +49,15 @@ export const useLogin = () => {
     return localUser && cookieIsSet;
   }
 
-  const submitLogin = () => {
-    if((login && password) && (loginValid && passwordValid)) {
+  const submitLogin = useCallback(() => {
+    if(login && password && !localUserState.locked) {
       const credentials: LoginCredentials = {
         username: login,
         password
       }
       dispatch(loginRequest(credentials));
     }
-  }
+  }, [login, password, localUserState.locked, dispatch]);
 
   const resetToDefaultBag = () => {
       dispatch(resetShoppingBag());

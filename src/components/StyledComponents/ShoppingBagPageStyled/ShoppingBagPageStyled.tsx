@@ -1,5 +1,4 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Grid, TextField, FormControlLabel, styled } from '@mui/material'
-import theme from '../../../themes/theme'
 import { smallScreenGridColumns, mediumScreenGridColumns, defaultColumns } from '../../../utilities/ShoppingBagPageGridCss'
 import Checkbox from '@mui/material/Checkbox';
 // Grid component
@@ -18,62 +17,38 @@ export const ShoppingBagPageHeaderStyled = styled(Grid)({
     paddingBottom: '0.9rem',
 })
 
-export const SetQuantityFieldStyled = styled(TextField)({
+
+export const StyledNumberInput = styled('input')(({ theme }) => ({
     borderColor: '#C4C4C4',
-    '& .MuiOutlinedInput-root': {
-      '&.Mui-focused fieldset': {
-          border: '1px solid black',  // Set the border radius value here
-      },
+    backgroundColor: '#F9F9F9',
+    lineHeight: '0.8rem',
+    textAlign: 'center',
+    fontSize: 'clamp(0.4rem, 100%, 1rem)',
+    height: '50%',
+    padding: '0 0.1rem',
+    maxWidth: '100%',
+    minHeight: '100%',
+    '&:focus': {
+        backgroundColor: 'white',
     },
-    '& .MuiInputBase-root': {
-      position: 'inherit',
-      minHeight: '100%',
-      maxWidth: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding:0,
+    [theme.breakpoints.up('sm')]: {
+        padding: '0.2rem 0.2rem',
     },
-    '& input': {
-      lineHeight: '0.8rem',
-      textAlign: 'center',
-      fontSize: 'clamp(0.4rem, 100%, 1rem)',
-      backgroundColor: '#F9F9F9',
-      height: '50%',
-      padding: '0 0.1rem',
-      maxWidth: '100%',
-      minHeight: '100%',
-      '&:focus': {
-          backgroundColor: 'white',
-      },
-      },
-      [theme.breakpoints.up('sm')]: {
-        '& input': {
-          padding: '0.2rem 0.2rem',
-        },
-      },
-      [theme.breakpoints.up('md')]: {
-        '& input': {
-          padding: '0.4rem 0.4rem',
-        },
-      },
-      [theme.breakpoints.up('lg')]: {
-        '& input': {
-          padding: '0.2rem 0.5rem',
-          minHeight: '100%',
-        },
-      },
-    'input[type=number]::-webkit-inner-spin-button': {
-      'WebkitAppearance': 'none',
-      margin: 0,
+    [theme.breakpoints.up('md')]: {
+        padding: '0.4rem 0.4rem',
     },
-    'input[type=number]::-webkit-outer-spin-button': {
-        'WebkitAppearance': 'none',
+    [theme.breakpoints.up('lg')]: {
+        padding: '0.2rem 0.5rem',
+        minHeight: '100%',
+    },
+    '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+        WebkitAppearance: 'none',
         margin: 0,
     },
-    'input[type=number]': {
-        'MozAppearance': 'textfield'
-    }
-})
+    '&[type=number]': {
+        MozAppearance: 'textfield',
+    },
+}));
 
 export const GridRowStyled = styled(Grid)({
   borderBottom: '1px solid #C4C4C4',

@@ -10,6 +10,7 @@ interface SuggestionsProps {
 
 const Suggestion = ({product, imageUrl} : SuggestionsProps) => {
  
+  const productTitleFirstWord = product?.title.split(' ')[0].toUpperCase();
   return (
     <>
       <Box height={'50vh'}>
@@ -17,7 +18,7 @@ const Suggestion = ({product, imageUrl} : SuggestionsProps) => {
       </Box>
       <Box textAlign={'center'} paddingTop={3}>
         <Link to={`/shop/view-all/${product?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <Typography variant={'h6'} fontFamily={'Mulish'}>BIYLACLESEN</Typography>
+          <Typography variant={'h6'} fontFamily={'Mulish'}>{productTitleFirstWord}</Typography>
         </Link>
       </Box>
       <Box textAlign={'center'}>

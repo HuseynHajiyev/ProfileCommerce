@@ -11,11 +11,11 @@ export const useProductQuantity = () => {
   const shoppingBagStore = useSelector((state: RootState) => state.shoppingBag);
   const dispatch = useDispatch();
 
-  const getSizeAvailability = useCallback((productId: number, size: string): number => {
+  const getSizeAvailability = useCallback((productId: number, size: string, currentQuantity = 0): number => {
     const product = findProduct(productId, productsStore.products);
     if(!product) return 0;
     const sizeAvailability = product.sizes[size];
-    return sizeAvailability;
+    return currentQuantity + sizeAvailability;
   },[productsStore.products]);
 
   const getAllsizesAvailable = useCallback((productId: number): string[] => {

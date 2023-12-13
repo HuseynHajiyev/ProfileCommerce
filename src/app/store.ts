@@ -4,6 +4,7 @@ import shoppingBagReducer from "../features/shoppingBagReducer/shoppingBagSlice"
 import productsReducer from "../features/productsReducer/productsSlice";
 import productReducer from "../features/productReducer/productSlice";
 import userReducer from "../features/userReducer/userSlice";
+import localUserReducer from "../features/localUserReducer/localUserSlice";
 import searchResultsReducer from "../features/searchResultsReducer/searchResultsSlice";
 import rootSaga from "../sagas";
 import { persistStore, persistReducer } from 'redux-persist';
@@ -29,9 +30,16 @@ export const productsPersistConfig = {
     blacklist: ['loading', 'error', 'loaded'],
 };
 
+export const localUserPersistConfig = {
+    key: 'localUserState',
+    storage: storage,
+    blacklist: ['timerStarted','loading', 'error', 'loaded'],
+};
+
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 const persistedShoppingBagReducer = persistReducer(shoppingBagPersistConfig, shoppingBagReducer);
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReducer);
+const persistedLocalUserReducer = persistReducer(localUserPersistConfig, localUserReducer);
 
 export const store = configureStore({
     reducer: {
@@ -40,6 +48,7 @@ export const store = configureStore({
         productState: productReducer,
         search: searchResultsReducer,
         userState: persistedUserReducer,
+        localUserState: persistedLocalUserReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

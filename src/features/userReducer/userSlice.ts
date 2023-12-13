@@ -27,7 +27,7 @@ export const userSlice = createSlice({
   reducers: {
     loginRequest: (state, action: PayloadAction<LoginCredentials>) => {
       state.loading = true;
-      state.actionLog = action.type;
+      state.actionLog = action.type;  
     },
     loginSuccess: (state, action) => {
       state.loggedIn = true;
@@ -48,7 +48,6 @@ export const userSlice = createSlice({
       return {
         ...initialState,
       }
-
     },
     addFavourite: (state, action: PayloadAction<ProductInterface>) => {
       const product = state.userFavourites?.find((product) => product.id === action.payload.id);
