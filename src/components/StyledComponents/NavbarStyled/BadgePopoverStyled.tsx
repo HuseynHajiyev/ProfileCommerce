@@ -2,31 +2,35 @@ import { Popover, styled, Box, Stack } from "@mui/material";
 import theme from "../../../themes/theme";
 
 export const BadgePopoverStyled = styled(Popover)(() => ({
+    zIndex: 2000,
     '& .MuiPopover-paper': {
-        width: '25%',
-        height: '81vh',
-        border: '2px solid black',
-        borderRadius: '0px',
-        position: 'relative', 
-        overflow: 'visible',
-    },
-    [theme.breakpoints.up('lg')]: {
-      '& .MuiPopover-paper': {
-          width: '30%',
-          height: '81vh',
-          border: '2px solid black',
-          borderRadius: '0px',
-          position: 'relative', 
-          overflow: 'visible',
+      width: '80vw', 
+      height: '81vh', 
+      border: '2px solid black',
+      borderRadius: '0px',
+      position: 'relative',
+      overflow: 'visible',
+      [theme.breakpoints.up('sm')]: {
+        width: '50vw', 
+      },
+      [theme.breakpoints.up('md')]: {
+        width: '35vw', 
+      },
+      [theme.breakpoints.up('lg')]: {
+        width: '30vw', 
+      },
+      [theme.breakpoints.up('xl')]: {
+        width: '25vw', 
       },
     },
-    '& .popoverArrow': { // create another style for our arrow
-        position: 'absolute',
-        top: '-2.2%',  // adjust as needed
-        right: '10.69%',
-        borderWidth: '7px',
-        borderStyle: 'solid',
-        borderColor: 'transparent transparent black transparent',
+    '& .popoverArrow': {
+      zIndex: 1999,
+      position: 'absolute',
+      top: '-15px',
+      right: '10.69%',
+      borderWidth: '7px',
+      borderStyle: 'solid',
+      borderColor: 'transparent transparent black transparent',
     }
 }));
 

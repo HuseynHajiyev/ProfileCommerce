@@ -5,7 +5,7 @@ const PopoverFooter = () => {
   return (
       <Box sx={{ '& a:visited': { color: 'inherit' } }}>
         <Link to="#">
-          <Typography variant="body2" display="block" align="center" textTransform={'none'} sx={{ marginTop: 2 }}>
+          <Typography variant="body2" display="block" align="center" textTransform={'none'}>
             Create an Account
           </Typography>
         </Link>

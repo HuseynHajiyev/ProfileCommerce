@@ -21,7 +21,7 @@ const UsernameInput = ({login, loginValid, loginInputHandler, checkLoginIsValid 
     setShowError(isTouched && !loginValid);
   }, [isTouched, loginValid]);
   return (
-    <Box marginY={'2%'}>
+    <Box>
       <Typography variant="body1" display="block">Username</Typography>
       <TextField
           fullWidth
@@ -33,6 +33,11 @@ const UsernameInput = ({login, loginValid, loginInputHandler, checkLoginIsValid 
           error={showError}
           autoComplete="off"
           value={login}
+          sx={{
+            '& .MuiInputBase-input': {
+              padding: '0.8em',
+            },
+          }}
       />
     </Box>
   );

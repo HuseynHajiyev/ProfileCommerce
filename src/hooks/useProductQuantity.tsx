@@ -28,14 +28,27 @@ export const useProductQuantity = () => {
   const updateProductQuantity = (cartItem: CartItemInterface) => {
     const product = findProduct(cartItem.product.id, productsStore.products);
     if(!product) return;
-    const sizeInStock = getSizeAvailability(cartItem.product.id, cartItem.sizeSelected);
-    if(sizeInStock < 1 || cartItem.quantity > sizeInStock) return;
-    const newCartItem: CartItemInterface = {
+    const sizeInStock = cartItem.quantity + getSizeAvailability(cartItem.product.id, cartItem.sizeSelected);
+    if(sizeInStock < 1) return;
+    let newCartItem: CartItemInterface = {
       ...cartItem,
-      cartPrice: product.price,
+      cartPrice: product.price * cartItem.quantity,
+    }
+    if(cartItem.quantity > sizeInStock) {
+      newCartItem = {
+        ...cartItem,
+        quantity: cartItem.quantity + sizeInStock,
+        cartPrice: product.price * sizeInStock,
+      }
+    }
+    if(cartItem.quantity < sizeInStock) {
+      newCartItem = {
+        ...cartItem,
+        cartPrice: product.price * cartItem.quantity,
+      }
     }
     dispatch(updateQuantity(newCartItem));
-    dispatch(updateProductInSize({productId: cartItem.product.id, size: cartItem.sizeSelected, quantity: cartItem.quantity}));
+    dispatch(updateProductInSize({productId: newCartItem.product.id, size: newCartItem.sizeSelected, quantity: newCartItem.quantity}));
   };
 
   const addProductToShoppingBag = (product: ProductInterface, size: string, discount: number | null) => {

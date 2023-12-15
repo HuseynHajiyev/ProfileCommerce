@@ -63,7 +63,7 @@ const ShoppingBagContents = () => {
                 </Box>
             ) : (
                 shoppingBag.products.map((cartItem: CartItemInterface, index: number) => (
-                    <ShoppingBagProductCardComponent key={index} cartItem={cartItem}/>
+                    <ShoppingBagProductCardComponent key={cartItem.product.id + index} cartItem={cartItem}/>
                 ))
             )
           }
