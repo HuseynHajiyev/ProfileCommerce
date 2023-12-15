@@ -29,8 +29,8 @@ const BagPageGrid = () => {
                         </BagEmptyTypographyStyled>
                     </BagEmptyContainer>
                 ):(
-                shoppingBag.products.map((cartItem: CartItemInterface) => {
-                    return <ProductRow key={cartItem.product.id} cartItem={cartItem} />
+                shoppingBag.products.map((cartItem: CartItemInterface, index: number) => {
+                    return <ProductRow key={cartItem.product.id + index} cartItem={cartItem} />
                 }))
             }
         </GridContainerStyled>

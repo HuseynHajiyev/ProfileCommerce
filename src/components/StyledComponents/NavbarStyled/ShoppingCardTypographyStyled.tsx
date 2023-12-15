@@ -8,12 +8,6 @@ export const ProductTitleStyled = styled(Typography)(() => ({
     fontWeight: 'bold',
     fontFamily: 'muli',
     [theme.breakpoints.up('sm')]: {
-        fontSize: '2.4rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '2rem',
-    },
-    [theme.breakpoints.up('lg')]: {
         fontSize: '0.8rem',
     },
 }));
@@ -23,12 +17,6 @@ export const ProductPriceStyled = styled(Typography)(() => ({
     fontWeight: 'bold',
     fontFamily: 'muli',
     [theme.breakpoints.up('sm')]: {
-        fontSize: '1.8rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '1.5rem',
-    },
-    [theme.breakpoints.up('lg')]: {
         fontSize: '0.8rem',
     },
 }));
@@ -39,12 +27,6 @@ export const ProductDescriptionStyled = styled(Typography)(() => ({
     color: '#9C9C9C', 
     fontFamily: 'muli',
     [theme.breakpoints.up('sm')]: {
-        fontSize: '1.9rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '1.5rem',
-    },
-    [theme.breakpoints.up('lg')]: {
         fontSize: '0.6rem',
     },
 }));
@@ -55,12 +37,6 @@ export const TotalStyled = styled(Typography)(() => ({
     fontWeight: 'bold',
     fontFamily: 'muli',
     [theme.breakpoints.up('sm')]: {
-        fontSize: '2.1rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '1.8rem',
-    },
-    [theme.breakpoints.up('lg')]: {
         fontSize: '1rem',
     },
 }));
@@ -71,12 +47,6 @@ export const ShippingStyled = styled(Typography)(() => ({
     color: '#9C9C9C', 
     fontFamily: 'muli',
     [theme.breakpoints.up('sm')]: {
-        fontSize: '2rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '1.8rem',
-    },
-    [theme.breakpoints.up('lg')]: {
         fontSize: '1rem',
     },
 }));

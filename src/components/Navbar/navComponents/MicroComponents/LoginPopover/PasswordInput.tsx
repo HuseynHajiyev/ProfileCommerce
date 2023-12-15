@@ -27,7 +27,7 @@ const PasswordInput = ({ password, showPassword, passwordValid, togglePasswordVi
     }, [isTouched, passwordValid]);
 
     return (
-        <Box marginY={'2%'}>
+        <Box>
             <Typography variant="body1" display="block">Password</Typography>
             <TextField
                 fullWidth
@@ -38,6 +38,11 @@ const PasswordInput = ({ password, showPassword, passwordValid, togglePasswordVi
                 value={password}
                 onChange={handleChange}
                 error={showError}
+                sx={{
+                    '& .MuiInputBase-input': {
+                      padding: '0.8em',
+                    },
+                  }}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
@@ -45,7 +50,7 @@ const PasswordInput = ({ password, showPassword, passwordValid, togglePasswordVi
                                 {showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </InputAdornment>
-                    )
+                    ),
                 }}
             />
             <Box pt={1} sx={{display: 'flex', justifyContent: 'flex-end', '& a:visited': {color: 'inherit'}}}>

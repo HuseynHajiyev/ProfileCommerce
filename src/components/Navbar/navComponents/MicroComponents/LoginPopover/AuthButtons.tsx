@@ -32,14 +32,20 @@ const AuthButtons = ({loginValid, passwordValid, loginAttempted, submitLogin}: A
 
     return (
         <>
-            <Grid container spacing={2} marginTop={1}>
+            <Grid container spacing={2} pt={1}>
                 <Grid item xs={12}>
                     <Button 
                         variant="contained" 
                         fullWidth size="large" 
-                        sx={{background: 'black', color: 'white', borderRadius: 0, padding: 2}}
                         onClick={handleSubmit}
                         endIcon={loading ? <CircularProgress size={20} color="inherit" /> : null}
+                        sx={{
+                            background: 'black', 
+                            color: 'white', 
+                            borderRadius: 0, 
+                            padding: 'clamp(8px, 2vw, 12px)',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)'
+                        }}
                     >
                         Sign In
                     </Button>
@@ -54,22 +60,34 @@ const AuthButtons = ({loginValid, passwordValid, loginAttempted, submitLogin}: A
                         <Button
                             variant="contained"
                             fullWidth
-                            sx={{ backgroundColor: "#3b5998", color: "white", borderRadius: 0 , padding: 2}}
                             startIcon={<FaFacebook />}
                             size="large"
                             href="https://www.facebook.com/"
                             target="_blank"
+                            sx={{ 
+                                backgroundColor: "#3b5998", 
+                                color: "white", 
+                                borderRadius: 0 , 
+                                padding: 'clamp(8px, 2vw, 12px)',
+                                fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)'
+                            }}
                         />
                     </Grid> 
                     <Grid item xs={6}>
                         <Button
                             variant="contained"
                             fullWidth
-                            sx={{ backgroundColor: "#DB4437", color: "white", borderRadius: 0, padding: 2 }}
                             startIcon={<AiFillGoogleCircle />}
                             size="large"
                             href="https://www.google.com/"
                             target="_blank"
+                            sx={{ 
+                                backgroundColor: "#DB4437",
+                                color: "white",
+                                borderRadius: 0,
+                                padding: 'clamp(8px, 2vw, 12px)',
+                                fontSize: 'clamp(0.75rem, 2vw, 0.875rem)',
+                            }}
                         />
                     </Grid>
                 </Grid>

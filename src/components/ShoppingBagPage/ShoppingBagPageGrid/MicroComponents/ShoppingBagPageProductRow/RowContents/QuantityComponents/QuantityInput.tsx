@@ -19,12 +19,11 @@ const ShoppingBagPageQuantityInput = ({ cartItem } : ShoppingBagPageQuantityInpu
 
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         let inputValue = e.target.value;
-        inputValue = inputValue.replace(/^0+/, ''); // Remove leading zeros
+        inputValue = inputValue.replace(/^0+/, '');
     
         let quantity = parseInt(inputValue, 10);
     
         if (!inputValue || isNaN(quantity)) {
-            // Do not set to 1 immediately; allow the input to be empty
             setValue('');
         } else if (quantity > sizeAvailability) {
             quantity = sizeAvailability;
@@ -35,10 +34,11 @@ const ShoppingBagPageQuantityInput = ({ cartItem } : ShoppingBagPageQuantityInpu
     }, [sizeAvailability]);
     
     const handleBlur = useCallback(() => {
-        // If the value is an empty string or '0' on blur, set it to '1'
-        if (value === '' || value === '0') {
+        if (value === '' || value === '0') {    
             setValue('1');
             updateProductQuantity({ ...cartItem, quantity: 1 });
+        } else {
+            updateProductQuantity({ ...cartItem, quantity: parseInt(value, 10) });
         }
     }, [value, cartItem, updateProductQuantity])
     
@@ -49,10 +49,10 @@ const ShoppingBagPageQuantityInput = ({ cartItem } : ShoppingBagPageQuantityInpu
         setValue(cartItem.quantity > 0 ? cartItem.quantity.toString() : "1");
     }, [cartItem]);
 
-    useEffect(()=>{
-        console.log('the value is: ', value);
-        console.log('the size availability is: ', sizeAvailability);
-    },[value, sizeAvailability])
+    // useEffect(()=>{
+    //     console.log('the value is: ', value);
+    //     console.log('the size availability is: ', sizeAvailability);
+    // },[value, sizeAvailability])
 
     return (
         <StyledNumberInput

@@ -11,14 +11,12 @@ import { useLogin } from '../../../../hooks/useLogin';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../app/store';
 import { LoginPopoverStyled } from '../../../StyledComponents/LoginPopoverStyled/LoginPopoverStyled';
-import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 const LoginPopover = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { loginPopoverOpen, loginAttempted, closeLoginPopover } = useDrawerToggle();
     const { loading, error, loggedIn } = useSelector((state: RootState) => state.userState);
     const [wrongCredentials, setWrongCredentials] = useState<boolean>(false);
-    const isTablet = useIsMobile('tablet');
     const {
         login,
         password,
@@ -65,21 +63,13 @@ const LoginPopover = () => {
             transformOrigin={{
                 vertical: 'center',
                 horizontal: 'center',
-            }}
-            sx={{
-                zIndex: 2000,
-                '& .MuiPopover-paper': {
-                    width: isTablet? '60vw' : '35vw',
-                    zIndex: 2000,
-                },
-            }}
-        >
+        }}>
             <IconButton onClick={closeLoginPopover} style={{ position: 'absolute', right: '2%', top: '2%' }}>
               <Close />
             </IconButton>
-            <Grid container direction="column" alignItems="center" display={'flex'} sx={{ width: '100%'}}>
+            <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2} sx={{ padding: '2vh 2vw'}}>
 
-                <Grid item xs={12} width={'100%'} paddingBottom={'10%'}>
+                <Grid item xs={12} width={'100%'} >
                     <PopoverHeader />
                 </Grid>
                 
@@ -90,15 +80,14 @@ const LoginPopover = () => {
                 <Grid item xs={12} width={'100%'}>
                     <PasswordInput password={password} showPassword={showPassword} passwordValid={passwordValid} togglePasswordVisibility={handlePasswordToggle} checkPasswordIsValid={checkPasswordIsValid} passwordInputHandler={passwordInputHandler}/>
                 </Grid>
-                <Grid item xs={12} width={'100%'}>
-                    { wrongCredentials && (
-                            <Typography variant="body2" display="block" align="center" textTransform={'none'} sx={{ color: 'red' }}>
-                                Wrong credentials
-                            </Typography>
-                        )
-                    }
-                </Grid>
-                
+                { wrongCredentials && (
+                    <Grid item xs={12} width={'100%'}>
+                        <Typography variant="body2" display="block" align="center" textTransform={'none'} sx={{ color: 'red' }}>
+                            Wrong credentials
+                        </Typography>
+                    </Grid>
+                    )
+                }
                 <Grid item xs={12} width={'100%'}>
                     <AuthButtons loginAttempted={loginAttempted} submitLogin={submitLogin} passwordValid={passwordValid} loginValid={loginValid}/>
                 </Grid>
