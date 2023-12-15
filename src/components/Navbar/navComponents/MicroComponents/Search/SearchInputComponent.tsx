@@ -50,7 +50,6 @@ const SearchInputComponent = () => {
             groupBy={(option: unknown) => (option as SearchResutProductInterface).category}
             options={productOptions}
             loading={loading}
-            placeholder="Search.."
             renderInput={(params) => <RenderInputTextField {...params} loading={loading} />}
             renderOption={(params: HTMLAttributes<HTMLLIElement>, option) => {
               const typedOption = option as SearchResutProductInterface;
