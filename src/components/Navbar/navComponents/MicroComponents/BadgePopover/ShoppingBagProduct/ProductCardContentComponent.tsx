@@ -20,7 +20,7 @@ import { mapNumericToAlphabeticSizes } from '../../../../../../utilities/mapProd
 import { useProductQuantity } from '../../../../../../hooks/useProductQuantity';
 
 
-const ProductCardContentComponent = memo(({cartItem}: {cartItem: CartItemInterface}) => {
+const ProductCardContentComponent = memo(({cartItem}: { cartItem: CartItemInterface}) => {
     const {removeProductFromShoppingBag} = useProductQuantity();
     const handleDelete = () => {
         removeProductFromShoppingBag(cartItem);
