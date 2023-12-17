@@ -44,7 +44,7 @@ const ShoppingBagContents = () => {
           borderRadius: theme.shape.borderRadius,
         },
       }}>
-        <Stack spacing={2} sx={{ padding: theme.spacing(0, 5),}}>
+        <Stack sx={{ padding: theme.spacing(0, 5),}}>
         { 
             loading ? (
               Array.from({ length: 6 }).map((_, index) => (

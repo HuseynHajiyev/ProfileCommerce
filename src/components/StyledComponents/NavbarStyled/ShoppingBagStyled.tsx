@@ -13,7 +13,7 @@ export const ShoppingBagProductCardStyled = styled(Card)(({ theme }) => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
     padding: '5% 0',
     '&:last-child': {
-        borderBottom: 'none', // Removes the border for the last item
+        borderBottom: 'none', 
     },
 }));
 

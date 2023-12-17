@@ -14,19 +14,19 @@ import { Link } from 'react-router-dom';
 
 
 
-const ProductCard = ({cartItem}: {cartItem: CartItemInterface}) => { 
+const ShoppingBagProductCard = ({cartItem}: {cartItem: CartItemInterface}) => { 
     if (!cartItem || !cartItem.product) {
         return null; 
     }
     return (
         <ShoppingBagProductCardStyled>
-            <Grid container direction='row' spacing={1} sx={{ paddingY: '5%', '& .MuiCardContent-root': { p:0 }}}>
-                <Grid item xs={3} sx={{position: 'relative', width: '100%', paddingTop: '100%', backgroundColor: '#ffffff'}}>
+            <Grid container>
+                <Grid item xs={3} sx={{position: 'relative', width: '100%', backgroundColor: '#ffffff'}}>
                     <Link to={`/shop/view-all/${cartItem.product.id}`}>
                         <ProductCardMediaComponent product={cartItem.product} />
                     </Link>
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={9} paddingLeft={2}>
                     <ProductCardContentComponent cartItem={cartItem} />
                 </Grid>
             </Grid>
@@ -34,4 +34,4 @@ const ProductCard = ({cartItem}: {cartItem: CartItemInterface}) => {
   )
 }
 
-export default ProductCard
+export default ShoppingBagProductCard
