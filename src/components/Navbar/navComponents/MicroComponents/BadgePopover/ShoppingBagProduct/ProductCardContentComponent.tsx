@@ -2,7 +2,7 @@
 import { memo } from 'react';
 
 // MUI imports
-import { CardContent, Box, Grid, Button, Tooltip } from '@mui/material';
+import { CardContent, Box, Grid, Button } from '@mui/material';
 
 // Icon imports
 import { VscTrash } from "react-icons/vsc";
@@ -31,11 +31,9 @@ const ProductCardContentComponent = memo(({cartItem}: { cartItem: CartItemInterf
             <Grid container direction='column' spacing={1}>
                 <Grid item>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                        <Tooltip title={cartItem.product.title} placement='top-start' aria-label="full-title">
-                            <ProductTitleStyled aria-label='product-title'>
-                                {`${trimTitle(cartItem.product.title, 15)}`}
-                            </ProductTitleStyled>
-                        </Tooltip>
+                        <ProductTitleStyled aria-label='product-title'>
+                            {`${trimTitle(cartItem.product.title, 22)}`}
+                        </ProductTitleStyled>
                         <ProductPriceStyled aria-label='product-price'>
                             {`$${cartItem.product.price}`}
                         </ProductPriceStyled>

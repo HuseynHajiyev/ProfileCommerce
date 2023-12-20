@@ -6,6 +6,7 @@ import { LoginCredentials } from "../models/UserInterface";
 import Cookies from "js-cookie";
 import { RootState } from "../app/store";
 import { regexCheckUsername } from "../utilities/stringManipulation";
+import { setLocalUser } from "../features/localUserReducer/localUserSlice";
 
 
 export const useLogin = () => {
@@ -63,7 +64,6 @@ export const useLogin = () => {
       dispatch(resetShoppingBag());
   }
 
-  
   const emptyValues = () => {
     setLogin('');
     setPassword('');
@@ -77,6 +77,10 @@ export const useLogin = () => {
     emptyValues();
   }
 
+  const instantiateLocalUser = () => {
+    const randomUsername = Math.random().toString(36).substring(7);
+    dispatch(setLocalUser(randomUsername));
+  }
   return {
     login,
     password,
@@ -94,7 +98,8 @@ export const useLogin = () => {
     isUserLoggedIn,
     submitLogin,
     logoutUser,
-    emptyValues
+    emptyValues,
+    instantiateLocalUser,
   }
 }
 

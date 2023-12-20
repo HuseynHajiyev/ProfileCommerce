@@ -1,12 +1,13 @@
 import { LocalUserInterface } from "../../models/UserInterface";
 import { incrementLoginAttempts, lockUser } from "./localUserSlice";
-import { call, select, takeLatest } from 'redux-saga/effects';
+import { put, select, takeLatest } from 'redux-saga/effects';
 
 
 function* incrementLoginAttemptsSaga() {
   const localUser: LocalUserInterface = yield select((state) => state.localUserState);
   if (localUser.loginAttempts >= localUser.maxLoginAttempts) {
-    yield call(lockUser);
+    console.log('lock user');
+    yield put(lockUser());
   } 
 }
 

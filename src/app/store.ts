@@ -36,6 +36,8 @@ export const localUserPersistConfig = {
     blacklist: ['timerStarted','loading', 'error', 'loaded'],
 };
 
+
+  
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 const persistedShoppingBagReducer = persistReducer(shoppingBagPersistConfig, shoppingBagReducer);
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReducer);

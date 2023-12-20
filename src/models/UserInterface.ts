@@ -66,5 +66,4 @@ export interface LocalUserInterface {
     loginAttempts: number,
     maxLoginAttempts: 3 | 5,
     locked: boolean,
-    timetoUnlock: number,
 }

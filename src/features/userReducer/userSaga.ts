@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 
 import { findUserByEmailAndPassword } from '../../services/processUserResponse';
 import { resetShoppingBag } from '../shoppingBagReducer/shoppingBagSlice';
+import { incrementLoginAttempts } from '../localUserReducer/localUserSlice';
 
 function* loginSaga(action: PayloadAction<LoginCredentialsInterface>) {
   try {
@@ -16,11 +17,13 @@ function* loginSaga(action: PayloadAction<LoginCredentialsInterface>) {
     const matchedUser = findUserByEmailAndPassword(users, action.payload.username, action.payload.password);
     if (!matchedUser) {
       yield put(loginFailure({ error: 'Invalid credentials' }));
+      yield put(incrementLoginAttempts());
       return;
     }
     const authResult: AuthResultInterface | null = yield call(loginUser, action.payload);
     if (!authResult || !authResult.token) {
       yield put(loginFailure({ error: 'Login failed. Please try again.' }));
+      yield put(incrementLoginAttempts());
       return;
     }
     Cookies.set('authToken', authResult.token, { expires: 1 });
