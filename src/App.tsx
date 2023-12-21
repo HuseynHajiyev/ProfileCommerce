@@ -41,15 +41,18 @@ import { loadShoppingBag, resetShoppingBag, setShoppingBag } from './features/sh
 import { loadProducts, setProducts } from './features/productsReducer/productsSlice';
 import MainSplash from './components/SplashScreens/MainSplash';
 import { ImageLoadingProvider } from './context/imagesContext/ImagesContext';
+import { useLogin } from './hooks/useLogin';
+import { resetLocalUser, setLocalUser } from './features/localUserReducer/localUserSlice';
 
 
 const App = () => {
   const dispatch = useDispatch();
   const userState = useSelector((state: RootState) => state.userState);
+  const localUserState = useSelector((state: RootState) => state.localUserState);
   const shoppingBagState = useSelector((state: RootState) => state.shoppingBag);
   const productsState = useSelector((state: RootState) => state.productsState);
   const [showResponsiveSplash, setShowResponsiveSplash] = useState(true);
-
+  const {instantiateLocalUser} = useLogin();
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,6 +82,7 @@ const App = () => {
     const token = Cookies.get('authToken');
     if (token && userState.user) {
       dispatch(setUser(userState.user));
+      dispatch(resetLocalUser());
     } else if (!token && userState.user) {
       dispatch(logoutUser());
     }
@@ -92,10 +96,16 @@ const App = () => {
       } else if(!shoppingBagState.loaded) {
         dispatch(loadShoppingBag(userState.user.id));
       }
-    } else if (userState.loggedIn === false && shoppingBagState.loaded) {
+    } else if (!userState.loggedIn && shoppingBagState.loaded) {
       dispatch(resetShoppingBag());
+    } else {
+      if(localUserState && localUserState.localUser && !userState.loggedIn) {
+        setLocalUser(localUserState.localUser);
+      } else {
+        instantiateLocalUser();
+      }
     }
-  }, [dispatch, userState.loggedIn, userState.user, shoppingBagState.loaded, shoppingBagState.userId, shoppingBagState]);
+  }, [dispatch, userState.loggedIn, userState.user, shoppingBagState.loaded, shoppingBagState.userId, shoppingBagState, localUserState.localUser, localUserState, instantiateLocalUser]);
   
   return (
     <IsMobileProvider>

@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { LocalUserInterface } from "../../models/UserInterface";
 
-
 interface InitialStateInterface extends LocalUserInterface {
+  lockedAt: string | null;
+  lockTimeout: number;
   error: string | null;
-  timerStarted: boolean;
 }
 
 
@@ -13,12 +13,10 @@ const initialState: InitialStateInterface = {
   loginAttempts: 0,
   maxLoginAttempts: 3,
   locked: false,
-  timetoUnlock: 0,
-  timerStarted: false,
+  lockedAt: null,
+  lockTimeout: 1,
   error: null,
 };
-
-
 
 
 export const localUserSlice = createSlice({
@@ -31,34 +29,30 @@ export const localUserSlice = createSlice({
     incrementLoginAttempts: (state) => {
       if(state.loginAttempts < state.maxLoginAttempts) {
         state.loginAttempts += 1;
-      } else {
-        if(!state.timerStarted) {
-          state.locked = true;
-          state.timerStarted = true;
-          state.timetoUnlock = Date.now() + 180000;
-          state.error = `Too many login attempts. Please try again in 3 minutes.`;
-        }
-      }
+      } 
     },
     lockUser: (state) => {
+      console.log('locked the user');
       state.locked = true;
-      state.timetoUnlock = 180000;
+      state.lockedAt = new Date().toISOString();
     },
     unlockUser: (state) => {
       state.locked = false;
-      state.timetoUnlock = 0;
+      state.lockedAt = null;
+      state.loginAttempts = 0;
     },
     resetLoginAttempts: (state) => {
       state.loginAttempts = 0;
       state.error = null;
-      state.timerStarted = false;
-      state.timetoUnlock = 0;
+      state.locked = false;
+      state.lockedAt = null;
     },
     resetLocalUser: () => {
       return{
         ...initialState
       }
-    }
+    
+    },
   },
 });
   

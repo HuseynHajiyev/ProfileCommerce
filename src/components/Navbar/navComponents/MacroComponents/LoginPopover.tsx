@@ -8,15 +8,19 @@ import PasswordInput from '../MicroComponents/LoginPopover/PasswordInput';
 import UsernameInput from '../MicroComponents/LoginPopover/UsernameInput';
 import { Close } from '@mui/icons-material';
 import { useLogin } from '../../../../hooks/useLogin';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../app/store';
 import { LoginPopoverStyled } from '../../../StyledComponents/LoginPopoverStyled/LoginPopoverStyled';
+import UnlockTimer from '../MicroComponents/LoginPopover/UnlockTimer';
+import { unlockUser } from '../../../../features/localUserReducer/localUserSlice';
 
 const LoginPopover = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { loginPopoverOpen, loginAttempted, closeLoginPopover } = useDrawerToggle();
     const { loading, error, loggedIn } = useSelector((state: RootState) => state.userState);
     const [wrongCredentials, setWrongCredentials] = useState<boolean>(false);
+    const localUserState = useSelector((state: RootState) => state.localUserState);
+    const dispatch = useDispatch();
     const {
         login,
         password,
@@ -52,6 +56,17 @@ const LoginPopover = () => {
         }
     }, [loading, error, loggedIn, loginAttempted]);
 
+    useEffect(()=>{
+        if(localUserState.locked && localUserState.lockedAt) {
+          const lockedAt = new Date(localUserState.lockedAt);
+          const unlockTime = new Date(lockedAt.getTime() + localUserState.lockTimeout * 60000);
+          const now = new Date();
+          if(now >= unlockTime) {
+            dispatch(unlockUser());
+          }
+        }
+      })
+
     return (
         <LoginPopoverStyled
             open={loginPopoverOpen}
@@ -80,12 +95,25 @@ const LoginPopover = () => {
                 <Grid item xs={12} width={'100%'}>
                     <PasswordInput password={password} showPassword={showPassword} passwordValid={passwordValid} togglePasswordVisibility={handlePasswordToggle} checkPasswordIsValid={checkPasswordIsValid} passwordInputHandler={passwordInputHandler}/>
                 </Grid>
-                { wrongCredentials && (
+                { (wrongCredentials && !localUserState.locked ) && (
                     <Grid item xs={12} width={'100%'}>
                         <Typography variant="body2" display="block" align="center" textTransform={'none'} sx={{ color: 'red' }}>
                             Wrong credentials
                         </Typography>
+                        <Typography variant="body2" display="block" align="center" textTransform={'none'} sx={{ color: 'red' }}>
+                            Login attempts remaining: {localUserState.maxLoginAttempts - localUserState.loginAttempts}
+                        </Typography>
                     </Grid>
+                    )
+                }
+                {
+                    localUserState.locked && (
+                        <Grid item xs={12} width={'100%'}>
+                            <Typography variant="body2" display="block" align="center" textTransform={'none'} sx={{ color: 'red' }}>
+                                Account locked. Too many failed login attempts. 
+                            </Typography>
+                            <UnlockTimer />
+                        </Grid>
                     )
                 }
                 <Grid item xs={12} width={'100%'}>
