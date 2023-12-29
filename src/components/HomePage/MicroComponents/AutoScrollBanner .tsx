@@ -1,50 +1,82 @@
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
-import { Box, Button, MobileStepper, Stack, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { Box, Button, MobileStepper } from '@mui/material'
+import { useCallback, useEffect, useState } from 'react'
 import BannerImage from './BannerImage';
 import { Link } from 'react-router-dom';
+import BannerProductInfo from '../BannerProductInfo';
+import { useProduct } from '../../../hooks/useProduct';
 
 const AutoScrollBanner  = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [hovered, setIsHovered] = useState(false);
   const maxSteps = 3;
+  const {findProductById} = useProduct();
   const bannerContent = [
     {
       title: 'STEP INTO STYLE',
       description: 'Discover Our Latest Collection',
       label: 'Slide 1',
+      product: findProductById(2),
       image: 'https://drive.google.com/uc?id=1svvwhSWazJomYnBM3_fVYKhkOnZusdlh',
+      link: '/shop/view-all/2',
     },
     {
       title: 'ELEVATE YOUR WARDOBE',
       description: 'Shop Our Trendy Fashion',
       label: 'Slide 2',
+      product: findProductById(16),
       image: 'https://drive.google.com/uc?id=1mKuXP9jX8rJbKKlhT7Nc1UkG6CmViHi4',
+      link: 'shop/view-all/16',
     },
     {
       title: 'UNLEASH ELEGANCE',
       description: 'Find Your Signature Look',
       label: 'Slide 3',
+      product: findProductById(1),
       image: 'https://drive.google.com/uc?id=1l0i_9HRdWIbBrjecZeNn23vIdeRw9QU9',
+      link: '/shop/view-all/1',
     },
   ];
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1 >= maxSteps ? 0 : prevActiveStep + 1);
+  const handleHover = (mouseIn: boolean) => {
+    setIsHovered(mouseIn);
   };
+
+  const handleNext = useCallback((button?: boolean) => {
+    if(button) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1 >= maxSteps ? 0 : prevActiveStep + 1);
+    } else {
+      if(!hovered) {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1 >= maxSteps ? 0 : prevActiveStep + 1);
+      }
+    }
+  }, [hovered]);
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1 < 0 ? maxSteps - 1 : prevActiveStep - 1);
   };
 
   useEffect(() => {
-    const interval = setInterval(handleNext, 5000); // Change slides every 3 seconds
+    const interval = setInterval(handleNext, 3000);
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [handleNext]);
   return (
     <Box position={'relative'}>
-      <Box sx={{ position: 'relative', width: '100%', height: '70vh', overflow: 'hidden' }}>
+      <Box 
+        onMouseOver={() => {
+          if (handleHover) {
+            handleHover(true);
+          }
+        }}
+        onMouseLeave={() => {
+          if (handleHover) {
+            handleHover(false);
+          }
+        }}
+        sx={{ position: 'relative', width: '100%', height: '70vh', overflow: 'hidden' }}
+      >
       {bannerContent.map((content, index) => (
           <Box
             key={index}
@@ -53,14 +85,25 @@ const AutoScrollBanner  = () => {
               width: '100%',
               height: '100%',
               transition: 'transform 0.8s ease',
-              transform: `translateX(${index - activeStep}00%)`, // Create sliding effect
+              transform: `translateX(${index - activeStep}00%)`,
             }}
           >
-            <BannerImage currentSlide={content.image} />
+            <BannerImage 
+              bannerContent={content} 
+              currentSlide={content.image}
+              isSlider={true} 
+              hovered={hovered} 
+              activeStep={activeStep}
+              index={index}
+            />
+            <BannerProductInfo 
+              bannerContent={content}
+              hovered={hovered}
+              index={index}
+              isSlider={true}
+            />
           </Box>
         ))}
-          <Typography variant="h3">{bannerContent[activeStep].label}</Typography>
-          <Typography>{bannerContent[activeStep].description}</Typography>
           <Link to='/shop/clothing'>
             <Button variant="contained" sx={{
               position:'absolute',
@@ -73,18 +116,6 @@ const AutoScrollBanner  = () => {
               Go To Catalog
             </Button>
           </Link>
-          <Box sx={{
-            position: 'absolute', 
-            top: '50%', 
-            left: '50%',  
-            transform: 'translate(-50%, -50%)',
-            textAlign: 'center',
-          }}> 
-          <Stack spacing={3}> 
-            <Typography variant='h3' fontFamily={'Mulish'} color={'white'} sx={{textShadow: '0px 0px 5px rgba(0,0,0,0.61)'}}>{bannerContent[activeStep].title}</Typography>
-            <Typography variant='h6' fontFamily={'Mulish'} color={'white'} sx={{textShadow: '0px 0px 5px rgba(0,0,0,0.61)'}}>{bannerContent[activeStep].description}</Typography>
-          </Stack>
-          </Box>
         </Box>
       <Box>
         <MobileStepper
@@ -93,7 +124,7 @@ const AutoScrollBanner  = () => {
           position="static"
           activeStep={activeStep}
           nextButton={
-            <Button size="small" onClick={handleNext}>
+            <Button size="small" onClick={()=> handleNext(true)}>
               <KeyboardArrowRight />
             </Button>
           }

@@ -89,7 +89,8 @@ export const GridContainerStyled = styled(Grid)({
   flexWrap: 'wrap',
   overflowY: 'scroll',
   overflowX: 'hidden',
-  minHeight: '10vh',
+  minHeight: '10dvh',
+  overscrollBehaviorY: 'contain',
   '&::-webkit-scrollbar': {
     width: 10,
   },
