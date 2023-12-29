@@ -1,6 +1,6 @@
 import { Box, Slide } from '@mui/material';
 import { useRef, useEffect, useState, FC } from 'react';
-import theme from '../../themes/theme';
+import theme from '../../../themes/theme';
 
 interface IntersectionTransitionProps {
   children: (isVisible: boolean) => React.ReactNode;

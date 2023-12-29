@@ -15,7 +15,7 @@ import ShoppingBagRowSkeleton from './MicroComponents/ShoppingBagPageProductRow/
 const BagPageGrid = () => {
     const shoppingBag = useSelector((state: RootState) => state.shoppingBag);
     return (
-        <GridContainerStyled item container direction='column' maxHeight='100vh' overflow='scroll'>
+        <GridContainerStyled item container direction='column'>
             <BagPageGridHeader />
             {
                 shoppingBag.loading ? (
