@@ -8,7 +8,7 @@ const Shop = () => {
   const isMobile = useIsMobile()
   return (
     <>
-      <Box justifyContent={'center'} display={'flex'} paddingTop={isMobile? '2%' :'1%'}>
+      <Box justifyContent={'center'} display={'flex'} paddingY={isMobile? '2%' :'1%'}>
         <DynamicBreadcrumbs />
       </Box>
       <Outlet />

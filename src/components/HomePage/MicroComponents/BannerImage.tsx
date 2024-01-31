@@ -1,15 +1,15 @@
 import { Box } from '@mui/material'
-import { useImageLoading } from '../../../hooks/useImageLoading'
-import { useCallback, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import BannerHeader from './BannerHeader'
 import BannerHeaderMotion from '../Motion/BannerHeaderMotion'
+import { AdvancedImage } from '@cloudinary/react'
+import { useCloud } from '../../../hooks/useCloud'
 
 interface BannerImageProps {
   bannerContent?: {
     title: string;
     description: string;
     label: string;
-    image: string;
   }
   currentSlide: string;
   objectPosition?: string;
@@ -19,62 +19,59 @@ interface BannerImageProps {
   index?: number;
 }
 
-const BannerImage = ({bannerContent, currentSlide, objectPosition, index, activeStep, isSlider, hovered} : BannerImageProps) => {
-  const { markImageAsLoaded } = useImageLoading();
+const BannerImage = memo(({bannerContent, currentSlide, objectPosition, index, activeStep, isSlider, hovered} : BannerImageProps) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const handleImageLoaded = useCallback(() => {
-    markImageAsLoaded(currentSlide);
-  }, [currentSlide, markImageAsLoaded]);
+  const { cld } = useCloud();
 
-  useEffect(() => {
+  const customStyles = {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: objectPosition || 'top',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    transition: 'opacity 0.8s ease, transform 0.4s ease-in-out',
+    transform: hovered ? 'scale(1.05)' : 'scale(1)',
+  };
+
+
+  const img = cld.image(currentSlide);
+
+  useEffect(() => {  
     const image = new Image();
     image.src = currentSlide;
+  
     image.onload = () => {
       setIsLoaded(true);
-      if (handleImageLoaded) {
-        handleImageLoaded();
-      }
     };
-
+  
     image.onerror = () => {
       setIsLoaded(true);
     };
-
+  
     return () => {
       image.onload = null;
       image.onerror = null;
     };
-  }, [currentSlide, handleImageLoaded]);
+  }, [currentSlide]);
+  
   return (
     <Box
-    sx={{
-      position: 'relative',
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden',
-      backgroundImage: `linear-gradient(45deg, #f3e5ab, #e1c17a)`,
-      backgroundSize: 'cover',
-      backgroundPosition: objectPosition || 'top',
-      animation: isLoaded ? 'pulse 1s infinite' : 'none',
-    }}
-  >
-    <img
-      src={currentSlide}
-      alt="product image"
-      loading="lazy"
-      style={{
+      sx={{
+        position: 'relative',
         width: '100%',
         height: '100%',
-        objectFit: 'cover',
-        objectPosition: objectPosition || 'top',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        opacity: isLoaded ? 1 : 0,
-        transition: 'opacity 0.8s ease, transform 0.4s ease-in-out',
-        transform: hovered ? 'scale(1.05)' : 'scale(1)',
+        overflow: 'hidden',
+        backgroundImage: `linear-gradient(45deg, #f3e5ab, #e1c17a)`,
+        backgroundSize: 'cover',
+        backgroundPosition: objectPosition || 'top',
+        animation: isLoaded ? 'pulse 1s infinite' : 'none',
       }}
-      onLoad={handleImageLoaded}
+    >
+    <AdvancedImage 
+      cldImg={img}
+      style={customStyles}
     />
       {
         (hovered) && (
@@ -104,13 +101,13 @@ const BannerImage = ({bannerContent, currentSlide, objectPosition, index, active
             zIndex: 10,
           }}>
             <BannerHeaderMotion isActive={index === activeStep}>
-              <BannerHeader bannerContent={bannerContent} />
+              <BannerHeader bannerContent={bannerContent} hovered={hovered}/>
             </BannerHeaderMotion>
           </Box>
         )
       }
     </Box>
   )
-}
+})
 
 export default BannerImage

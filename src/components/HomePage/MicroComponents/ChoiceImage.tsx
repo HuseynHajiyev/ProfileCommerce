@@ -10,7 +10,6 @@ interface ChoiceImageProps {
     description: string;
     label: string;
     product: ProductInterface| undefined;
-    image: string;
     link: string;
   }
   currentSlide: string;

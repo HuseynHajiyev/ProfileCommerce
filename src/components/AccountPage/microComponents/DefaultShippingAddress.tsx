@@ -56,7 +56,7 @@ const DefaultShippingAddress = ({user}: DefaultShippingAddressProps) => {
       }
       setAddressInformation(newInfo);
     }
-  },[user, capitalizedCity, capitalizedStreet])
+  },[user, capitalizedCity, capitalizedStreet, addressInformation])
 
   return (
     <Box component="form" onSubmit={handleSubmit} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} borderBottom={'2px solid #D9D9D9'} paddingY={2}>

@@ -1,97 +1,64 @@
 import { responsiveFontSizes } from '@mui/material/styles';
 import { createTheme } from '@mui/material';
 
-
-
 // create a theme instance
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#black',
+      main: '#000000',
     },
     secondary: {
-      main: '#fff',
+      main: '#ffffff',
     },
     background: {
-      default: '#fff',
-    }
+      default: '#ffffff',
+    },
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        body: {
-          color: '#011627',
-          backgroundColor: '#ffffff',
-          display: 'block',
-          margin: "0 auto",
-          fontFamily: '"Palanquin Dark", sans-serif',
-          overflowY: 'scroll',
-          scrollBehavior: 'smooth',
-        },
-      },
-    },
-    MuiMobileStepper: {
-      styleOverrides: {
-        dot: {
-          backgroundColor: 'gray',
-        },
-        dotActive: {
-          backgroundColor: 'black', 
-        },
-      },
-    },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          fontFamily: '"Palanquin Dark" sans-serif',
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          color: '#011627',
-          fontFamily: 'Mulish',
-        },
-      },
-    },
-    MuiBadge: {
-      styleOverrides: {
-        badge: {
-          fontSize: '1rem',
-          whiteSpace: 'nowrap',
-          '@media (min-width:600px)': {
-            fontSize: '2rem',
+        '@global': {
+          // Existing styles
+          '@keyframes rotate': {
+            '0%': {
+              transform: 'rotate(0deg)',
+            },
+            '100%': {
+              transform: 'rotate(360deg)',
+            },
           },
-          '@media (min-width:960px)': {
-            fontSize: '1.8rem',
+          body: {
+            color: '#011627',
+            backgroundColor: '#ffffff',
+            display: 'block',
+            margin: "0 auto",
+            fontFamily: '"Palanquin Dark", sans-serif',
+            overflowY: 'scroll',
+            scrollBehavior: 'smooth',
           },
-          '@media (min-width:1280px)': {
-            fontSize: '1rem',
+
+          // Adding your styles here
+          '.lenis': {
+            height: 'auto',
+          },
+          '.lenis.lenis-smooth': {
+            scrollBehavior: 'auto !important',
+          },
+          '.lenis.lenis-smooth [data-lenis-prevent]': {
+            overscrollBehavior: 'contain',
+          },
+          '.lenis.lenis-stopped': {
+            overflow: 'hidden',
+          },
+          '.lenis.lenis-scrolling iframe': {
+            pointerEvents: 'none',
           },
         },
       },
     },
+    // ... other component overrides
   },
-  typography: {
-    fontFamily: 'Mulish',
-    h6: {
-      fontSize: '1rem',
-      whiteSpace: 'nowrap',
-      '@media (min-width:600px)': {
-        fontSize: '1.1rem',
-      },
-      '@media (min-width:960px)': {
-        fontSize: '1.1rem',
-      },
-      '@media (min-width:1280px)': {
-        fontSize: '1rem',
-      },
-      '@media (min-width:1496px)': {
-        fontSize: '1rem',
-      },
-    },
-  },
+  // ... other theme options
 });
 
 theme = responsiveFontSizes(theme);

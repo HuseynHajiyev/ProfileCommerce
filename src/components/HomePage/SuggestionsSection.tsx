@@ -1,6 +1,7 @@
 import { ProductInterface } from "../../models/ProductInterface"
 import { Box, Grid, Typography } from "@mui/material"
 import Suggestion from "./MicroComponents/Suggestion"
+import { memo } from "react"
 
 interface SuggestionsSectionProps {
   mainProducts: {
@@ -13,7 +14,7 @@ interface SuggestionsSectionProps {
   }
 }
 
-const SuggestionsSection = ({mainProducts} : SuggestionsSectionProps) => {
+const SuggestionsSection = memo(({mainProducts} : SuggestionsSectionProps) => {
   return (
     <Box borderTop={'1px solid lightgray'}>
       <Box textAlign={'center'} paddingY={5}>
@@ -23,20 +24,20 @@ const SuggestionsSection = ({mainProducts} : SuggestionsSectionProps) => {
       </Box>
       <Grid container spacing={3}>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.biylaclesen} imageUrl={'https://drive.google.com/uc?id=19M_wLKs8zSBRVAZwwZqYJNRkmGXWWa5S'} />
+          <Suggestion product={mainProducts.biylaclesen} imageUrl={'participle/homePage/bstvjafwcwr3k5thmxc2'} />
         </Grid>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.opna} imageUrl={'https://drive.google.com/uc?id=1zQ6q7ynDDX0WeB80r5AQOTjdHMFCJrMZ'} />
+          <Suggestion product={mainProducts.opna} imageUrl={'participle/homePage/qbchr4ljkrctodu2c8zy'} />
         </Grid>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.danvouy} imageUrl={'https://drive.google.com/uc?id=17zUUZbnFOgDwkNTI8A6g6nwCnVxCCdo_'} />
+          <Suggestion product={mainProducts.danvouy} imageUrl={'participle/homePage/ed8lnrlobh0ki6evqy6m'} />
         </Grid>
         <Grid item xs={3}>
-          <Suggestion product={mainProducts.rainJacket} imageUrl={'https://drive.google.com/uc?id=1U9xErIoeBLnLB1JaPG6ecO8ngDi_2bvL'} />
+          <Suggestion product={mainProducts.rainJacket} imageUrl={'participle/homePage/qkqky0vizoeleygzuhmc'} />
         </Grid>
       </Grid>
     </Box>
   )
-}
+})
 
 export default SuggestionsSection

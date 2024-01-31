@@ -10,7 +10,7 @@ interface MemorizedPaperProps {
 const MemorizedPaper = memo(({children} : MemorizedPaperProps) => {
     const paperRef = useRef<HTMLDivElement>(null);
     return (
-        <Paper ref={paperRef}>
+        <Paper data-lenis-prevent ref={paperRef}>
             {children}
         </Paper>
     )

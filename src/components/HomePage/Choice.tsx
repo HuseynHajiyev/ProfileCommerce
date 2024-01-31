@@ -20,7 +20,6 @@ const Choice = ({product, imageUrl, choiceTitle, choiceLinkText} : ChoiceProps) 
             description: product?.description || '',
             label: `Slide ${product?.id}`,
             product: product,
-            image: imageUrl,
             link: `/shop/view-all/${product?.id}`,
           }}
           currentSlide={imageUrl}

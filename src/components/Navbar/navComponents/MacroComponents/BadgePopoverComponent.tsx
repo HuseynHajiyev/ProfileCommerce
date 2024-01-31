@@ -17,6 +17,7 @@ interface PopperProps {
 const BadgePopover = ({ buttonRef } : PopperProps) => {
     const { shoppingBagIsOpen, closeShoppingPopper } = useDrawerToggle();
     const isMobile = useIsMobile('mobile');
+
     useEffect(() => {
         if(isMobile) {
             closeShoppingPopper();

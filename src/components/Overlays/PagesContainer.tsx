@@ -1,6 +1,5 @@
 import { ReactNode, useEffect } from 'react'
-import PagesContainerStyled from '../components/StyledComponents/AppFileStyled/PagesContainerStyled';
-import { useMainScroll } from '../hooks/useMainScroll';
+import PagesContainerStyled from '../StyledComponents/AppFileStyled/PagesContainerStyled';
 import { useLocation } from 'react-router-dom';
 
 interface PagesContainerProps {
@@ -8,13 +7,13 @@ interface PagesContainerProps {
 }
 
 const PagesContainer = ({children} : PagesContainerProps) => {
-  const { mainRef } = useMainScroll();
+
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
   return (
-    <PagesContainerStyled ref={mainRef}>
+    <PagesContainerStyled>
         {children}
     </PagesContainerStyled>
   )

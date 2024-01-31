@@ -19,7 +19,7 @@ const ChoicesSection = ({mainProducts} : ChoiceSectionProps) => {
       <Grid item xs={6}>
         <Choice 
           product={mainProducts.cottonJacket} 
-          imageUrl={'https://drive.google.com/uc?id=1Ir6ShI1HChuj2blKZkYcaIhNpNZTFRVU'}
+          imageUrl={'participle/homePage/uqoiuargpram7ucii9mt'}
           choiceTitle={'ALL OVER BEIGE'}
           choiceLinkText={'SHOP OVERCOATS'}
         />
@@ -27,7 +27,7 @@ const ChoicesSection = ({mainProducts} : ChoiceSectionProps) => {
       <Grid item xs={6}>
         <Choice 
           product={mainProducts.slimFit} 
-          imageUrl={'https://drive.google.com/uc?id=1Oefhffi9k4oRo4ipw-GaPsS4V9NDph-s'}
+          imageUrl={'participle/homePage/eazki3h9tpeol94hpko5'}
           choiceTitle={'LEANING IN'}
           choiceLinkText={'SHOP SWEATERS'}
         />
