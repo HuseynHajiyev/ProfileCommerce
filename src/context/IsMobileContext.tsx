@@ -2,6 +2,8 @@ import { createContext, ReactNode } from 'react';
 import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+
+
 interface IsMobileContextProps {
   isMobile: boolean;
   isTablet: boolean;
@@ -21,7 +23,8 @@ export const IsMobileProvider = ({ children }: IsMobileProviderProps): JSX.Eleme
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const isLargeDesktop = useMediaQuery(theme.breakpoints.up('lg'));
-
+  
+ 
   return (
     <IsMobileContext.Provider value={{ isMobile, isTablet, isDesktop, isLargeDesktop }}>
       {children}

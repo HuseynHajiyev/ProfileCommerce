@@ -1,10 +1,14 @@
 // MUI Imports
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
+import Gallery from '../../components/NewArrivals/Gallery'
 
 const NewArrivals = () => {
+  
   return (
     <Box>
-        <Typography variant="h1">New Arrivals</Typography>
+      <Box sx={{height: '30vh'}} />
+      <Gallery />
+      <Box sx={{height: '30vh'}} />
     </Box>
   )
 }

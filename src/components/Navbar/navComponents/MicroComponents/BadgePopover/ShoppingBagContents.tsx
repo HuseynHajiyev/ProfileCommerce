@@ -20,8 +20,9 @@ import theme from '../../../../../themes/theme';
 const ShoppingBagContents = () => {
   const loading = useSelector((state: RootState) => state.shoppingBag.loading);
   const shoppingBag: ShoppingBagInterface = useSelector((state: RootState) => state.shoppingBag);
+
   return (
-    <BadgePopoverContentGridStyled>
+    <BadgePopoverContentGridStyled  data-lenis-prevent>
       <Box>
         <Box sx={{p: '5%'}}>
           <Typography variant='h6'>
@@ -63,7 +64,7 @@ const ShoppingBagContents = () => {
                 </Box>
             ) : (
                 shoppingBag.products.map((cartItem: CartItemInterface, index: number) => (
-                    <ShoppingBagProductCardComponent key={cartItem.product.id + index} cartItem={cartItem}/>
+                    <ShoppingBagProductCardComponent key={index} cartItem={cartItem}/>
                 ))
             )
           }

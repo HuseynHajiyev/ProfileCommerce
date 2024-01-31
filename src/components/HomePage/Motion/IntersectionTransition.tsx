@@ -18,13 +18,9 @@ const IntersectionTransition: FC<IntersectionTransitionProps> = ({ children }) =
         if (entry.isIntersecting && !hasAnimated) {
           setIsVisible(true);
           setHasAnimated(true);
-          setTimeout(() => {
-            document.body.style.overflow = ''; // Unlock scroll after a second
-            document.body.style.paddingRight = ''; // Reset paddingRight
-          }, 1000);
         }
       },
-      { threshold: 0.5 } // Adjust the threshold as needed
+      { threshold: 0.5 } 
     );
 
     if (sectionRef.current) {

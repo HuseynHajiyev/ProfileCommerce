@@ -15,6 +15,13 @@ export interface SuggestionsProps {
 const Suggestion = ({ product, imageUrl }: SuggestionsProps) => {
   const [hovered, setHovered] = useState(false);
   const productTitleFirstWord = product?.title.split(' ')[0].toUpperCase();
+  const bannerContent = {
+    title: product?.title || '',
+    description: product?.description || '',
+    label: `Slide ${product?.id}`,
+    product: product,
+    link: `/shop/view-all/${product?.id}`,
+  }
   return (
     <>
       <Box
@@ -27,16 +34,7 @@ const Suggestion = ({ product, imageUrl }: SuggestionsProps) => {
       >
         <BannerImage currentSlide={imageUrl} hovered={hovered} />
         <BannerProductInfo
-          bannerContent={
-            {
-              title: product?.title || '',
-              description: product?.description || '',
-              label: `Slide ${product?.id}`,
-              product: product,
-              image: imageUrl,
-              link: `/shop/view-all/${product?.id}`,
-            }
-          }
+          bannerContent={bannerContent}
           hovered={hovered}
           textSize={'small'}
           />

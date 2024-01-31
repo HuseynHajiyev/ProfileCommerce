@@ -17,7 +17,7 @@ const AutoScrollBanner  = () => {
       description: 'Discover Our Latest Collection',
       label: 'Slide 1',
       product: findProductById(2),
-      image: 'https://drive.google.com/uc?id=1svvwhSWazJomYnBM3_fVYKhkOnZusdlh',
+      image: 'participle/homePage/wzkj60boh5keuuyiuhls',
       link: '/shop/view-all/2',
     },
     {
@@ -25,7 +25,7 @@ const AutoScrollBanner  = () => {
       description: 'Shop Our Trendy Fashion',
       label: 'Slide 2',
       product: findProductById(16),
-      image: 'https://drive.google.com/uc?id=1mKuXP9jX8rJbKKlhT7Nc1UkG6CmViHi4',
+      image: 'participle/homePage/xzxopqpheuqn7soley8o',
       link: 'shop/view-all/16',
     },
     {
@@ -33,7 +33,7 @@ const AutoScrollBanner  = () => {
       description: 'Find Your Signature Look',
       label: 'Slide 3',
       product: findProductById(1),
-      image: 'https://drive.google.com/uc?id=1l0i_9HRdWIbBrjecZeNn23vIdeRw9QU9',
+      image: 'participle/homePage/gupddrz5c8we1kf2c3co',
       link: '/shop/view-all/1',
     },
   ];

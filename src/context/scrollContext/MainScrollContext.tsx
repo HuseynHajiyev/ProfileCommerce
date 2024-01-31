@@ -13,6 +13,7 @@ interface MainScrollState {
 }
 
 
+
 export const MainScrollContext = createContext<MainScrollState | undefined>(undefined);
 
 
@@ -29,7 +30,6 @@ export function MainScrollProvider({ children } : MainScrollContextProps) {
   const handleLinkScrolled = (scrolled: boolean) => {
     setLinkScrolled(scrolled);
   }
-
 
   return (
     <MainScrollContext.Provider value={{scrollSection, mainRef, linkScrolled,  handleScrollSection, handleLinkScrolled}}>

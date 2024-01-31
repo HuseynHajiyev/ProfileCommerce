@@ -70,7 +70,7 @@ export const NavLinkStyled = styled(NavLink)<NavLinkProps>`
     transition: color 0.2s;
     display: block;
     padding: 0;
-    color: inherit;
+    color: #000;
     &:hover {
         color: #888;
     }
