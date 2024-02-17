@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import Column from './Column'
 import { useRef } from 'react'
 import { useScroll, useTransform } from 'framer-motion'
-import { useDimension } from '../../hooks/useDimension'
+import { useDimension } from '../../../hooks/useDimension'
 
 const Gallery = () => {
   const images = [

@@ -76,7 +76,7 @@ const ShopClothing = () => {
                   MenuProps={{ disableScrollLock: true }}
                   renderValue={(selected) => {
                     if (!selected) {
-                      return <Typography fontFamily={'Mulish'} variant='h6'>View</Typography>;
+                      return <Typography fontFamily={'Mulish'} variant='body1'>View</Typography>;
                     }
                     return selected;
                   }}
@@ -100,7 +100,7 @@ const ShopClothing = () => {
                   MenuProps={{ disableScrollLock: true }}
                   renderValue={(selected) => {
                     if (!selected || selected === 'All') {
-                      return <Typography fontFamily={'Mulish'} variant='h6'>Sort By</Typography>;
+                      return <Typography fontFamily={'Mulish'} variant='body1'>Sort By</Typography>;
                     }
                     return selected;
                   }}

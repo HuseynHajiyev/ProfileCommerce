@@ -22,3 +22,9 @@ export const ColumnStyled = styled(motion.div)(() => ({
     top: '-100%',
   },
 }));
+
+
+export const HorizontalStyled = styled(motion.div)(() => ({
+  display: 'flex',
+  gap: 4,
+}));
