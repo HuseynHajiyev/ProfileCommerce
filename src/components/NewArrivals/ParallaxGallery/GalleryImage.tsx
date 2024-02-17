@@ -1,4 +1,4 @@
-import { useCloud } from '../../hooks/useCloud';
+import { useCloud } from '../../../hooks/useCloud';
 import { AdvancedImage } from '@cloudinary/react';
 
 interface GalleryImageProps {

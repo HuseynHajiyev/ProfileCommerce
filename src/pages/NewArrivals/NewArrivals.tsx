@@ -1,12 +1,13 @@
 // MUI Imports
 import { Box } from '@mui/material'
-import Gallery from '../../components/NewArrivals/Gallery'
+import Gallery from '../../components/NewArrivals/ParallaxGallery/Gallery'
+import PinnedSection from '../../components/NewArrivals/HorizontalScroll/PinnedSection'
 
 const NewArrivals = () => {
   
   return (
     <Box>
-      <Box sx={{height: '30vh'}} />
+      <PinnedSection />
       <Gallery />
       <Box sx={{height: '30vh'}} />
     </Box>

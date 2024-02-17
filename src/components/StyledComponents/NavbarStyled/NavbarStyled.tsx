@@ -84,6 +84,6 @@ export const NavLinkStyled = styled(NavLink)<NavLinkProps>`
     }
 
     &:visited {
-        color: inherit;
+        color: #000;
     }
 `;

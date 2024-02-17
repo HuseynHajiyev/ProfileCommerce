@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import GalleryImage from './GalleryImage';
 import { MotionValue } from 'framer-motion';
-import { ColumnStyled } from '../StyledComponents/GalleryStyled/ColumnStyled';
+import { ColumnStyled } from '../../StyledComponents/GalleryStyled/ColumnStyled';
 
 interface ColumnProps {
   images: string[];
