@@ -32,6 +32,9 @@ export const ShoppingBagCheckoutButtonStyled = styled(Button)(() => ({
         fontSize: '1rem',
         padding: '3%',
     },
+    '&:hover': {
+        color: '#000000',
+    },
 }))
 
 export const ShoppingBagAddRemoveStyled = styled(IconButton)(() => ({
