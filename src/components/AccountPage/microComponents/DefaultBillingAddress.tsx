@@ -57,7 +57,7 @@ const DefaultBillingAddress = ({user}: DefaultBillingAddressProps) => {
       setAddressInformation(newInfo);
   
     }
-  },[user, capitalizedCity, capitalizedStreet])
+  },[user, capitalizedCity, capitalizedStreet, addressInformation])
 
   return (
     <Box component="form" onSubmit={handleSubmit} display={'flex'} flexDirection={'column'} justifyContent={'space-between'} paddingY={2}>

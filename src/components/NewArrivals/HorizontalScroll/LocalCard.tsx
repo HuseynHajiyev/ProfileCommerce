@@ -11,7 +11,6 @@ interface LocalCardInterface {
 
 interface LocalCardProps {
   card: LocalCardInterface;
-  scale?: MotionValue<number> | null;
   width?: MotionValue<string> | null;
 }
 
@@ -28,7 +27,7 @@ const aspectRatioStyle = {
   paddingTop: '100%',
 }
 
-const LocalCard = ({ card, scale, width } : LocalCardProps) => {
+const LocalCard = ({ card, width } : LocalCardProps) => {
   const { cld } = useCloud();
   const img = cld.image(card.image);
 
@@ -54,7 +53,6 @@ const LocalCard = ({ card, scale, width } : LocalCardProps) => {
           alignItems: 'center', 
           justifyContent: 'center',
           transformOrigin: 'center center',
-          scale: scale? scale : 1,
         }}
         transition={transition}
       >

@@ -9,7 +9,7 @@ const NewArrivals = () => {
     <Box>
       <PinnedSection />
       <Gallery />
-      <Box sx={{height: '30vh'}} />
+      <Box sx={{height: '10vh'}} />
     </Box>
   )
 }

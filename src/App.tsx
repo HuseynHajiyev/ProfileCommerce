@@ -36,6 +36,7 @@ import useAppInitialization from './hooks/useAppInitialization';
 import MainSplash from './components/SplashScreens/MainSplash';
 import LoadingSplash from './components/SplashScreens/LoadingSplash';
 import { useEffect } from 'react';
+import Footer from './components/Footer/Footer';
 
 
 const App = () => {
@@ -86,6 +87,7 @@ const App = () => {
                       <Route path="*" element={ <NotFound404 />} />
                     </Routes>
                   </PagesContainer>
+                  <Footer />
                 </>
               ))}
             </ThemeProvider>

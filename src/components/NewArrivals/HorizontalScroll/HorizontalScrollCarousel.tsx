@@ -32,7 +32,7 @@ const cards: LocalCardInterface[] = [
     id: 4,
   },
   {
-    image: 'participle/newArrivals/hhdtufbrwgnqsiqy7uhq',
+    image: 'participle/newArrivals/boz0yqb3xadqelbpfueo',
     title: 'Five',
     id: 5,
   }
@@ -46,7 +46,6 @@ const HorizontalScrollCarousel = () => {
   });
 
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
-  const scale = useTransform(scrollYProgress, [0.7, 1], [1, 5]);
   const width = useTransform(scrollYProgress, [0.7, 1], ['30vw', '100vw']);
 
 
@@ -66,7 +65,7 @@ const HorizontalScrollCarousel = () => {
           {cards.map((card, index) => {
             const isLastCard = index === cards.length - 1;
             return (
-              <LocalCard key={card.id} card={card} scale={isLastCard ? scale : null} width={isLastCard ? width : null}/>
+              <LocalCard key={card.id} card={card} width={isLastCard ? width : null}/>
             )
           })}
         </HorizontalStyled>
