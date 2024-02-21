@@ -4,6 +4,7 @@ import shoppingBagReducer from "../features/shoppingBagReducer/shoppingBagSlice"
 import productsReducer from "../features/productsReducer/productsSlice";
 import productReducer from "../features/productReducer/productSlice";
 import userReducer from "../features/userReducer/userSlice";
+import usersReducer from "../features/usersReducer/usersSlice";
 import localUserReducer from "../features/localUserReducer/localUserSlice";
 import searchResultsReducer from "../features/searchResultsReducer/searchResultsSlice";
 import rootSaga from "../sagas";
@@ -24,6 +25,12 @@ export const userPersistConfig = {
     blacklist: ['loading', 'error', 'loginCredentials'],
 };
 
+export const usersPersistConfig = {
+    key: 'usersState',
+    storage: storage,
+    blacklist: ['loading', 'error', 'loaded'],
+};
+
 export const productsPersistConfig = {
     key: 'productsState',
     storage: storage,
@@ -39,6 +46,7 @@ export const localUserPersistConfig = {
 
   
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
+const persistedUsersReducer = persistReducer(usersPersistConfig, usersReducer);
 const persistedShoppingBagReducer = persistReducer(shoppingBagPersistConfig, shoppingBagReducer);
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReducer);
 const persistedLocalUserReducer = persistReducer(localUserPersistConfig, localUserReducer);
@@ -50,6 +58,7 @@ export const store = configureStore({
         productState: productReducer,
         search: searchResultsReducer,
         userState: persistedUserReducer,
+        usersState: persistedUsersReducer,
         localUserState: persistedLocalUserReducer,
     },
     middleware: (getDefaultMiddleware) =>

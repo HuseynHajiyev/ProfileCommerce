@@ -20,6 +20,7 @@ const LoginPopover = () => {
     const { loading, error, loggedIn } = useSelector((state: RootState) => state.userState);
     const [wrongCredentials, setWrongCredentials] = useState<boolean>(false);
     const localUserState = useSelector((state: RootState) => state.localUserState);
+    const usersState = useSelector((state: RootState) => state.usersState);
     const dispatch = useDispatch();
     const {
         login,
@@ -28,6 +29,7 @@ const LoginPopover = () => {
         passwordValid,
         checkLoginIsValid,
         loginInputHandler,
+        pickUser,
         checkPasswordIsValid,
         passwordInputHandler,
         submitLogin,
@@ -65,16 +67,16 @@ const LoginPopover = () => {
             dispatch(unlockUser());
           }
         }
-      })
+      },[localUserState.locked, localUserState.lockedAt, localUserState.lockTimeout, dispatch]);
 
     return (
         <LoginPopoverStyled
             open={loginPopoverOpen}
-            anchorEl={null} // No anchoring element
+            anchorEl={null}
             onClose={handleClose}
             disableScrollLock={true}
-            anchorReference="anchorPosition" // Use anchorPosition for positioning
-            anchorPosition={{ top: window.innerHeight / 2, left: window.innerWidth / 2 }} // Center of viewport
+            anchorReference="anchorPosition"
+            anchorPosition={{ top: window.innerHeight / 2, left: window.innerWidth / 2 }}
             transformOrigin={{
                 vertical: 'center',
                 horizontal: 'center',
@@ -89,7 +91,14 @@ const LoginPopover = () => {
                 </Grid>
                 
                 <Grid item xs={12} width={'100%'}>
-                    <UsernameInput login={login} loginValid={loginValid} checkLoginIsValid={checkLoginIsValid} loginInputHandler={loginInputHandler}/>
+                    <UsernameInput 
+                        login={login} 
+                        loginValid={loginValid} 
+                        checkLoginIsValid={checkLoginIsValid} 
+                        loginInputHandler={loginInputHandler}
+                        pickUser={pickUser}
+                        options={usersState.users}
+                    />
                 </Grid>
                 
                 <Grid item xs={12} width={'100%'}>

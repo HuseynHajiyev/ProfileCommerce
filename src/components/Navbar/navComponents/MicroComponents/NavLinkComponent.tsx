@@ -26,6 +26,7 @@ const NavLinkComponent = ({ to, justify }: NavLinkComponentProps): JSX.Element =
     const handleClick = useCallback(() => {
         closeAllDrawers();
     }, [closeAllDrawers])
+    console.log('to', to)
     return (
             <Box
                 sx={{
@@ -35,7 +36,7 @@ const NavLinkComponent = ({ to, justify }: NavLinkComponentProps): JSX.Element =
                 onClick={(e) => { e.stopPropagation(); handleClick(); }} 
                 onTouchStart={(e) => { e.stopPropagation(); }}
             >
-                <NavLinkStyled to={to} replace aria-label={`Link to ${linkText}`} 
+                <NavLinkStyled to={to === '/about' ? 'https://react-profile-mcrgmwb56-huseynhajiyev.vercel.app/' : to} target={to === '/about' ? '_blank' : ''} replace aria-label={`Link to ${linkText}`} 
                     sx={{
                         display: 'flex',
                         justifyContent: justify ? justify : 'inherit',

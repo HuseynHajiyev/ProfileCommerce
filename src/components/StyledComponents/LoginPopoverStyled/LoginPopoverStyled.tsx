@@ -3,7 +3,7 @@ import theme from "../../../themes/theme";
 
 
 export const LoginPopoverStyled = styled(Popover)({
-    zIndex: 2000,
+    zIndex: 1300,
     '& .MuiPopover-paper': {
         borderRadius: '0px',
         boxShadow: '0px 0px 24px rgba(0, 0, 0, 0.25)',

@@ -8,6 +8,7 @@ import { logoutUser, setUser } from '../features/userReducer/userSlice';
 import { useLogin } from './useLogin';
 import { RootState } from '../app/store';
 import { resetLocalUser, setLocalUser } from '../features/localUserReducer/localUserSlice';
+import { loadUsers } from '../features/usersReducer/usersSlice';
 
 
 const useAppInitialization = () => {
@@ -46,6 +47,7 @@ const useAppInitialization = () => {
 
   useEffect(() => {
     const token = Cookies.get('authToken');
+    dispatch(loadUsers());
     if (token && userState.user) {
       dispatch(setUser(userState.user));
       dispatch(resetLocalUser());

@@ -13,7 +13,7 @@ const PagesContainer = ({children} : PagesContainerProps) => {
     window.scrollTo(0, 0);
   }, [location]);
   return (
-    <PagesContainerStyled>
+    <PagesContainerStyled component={'main'} flexGrow={1}>
         {children}
     </PagesContainerStyled>
   )

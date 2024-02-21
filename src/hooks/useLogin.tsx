@@ -15,6 +15,7 @@ export const useLogin = () => {
   const [loginValid, setLoginValid] = useState<boolean>(false);
   const [passwordValid, setPasswordValid] = useState<boolean>(false);
   const userState = useSelector((state: RootState) => state.userState);
+  const usersState = useSelector((state: RootState) => state.usersState);
   const localUserState = useSelector((state: RootState) => state.localUserState);
   
 
@@ -40,6 +41,17 @@ export const useLogin = () => {
     }
   }
 
+  const pickUser = (id: number) => {
+    if(!userState || !usersState.users) return;
+    const user = usersState.users.find(user => user.id === id);
+    if(user) {
+      setLogin(user.username);
+      setPassword(user.password);
+      setLoginValid(true);
+      setPasswordValid(true);
+    }
+  }
+
   const passwordInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   }
@@ -51,7 +63,9 @@ export const useLogin = () => {
   }
 
   const submitLogin = useCallback(() => {
+    console.log('submit login called');
     if(login && password && !localUserState.locked) {
+      console.log('login', login, 'password', password);
       const credentials: LoginCredentials = {
         username: login,
         password
@@ -92,6 +106,7 @@ export const useLogin = () => {
     setPasswordValid,
     checkLoginIsValid,
     loginInputHandler,
+    pickUser,
     checkPasswordIsValid,
     passwordInputHandler,
     resetToDefaultBag,
@@ -114,6 +129,7 @@ export interface UseLoginInterface {
   setPasswordValid: (passwordValid: boolean) => void;
   checkLoginIsValid: (e: ChangeEvent<HTMLInputElement>) => void;
   loginInputHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+  pickUser: (id: number) => void;
   checkPasswordIsValid: (e: ChangeEvent<HTMLInputElement>) => void;
   passwordInputHandler: (e: ChangeEvent<HTMLInputElement>) => void;
   resetToDefaultBag: () => void;
