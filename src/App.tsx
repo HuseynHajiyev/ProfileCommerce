@@ -63,8 +63,8 @@ const App = () => {
                 ) : ( !showLoadingSplash ? (
                   <LoadingSplash />
                 ) : (
-                <>
-                  <Box position={'sticky'} top={0} zIndex={'2000'}>
+                <Box display={'flex'} flexDirection={'column'} minHeight={'100dvh'}>
+                  <Box position={'sticky'} top={0} zIndex={'1300'}>
                     <AnnouncementBarComponent />
                     <SearchBarDrawer />
                     <Navbar />
@@ -88,7 +88,7 @@ const App = () => {
                     </Routes>
                   </PagesContainer>
                   <Footer />
-                </>
+                </Box>
               ))}
             </ThemeProvider>
         </MainScrollProvider>
