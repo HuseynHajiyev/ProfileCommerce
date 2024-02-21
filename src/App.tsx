@@ -63,7 +63,7 @@ const App = () => {
                 ) : ( !showLoadingSplash ? (
                   <LoadingSplash />
                 ) : (
-                <Box display={'flex'} flexDirection={'column'} minHeight={'100dvh'}>
+                <Box display={'flex'} flexDirection={'column'} minHeight={'100dvh'} sx={{overflowX: 'hidden'}}>
                   <Box position={'sticky'} top={0} zIndex={'1300'}>
                     <AnnouncementBarComponent />
                     <SearchBarDrawer />
