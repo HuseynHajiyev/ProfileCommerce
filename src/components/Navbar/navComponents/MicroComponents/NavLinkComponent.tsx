@@ -26,7 +26,6 @@ const NavLinkComponent = ({ to, justify }: NavLinkComponentProps): JSX.Element =
     const handleClick = useCallback(() => {
         closeAllDrawers();
     }, [closeAllDrawers])
-    console.log('to', to)
     return (
             <Box
                 sx={{

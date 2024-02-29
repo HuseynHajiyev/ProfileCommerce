@@ -49,11 +49,6 @@ const ShoppingBagPageQuantityInput = ({ cartItem } : ShoppingBagPageQuantityInpu
         setValue(cartItem.quantity > 0 ? cartItem.quantity.toString() : "1");
     }, [cartItem]);
 
-    // useEffect(()=>{
-    //     console.log('the value is: ', value);
-    //     console.log('the size availability is: ', sizeAvailability);
-    // },[value, sizeAvailability])
-
     return (
         <StyledNumberInput
             value={value}

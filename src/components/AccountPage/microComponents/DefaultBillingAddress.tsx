@@ -40,7 +40,6 @@ const DefaultBillingAddress = ({user}: DefaultBillingAddressProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form Submitted', addressInformation);
   };
 
   useEffect(() => {

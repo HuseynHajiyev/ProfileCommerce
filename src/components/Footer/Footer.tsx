@@ -3,7 +3,7 @@ import { Box, Button, Grid, Input, Stack, Typography } from '@mui/material'
 const Footer = () => {
   return (
     <footer style={{
-     width: '100dvw',
+     width: '100%',
     }}>
       <Box
         position={'relative'}
