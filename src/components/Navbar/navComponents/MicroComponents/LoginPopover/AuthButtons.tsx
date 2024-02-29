@@ -17,7 +17,6 @@ const AuthButtons = ({loginValid, passwordValid, loginAttempted, submitLogin}: A
     const {loading, error, loggedIn } = useSelector((state: RootState) => state.userState);
     const { handleloginAttempted, closeLoginPopover } = useDrawerToggle();
     const handleSubmit = () => {
-        console.log('submitting login');
         if(loginValid && passwordValid) {
             submitLogin();
             handleloginAttempted(true);

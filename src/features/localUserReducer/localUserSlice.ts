@@ -32,7 +32,6 @@ export const localUserSlice = createSlice({
       } 
     },
     lockUser: (state) => {
-      console.log('locked the user');
       state.locked = true;
       state.lockedAt = new Date().toISOString();
     },
