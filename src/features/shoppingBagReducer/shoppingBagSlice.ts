@@ -118,6 +118,7 @@ const shoppingBagSlice = createSlice({
         resetShoppingBag: () => {
             return {
                 ...initialState,
+                loaded: true,
             }
         }
     }
