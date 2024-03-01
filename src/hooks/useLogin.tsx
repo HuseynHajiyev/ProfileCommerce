@@ -63,9 +63,7 @@ export const useLogin = () => {
   }
 
   const submitLogin = useCallback(() => {
-    console.log('submit login called');
     if(login && password && !localUserState.locked) {
-      console.log('login', login, 'password', password);
       const credentials: LoginCredentials = {
         username: login,
         password
