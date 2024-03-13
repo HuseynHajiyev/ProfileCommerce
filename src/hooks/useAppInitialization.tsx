@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
-import { loadShoppingBag, resetShoppingBag, setShoppingBag } from '../features/shoppingBagReducer/shoppingBagSlice';
+import { loadShoppingBag, setShoppingBag } from '../features/shoppingBagReducer/shoppingBagSlice';
 import { loadProducts, setProducts } from '../features/productsReducer/productsSlice';
 import { logoutUser, setUser } from '../features/userReducer/userSlice';
 import { useLogin } from './useLogin';
@@ -63,8 +63,6 @@ const useAppInitialization = () => {
       } else if(!shoppingBagState.loaded) {
         dispatch(loadShoppingBag(userState.user.id));
       }
-    } else if (!userState.loggedIn && shoppingBagState.loaded) {
-      dispatch(resetShoppingBag());
     } else {
       if(localUserState && localUserState.localUser && !userState.loggedIn) {
         setLocalUser(localUserState.localUser);

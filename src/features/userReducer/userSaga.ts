@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 
 import { findUserByEmailAndPassword } from '../../services/processUserResponse';
-import { resetShoppingBag } from '../shoppingBagReducer/shoppingBagSlice';
+import { loadShoppingBag, resetShoppingBag } from '../shoppingBagReducer/shoppingBagSlice';
 import { incrementLoginAttempts } from '../localUserReducer/localUserSlice';
 
 function* loginSaga(action: PayloadAction<LoginCredentialsInterface>) {
@@ -29,6 +29,7 @@ function* loginSaga(action: PayloadAction<LoginCredentialsInterface>) {
     Cookies.set('authToken', authResult.token, { expires: 1 });
     yield put(setUser(matchedUser));
     yield put(loginSuccess({ token: authResult.token }));
+    yield put(loadShoppingBag(matchedUser.id));
   } catch (error: unknown) {
     if (error instanceof Error) {
       yield put(loginFailure({ error: error.message }));
