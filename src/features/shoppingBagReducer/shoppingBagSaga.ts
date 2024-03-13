@@ -113,7 +113,7 @@ function* decreaseQuantitySaga() {
 
 function* resetShoppingBagSaga() {
   try {
-    yield put(resetShoppingBag());
+    console.log('resetting shopping bag')
     yield call(loadShoppingBagSuccess);
   } catch (e) {
     yield put(loadShoppingBagFailed((e as TypeError).message));

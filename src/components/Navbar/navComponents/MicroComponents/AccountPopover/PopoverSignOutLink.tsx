@@ -31,7 +31,7 @@ const PopoverSignOutLink = () => {
           </Grid>
           <Grid item xs={8} display={'flex'} alignItems={'center'}>    
             <Typography variant='body2' fontFamily='Mulish' fontSize={!isDesktop && !isLargeDesktop ? '0.8rem' : 'inherit'}>
-                    Sign Out
+              Sign Out
             </Typography>
           </Grid>
         </Grid>

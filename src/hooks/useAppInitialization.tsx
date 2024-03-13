@@ -63,8 +63,6 @@ const useAppInitialization = () => {
       } else if(!shoppingBagState.loaded) {
         dispatch(loadShoppingBag(userState.user.id));
       }
-    } else if (!userState.loggedIn && shoppingBagState.loaded) {
-      dispatch(resetShoppingBag());
     } else {
       if(localUserState && localUserState.localUser && !userState.loggedIn) {
         setLocalUser(localUserState.localUser);

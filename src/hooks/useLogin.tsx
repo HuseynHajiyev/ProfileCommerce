@@ -59,6 +59,7 @@ export const useLogin = () => {
   const isUserLoggedIn = () => {
     const localUser = userState.user ? userState.user : null;
     const cookieIsSet = Cookies.get('authToken') ? true : false;
+    console.log('here')
     return localUser && cookieIsSet;
   }
 
@@ -83,9 +84,8 @@ export const useLogin = () => {
     setPasswordValid(false);
   }
   const logoutUser = () => {
-    if(userState.loggedIn) {
-      dispatch(logoutUserAction());
-    }
+    dispatch(logoutUserAction());
+    dispatch(resetShoppingBag());
     emptyValues();
   }
 
